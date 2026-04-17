@@ -1,7 +1,26 @@
 import { useState } from "react";
 import { addMonths, addDays, format, isBefore, isSameDay, isSameMonth, startOfMonth, startOfWeek, endOfWeek, endOfMonth, isWithinInterval } from "date-fns";
+import { nl as nlLocale, enUS } from "date-fns/locale";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n/I18nContext";
+
+const CalendarSummary = ({ checkIn, checkOut }: { checkIn: Date; checkOut: Date | null }) => {
+  const { t, lang } = useI18n();
+  const locale = lang === "nl" ? nlLocale : enUS;
+  return (
+    <div className="mt-5 pt-4 border-t border-border flex flex-wrap gap-2 text-sm text-muted-foreground">
+      <span>
+        <span className="font-medium text-navy">{t("cal.checkin")}</span> {format(checkIn, "EEE, MMM d", { locale })}
+      </span>
+      {checkOut && (
+        <span>
+          <span className="font-medium text-navy">·  {t("cal.checkout")}</span> {format(checkOut, "EEE, MMM d", { locale })}
+        </span>
+      )}
+    </div>
+  );
+};
 
 interface RangeCalendarProps {
   checkIn: Date | null;
