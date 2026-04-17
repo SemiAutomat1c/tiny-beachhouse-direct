@@ -415,8 +415,8 @@ const Boeken = () => {
 
 /* ───────────── helpers ───────────── */
 
-const Stepper = ({ current }: { current: Step }) => {
-  const steps = ["Dates", "Details", "Confirm"];
+const Stepper = ({ current, t }: { current: Step; t: (k: TranslationKey) => string }) => {
+  const steps: TranslationKey[] = ["bk.step.dates", "bk.step.details", "bk.step.confirm"];
   return (
     <div className="flex items-center justify-center gap-3 md:gap-6">
       {steps.map((label, i) => {
@@ -436,7 +436,7 @@ const Stepper = ({ current }: { current: Step }) => {
               {done ? <Check className="w-4 h-4" /> : idx}
             </div>
             <span className={cn("text-sm hidden sm:inline", active ? "text-navy font-medium" : "text-muted-foreground")}>
-              {label}
+              {t(label)}
             </span>
             {i < steps.length - 1 && <div className="w-6 md:w-12 h-px bg-dune/50" />}
           </div>
