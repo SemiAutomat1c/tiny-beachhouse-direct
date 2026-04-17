@@ -110,16 +110,7 @@ export const RangeCalendar = ({
         {months.map(renderMonth)}
       </div>
       {checkIn && (
-        <div className="mt-5 pt-4 border-t border-border flex flex-wrap gap-2 text-sm text-muted-foreground">
-          <span>
-            <span className="font-medium text-navy">Check-in:</span> {format(checkIn, "EEE, MMM d")}
-          </span>
-          {checkOut && (
-            <span>
-              <span className="font-medium text-navy">·  Check-out:</span> {format(checkOut, "EEE, MMM d")}
-            </span>
-          )}
-        </div>
+        <CalendarSummary checkIn={checkIn} checkOut={checkOut} />
       )}
     </div>
   );

@@ -2,19 +2,21 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const links = [
-  { to: "/", label: "Home" },
-  { to: "/accommodatie", label: "De Accommodatie" },
-  { to: "/omgeving", label: "Omgeving" },
-];
+import { useI18n } from "@/i18n/I18nContext";
+import { LanguageToggle } from "./LanguageToggle";
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
+  const { t } = useI18n();
 
-  // Hero exists on home page; force solid on other pages
+  const links = [
+    { to: "/", label: t("nav.home") },
+    { to: "/accommodatie", label: t("nav.accommodation") },
+    { to: "/omgeving", label: t("nav.area") },
+  ];
+
   const transparentEligible = pathname === "/";
 
   useEffect(() => {
@@ -74,24 +76,28 @@ export const Navbar = () => {
               {l.label}
             </NavLink>
           ))}
+          <LanguageToggle solid={solid} />
           <Link
             to="/boeken"
             className="inline-flex items-center gap-1.5 bg-navy text-sand px-5 py-2.5 rounded-full text-sm font-medium hover:bg-navy-soft transition-colors"
           >
-            Book Direct <ArrowUpRight className="w-4 h-4" />
+            {t("nav.bookDirect")} <ArrowUpRight className="w-4 h-4" />
           </Link>
         </nav>
 
-        <button
-          aria-label="Open menu"
-          className={cn(
-            "md:hidden p-2 rounded-md transition-colors",
-            solid ? "text-navy" : "text-white"
-          )}
-          onClick={() => setOpen(true)}
-        >
-          <Menu className="w-6 h-6" />
-        </button>
+        <div className="md:hidden flex items-center gap-3">
+          <LanguageToggle solid={solid} />
+          <button
+            aria-label="Open menu"
+            className={cn(
+              "p-2 rounded-md transition-colors",
+              solid ? "text-navy" : "text-white"
+            )}
+            onClick={() => setOpen(true)}
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+        </div>
       </div>
 
       {/* Mobile overlay */}
@@ -127,7 +133,7 @@ export const Navbar = () => {
             to="/boeken"
             className="mt-6 inline-flex items-center gap-2 bg-dune text-navy px-7 py-3.5 rounded-full text-base font-medium"
           >
-            Book Direct <ArrowUpRight className="w-4 h-4" />
+            {t("nav.bookDirect")} <ArrowUpRight className="w-4 h-4" />
           </Link>
         </nav>
       </div>

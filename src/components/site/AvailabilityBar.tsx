@@ -2,9 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Calendar, Users, ArrowRight } from "lucide-react";
 import { format } from "date-fns";
+import { useI18n } from "@/i18n/I18nContext";
 
 export const AvailabilityBar = () => {
   const navigate = useNavigate();
+  const { t } = useI18n();
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState(2);
@@ -27,7 +29,7 @@ export const AvailabilityBar = () => {
     >
       <label className="block">
         <span className="block text-[11px] uppercase tracking-[0.18em] text-navy/70 mb-1.5 font-medium px-1">
-          <Calendar className="inline w-3 h-3 mr-1" /> Check-in
+          <Calendar className="inline w-3 h-3 mr-1" /> {t("avail.checkIn")}
         </span>
         <input
           type="date"
@@ -39,7 +41,7 @@ export const AvailabilityBar = () => {
       </label>
       <label className="block">
         <span className="block text-[11px] uppercase tracking-[0.18em] text-navy/70 mb-1.5 font-medium px-1">
-          <Calendar className="inline w-3 h-3 mr-1" /> Check-out
+          <Calendar className="inline w-3 h-3 mr-1" /> {t("avail.checkOut")}
         </span>
         <input
           type="date"
@@ -51,7 +53,7 @@ export const AvailabilityBar = () => {
       </label>
       <label className="block md:w-32">
         <span className="block text-[11px] uppercase tracking-[0.18em] text-navy/70 mb-1.5 font-medium px-1">
-          <Users className="inline w-3 h-3 mr-1" /> Guests
+          <Users className="inline w-3 h-3 mr-1" /> {t("avail.guests")}
         </span>
         <select
           value={guests}
@@ -59,7 +61,7 @@ export const AvailabilityBar = () => {
           className="w-full bg-transparent border-0 px-3 py-2.5 rounded-lg text-navy font-medium focus:outline-none focus:ring-2 focus:ring-navy/20 appearance-none"
         >
           {[1, 2, 3, 4].map((n) => (
-            <option key={n} value={n}>{n} {n === 1 ? "guest" : "guests"}</option>
+            <option key={n} value={n}>{n} {n === 1 ? t("avail.guest_one") : t("avail.guest_other")}</option>
           ))}
         </select>
       </label>
@@ -67,7 +69,7 @@ export const AvailabilityBar = () => {
         type="submit"
         className="bg-navy text-sand h-12 px-6 rounded-xl font-medium inline-flex items-center justify-center gap-2 hover:bg-navy-soft transition"
       >
-        Check Availability <ArrowRight className="w-4 h-4" />
+        {t("avail.check")} <ArrowRight className="w-4 h-4" />
       </button>
     </form>
   );
