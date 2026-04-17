@@ -209,40 +209,44 @@ const Boeken = () => {
 
             {step === 2 && (
               <div>
-                <h2 className="font-display text-2xl text-navy mb-6">Your details</h2>
+                <h2 className="font-display text-2xl text-navy mb-6">{t("bk.s2.title")}</h2>
                 <div className="grid sm:grid-cols-2 gap-5">
-                  <Field label="First name" required>
+                  <Field label={t("bk.firstName")} required>
                     <Input value={details.firstName} onChange={(v) => setDetails((d) => ({ ...d, firstName: v }))} />
                   </Field>
-                  <Field label="Last name" required>
+                  <Field label={t("bk.lastName")} required>
                     <Input value={details.lastName} onChange={(v) => setDetails((d) => ({ ...d, lastName: v }))} />
                   </Field>
-                  <Field label="Email" required>
+                  <Field label={t("bk.email")} required>
                     <Input type="email" value={details.email} onChange={(v) => setDetails((d) => ({ ...d, email: v }))} />
                   </Field>
-                  <Field label="Phone" required>
+                  <Field label={t("bk.phone")} required>
                     <Input type="tel" value={details.phone} onChange={(v) => setDetails((d) => ({ ...d, phone: v }))} />
                   </Field>
-                  <Field label="Country">
+                  <Field label={t("bk.country")}>
                     <Select value={details.country} onChange={(v) => setDetails((d) => ({ ...d, country: v }))}
-                      options={["Netherlands", "Belgium", "Germany", "France", "United Kingdom", "United States", "Other"]}
+                      options={
+                        lang === "nl"
+                          ? ["Nederland", "België", "Duitsland", "Frankrijk", "Verenigd Koninkrijk", "Verenigde Staten", "Anders"]
+                          : ["Netherlands", "Belgium", "Germany", "France", "United Kingdom", "United States", "Other"]
+                      }
                     />
                   </Field>
-                  <Field label="Estimated arrival">
+                  <Field label={t("bk.arrival")}>
                     <Select
                       value={details.arrival}
                       onChange={(v) => setDetails((d) => ({ ...d, arrival: v }))}
-                      options={["15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "Later — I'll contact you"]}
+                      options={["15:00", "16:00", "17:00", "18:00", "19:00", "20:00", lang === "nl" ? "Later — ik neem contact op" : "Later — I'll contact you"]}
                     />
                   </Field>
-                  <Field label="Special requests" className="sm:col-span-2">
+                  <Field label={t("bk.specialRequests")} className="sm:col-span-2">
                     <textarea
                       rows={4}
                       value={details.notes}
                       onChange={(e) => setDetails((d) => ({ ...d, notes: e.target.value }))}
                       maxLength={1000}
                       className="w-full bg-sand-deep border-0 rounded-lg px-4 py-3 text-navy focus:ring-2 focus:ring-navy/20 focus:outline-none"
-                      placeholder="Champagne on arrival, late check-in, special occasion..."
+                      placeholder={t("bk.requestsPlaceholder")}
                     />
                   </Field>
                 </div>
@@ -256,7 +260,7 @@ const Boeken = () => {
                       className="w-4 h-4 accent-navy"
                     />
                     <span className="text-sm text-navy/85 inline-flex items-center gap-2">
-                      <PawPrint className="w-4 h-4" /> I'm bringing a pet (free of charge)
+                      <PawPrint className="w-4 h-4" /> {t("bk.bringPet")}
                     </span>
                   </label>
                   <label className="flex items-start gap-3 cursor-pointer">
@@ -267,7 +271,7 @@ const Boeken = () => {
                       className="w-4 h-4 mt-0.5 accent-navy"
                     />
                     <span className="text-sm text-navy/85">
-                      I agree to the cancellation policy and house rules. <span className="text-destructive">*</span>
+                      {t("bk.agree")} <span className="text-destructive">*</span>
                     </span>
                   </label>
                 </div>
@@ -277,7 +281,7 @@ const Boeken = () => {
                     onClick={() => setStep(1)}
                     className="inline-flex items-center gap-2 text-navy/70 hover:text-navy text-sm"
                   >
-                    <ArrowLeft className="w-4 h-4" /> Back
+                    <ArrowLeft className="w-4 h-4" /> {t("bk.back")}
                   </button>
                   <button
                     disabled={!canStep3}
@@ -289,7 +293,7 @@ const Boeken = () => {
                         : "bg-muted text-muted-foreground cursor-not-allowed"
                     )}
                   >
-                    Review booking <ArrowRight className="w-4 h-4" />
+                    {t("bk.review")} <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -297,27 +301,29 @@ const Boeken = () => {
 
             {step === 3 && checkIn && checkOut && (
               <div>
-                <h2 className="font-display text-2xl text-navy mb-6">Review & confirm</h2>
+                <h2 className="font-display text-2xl text-navy mb-6">{t("bk.s3.title")}</h2>
                 <div className="bg-sand-deep rounded-xl p-6 space-y-4 text-sm">
                   <div className="grid sm:grid-cols-2 gap-4">
-                    <SummaryItem label="Check-in" value={format(checkIn, "EEE, MMM d, yyyy")} />
-                    <SummaryItem label="Check-out" value={format(checkOut, "EEE, MMM d, yyyy")} />
-                    <SummaryItem label="Guests" value={`${details.adults} adult${details.adults !== 1 ? "s" : ""}${details.children ? `, ${details.children} children` : ""}${details.pets ? ", + pet" : ""}`} />
-                    <SummaryItem label="Arrival" value={details.arrival} />
-                    <SummaryItem label="Guest" value={`${details.firstName} ${details.lastName}`} />
-                    <SummaryItem label="Contact" value={details.email} />
+                    <SummaryItem label={t("bk.sum.checkin")} value={format(checkIn, "EEE, MMM d, yyyy", { locale: dateLocale })} />
+                    <SummaryItem label={t("bk.sum.checkout")} value={format(checkOut, "EEE, MMM d, yyyy", { locale: dateLocale })} />
+                    <SummaryItem
+                      label={t("bk.sum.guests")}
+                      value={`${details.adults} ${details.adults === 1 ? t("bk.adult_one") : t("bk.adult_other")}${details.children ? `, ${details.children} ${details.children === 1 ? t("bk.child_one") : t("bk.child_other")}` : ""}${details.pets ? t("bk.withPet") : ""}`}
+                    />
+                    <SummaryItem label={t("bk.sum.arrival")} value={details.arrival} />
+                    <SummaryItem label={t("bk.sum.guest")} value={`${details.firstName} ${details.lastName}`} />
+                    <SummaryItem label={t("bk.sum.contact")} value={details.email} />
                   </div>
                   <div className="border-t border-dune/40 pt-4 space-y-2">
-                    <Row label={`€${NIGHTLY_RATE} × ${nights} nights`} value={`€${subtotal}`} />
-                    <Row label="Cleaning fee" value={`€${CLEANING_FEE}`} />
-                    <Row label={<span className="font-medium text-navy">Total</span>} value={<span className="font-medium text-navy">€{total}</span>} />
+                    <Row label={`€${NIGHTLY_RATE} × ${nights} ${nights === 1 ? t("bk.night_one") : t("bk.night_other")}`} value={`€${subtotal}`} />
+                    <Row label={t("bk.cleaning")} value={`€${CLEANING_FEE}`} />
+                    <Row label={<span className="font-medium text-navy">{t("bk.total")}</span>} value={<span className="font-medium text-navy">€{total}</span>} />
                   </div>
                 </div>
 
                 <div className="mt-6 bg-dune/20 rounded-xl p-5 text-sm text-navy/85 leading-relaxed">
                   <Wallet className="w-4 h-4 inline mr-2" />
-                  After confirming, you'll receive a payment request via email. We accept bank transfer and credit card.
-                  Full prepayment is required for stays under 7 days.
+                  {t("bk.payNote")}
                 </div>
 
                 {submitError && (
@@ -329,14 +335,14 @@ const Boeken = () => {
                     onClick={() => setStep(2)}
                     className="inline-flex items-center gap-2 text-navy/70 hover:text-navy text-sm"
                   >
-                    <ArrowLeft className="w-4 h-4" /> Back
+                    <ArrowLeft className="w-4 h-4" /> {t("bk.back")}
                   </button>
                   <button
                     disabled={submitting}
                     onClick={handleSubmit}
                     className="bg-navy text-sand px-8 py-3.5 rounded-full font-medium hover:bg-navy-soft transition disabled:opacity-60"
                   >
-                    {submitting ? "Sending..." : "Confirm reservation"}
+                    {submitting ? t("bk.sending") : t("bk.confirm")}
                   </button>
                 </div>
               </div>
@@ -347,12 +353,12 @@ const Boeken = () => {
                 <div className="w-16 h-16 mx-auto rounded-full bg-seafoam/40 flex items-center justify-center mb-5">
                   <Check className="w-8 h-8 text-navy" />
                 </div>
-                <h2 className="display-italic text-h1 text-navy">Reservation request received</h2>
+                <h2 className="display-italic text-h1 text-navy">{t("bk.s4.title")}</h2>
                 <p className="mt-4 text-navy/75 max-w-md mx-auto">
-                  Thank you, <strong>{details.firstName}</strong>. We'll confirm your booking within 24 hours by email.
+                  {t("bk.s4.thanks", { name: details.firstName })}
                 </p>
                 <p className="mt-6 text-sm text-muted-foreground">
-                  Questions? Email us at{" "}
+                  {t("bk.s4.questions")}{" "}
                   <a href="mailto:hello@tinybeachhouse.nl" className="text-navy underline">
                     hello@tinybeachhouse.nl
                   </a>
@@ -365,22 +371,22 @@ const Boeken = () => {
           {step !== 4 && (
             <>
               <div className="grid md:grid-cols-3 gap-4 mt-16">
-                <Perk icon={<Wallet className="w-5 h-5 text-navy" />} title="Best Rate" text="No platform commission added to your price." />
-                <Perk icon={<MessageCircle className="w-5 h-5 text-navy" />} title="Direct Contact" text="Communicate directly with your hosts." />
-                <Perk icon={<PawPrint className="w-5 h-5 text-navy" />} title="Flexible Requests" text="Pets, early check-in, champagne — just ask." />
+                <Perk icon={<Wallet className="w-5 h-5 text-navy" />} title={t("bk.perk1.title")} text={t("bk.perk1.text")} />
+                <Perk icon={<MessageCircle className="w-5 h-5 text-navy" />} title={t("bk.perk2.title")} text={t("bk.perk2.text")} />
+                <Perk icon={<PawPrint className="w-5 h-5 text-navy" />} title={t("bk.perk3.title")} text={t("bk.perk3.text")} />
               </div>
 
               <div className="mt-14">
                 <Accordion type="single" collapsible className="bg-card rounded-2xl shadow-soft px-6">
                   <AccordionItem value="cancel" className="border-none">
                     <AccordionTrigger className="text-navy font-medium hover:no-underline">
-                      Cancellation policy
+                      {t("bk.cancel.title")}
                     </AccordionTrigger>
                     <AccordionContent className="text-navy/75 text-sm space-y-2 leading-relaxed">
-                      <p>• Free cancellation up to 14 days before check-in.</p>
-                      <p>• After that: first night non-refundable.</p>
-                      <p>• No-show: full stay charged.</p>
-                      <p className="text-muted-foreground italic">Policy subject to change — always check your booking confirmation.</p>
+                      <p>{t("bk.cancel.l1")}</p>
+                      <p>{t("bk.cancel.l2")}</p>
+                      <p>{t("bk.cancel.l3")}</p>
+                      <p className="text-muted-foreground italic">{t("bk.cancel.note")}</p>
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
@@ -389,7 +395,7 @@ const Boeken = () => {
               <div className="mt-12 text-center bg-sand-deep rounded-2xl p-8">
                 <Mail className="w-5 h-5 text-navy mx-auto mb-3" />
                 <p className="text-navy/85">
-                  Prefer to book by email or have questions?
+                  {t("bk.contactQ")}
                 </p>
                 <a
                   href="mailto:hello@tinybeachhouse.nl"
@@ -397,7 +403,7 @@ const Boeken = () => {
                 >
                   hello@tinybeachhouse.nl
                 </a>
-                <p className="mt-2 text-xs text-muted-foreground">We respond within a few hours.</p>
+                <p className="mt-2 text-xs text-muted-foreground">{t("bk.respond")}</p>
               </div>
             </>
           )}
