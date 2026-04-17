@@ -121,13 +121,13 @@ const Boeken = () => {
       {/* Hero */}
       <section className="bg-navy text-sand pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="container-narrow text-center">
-          <p className="eyebrow text-dune mb-3">Direct Boeken</p>
+          <p className="eyebrow text-dune mb-3">{t("bk.heroEyebrow")}</p>
           <h1 className="display-italic text-display text-sand">
-            Book direct. <br />
-            <span className="text-dune">Best rate. Personal service.</span>
+            {t("bk.heroTitle1")} <br />
+            <span className="text-dune">{t("bk.heroTitle2")}</span>
           </h1>
           <p className="mt-6 text-sand/75 max-w-xl mx-auto">
-            Skip the platform — book directly with us and enjoy the best available rate.
+            {t("bk.heroSub")}
           </p>
         </div>
       </section>
@@ -136,15 +136,15 @@ const Boeken = () => {
       <section className="py-16 md:py-20">
         <div className="container-narrow">
           {step !== 4 && (
-            <Stepper current={step} />
+            <Stepper current={step} t={t} />
           )}
 
           <div className="mt-10 bg-card rounded-2xl shadow-lift p-6 md:p-10">
             {step === 1 && (
               <div>
-                <h2 className="font-display text-2xl text-navy mb-2">Select your dates & guests</h2>
+                <h2 className="font-display text-2xl text-navy mb-2">{t("bk.s1.title")}</h2>
                 <p className="text-sm text-muted-foreground mb-6">
-                  Single-unit property. If your dates show as unavailable, please email us directly.
+                  {t("bk.s1.sub")}
                 </p>
 
                 <RangeCalendar
@@ -158,7 +158,7 @@ const Boeken = () => {
                 />
 
                 <div className="mt-6 grid sm:grid-cols-2 gap-4">
-                  <Field label="Adults">
+                  <Field label={t("bk.adults")}>
                     <NumberStepper
                       value={details.adults}
                       onChange={(v) => setDetails((d) => ({ ...d, adults: v }))}
@@ -166,7 +166,7 @@ const Boeken = () => {
                       max={4}
                     />
                   </Field>
-                  <Field label="Children">
+                  <Field label={t("bk.children")}>
                     <NumberStepper
                       value={details.children}
                       onChange={(v) => setDetails((d) => ({ ...d, children: v }))}
@@ -177,15 +177,15 @@ const Boeken = () => {
                 </div>
 
                 <p className="mt-5 text-xs text-muted-foreground">
-                  Minimum 1 night. Weekend stays from 2 nights.
+                  {t("bk.minStay")}
                 </p>
 
                 {nights > 0 && (
                   <div className="mt-6 bg-sand-deep rounded-xl p-5 text-sm space-y-2">
-                    <Row label={`€${NIGHTLY_RATE} × ${nights} ${nights === 1 ? "night" : "nights"}`} value={`€${subtotal}`} />
-                    <Row label="Cleaning fee" value={`€${CLEANING_FEE}`} />
+                    <Row label={`€${NIGHTLY_RATE} × ${nights} ${nights === 1 ? t("bk.night_one") : t("bk.night_other")}`} value={`€${subtotal}`} />
+                    <Row label={t("bk.cleaning")} value={`€${CLEANING_FEE}`} />
                     <div className="border-t border-dune/40 pt-2 mt-2">
-                      <Row label={<span className="font-medium text-navy">Total (excl. tourist tax)</span>} value={<span className="font-medium text-navy">€{total}</span>} />
+                      <Row label={<span className="font-medium text-navy">{t("bk.totalExcl")}</span>} value={<span className="font-medium text-navy">€{total}</span>} />
                     </div>
                   </div>
                 )}
@@ -201,7 +201,7 @@ const Boeken = () => {
                         : "bg-muted text-muted-foreground cursor-not-allowed"
                     )}
                   >
-                    Continue to details <ArrowRight className="w-4 h-4" />
+                    {t("bk.continueDetails")} <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
