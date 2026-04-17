@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SiteLayout } from "@/components/site/SiteLayout";
+import { I18nProvider } from "@/i18n/I18nContext";
 import Index from "./pages/Index.tsx";
 import Accommodatie from "./pages/Accommodatie.tsx";
 import Omgeving from "./pages/Omgeving.tsx";
@@ -17,7 +18,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <I18nProvider>
+        <BrowserRouter>
         <Routes>
           <Route element={<SiteLayout />}>
             <Route path="/" element={<Index />} />
@@ -27,7 +29,8 @@ const App = () => (
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
+        </BrowserRouter>
+      </I18nProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
