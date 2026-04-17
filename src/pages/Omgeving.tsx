@@ -1,53 +1,29 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, MapPin, Car, Train, Plane } from "lucide-react";
 import { images } from "@/lib/images";
+import { useI18n } from "@/i18n/I18nContext";
+import type { TranslationKey } from "@/i18n/translations";
 
-const attractions = [
-  {
-    img: images.heroBeach,
-    badge: "🏖️ The Beach",
-    name: "Scheveningen Beach",
-    distance: "2 min walk · 200m",
-    text: "Scheveningen's wide North Sea beach is on your doorstep. Swim in summer, walk in winter, or simply watch the waves.",
-  },
-  {
-    img: images.areaPier,
-    badge: "🎡 The Pier & Boulevard",
-    name: "Pier & SkyView",
-    distance: "15 min walk",
-    text: "The iconic SkyView Ferris Wheel and Scheveningen Pier offer sweeping sea views. The boulevard is lined with bars and restaurants.",
-  },
-  {
-    img: images.areaMuseum,
-    badge: "🎨 Art by the sea",
-    name: "Museum Beelden aan Zee",
-    distance: "8 min walk",
-    text: "An outdoor sculpture museum on the beach — featuring modern works from Dutch and international artists.",
-  },
-  {
-    img: images.areaRestaurant,
-    badge: "🍽️ Eat & drink",
-    name: "Beach Restaurants",
-    distance: "5 min walk",
-    text: "Strandpaviljoen BooNooNooNoos, Solbeach, and dozens of seafood restaurants — minutes from your door.",
-  },
-  {
-    img: images.areaDunes,
-    badge: "🚲 Cycling & nature",
-    name: "Cycling the Dunes",
-    distance: "Doorstep",
-    text: "Rent a bike and explore the dune landscape stretching north and south — one of the Netherlands' most scenic coastal routes.",
-  },
-  {
-    img: images.exteriorHouse,
-    badge: "🌲 Forested escape",
-    name: "Scheveningen Woods",
-    distance: "25 min walk",
-    text: "A peaceful forested park offering cycling trails and a welcome escape from the coast.",
-  },
-];
+interface Attraction {
+  img: string;
+  badgeKey: TranslationKey;
+  nameKey: TranslationKey;
+  distKey: TranslationKey;
+  textKey: TranslationKey;
+}
 
 const Omgeving = () => {
+  const { t } = useI18n();
+
+  const attractions: Attraction[] = [
+    { img: images.heroBeach, badgeKey: "omg.attr1.badge", nameKey: "omg.attr1.name", distKey: "omg.attr1.dist", textKey: "omg.attr1.text" },
+    { img: images.areaPier, badgeKey: "omg.attr2.badge", nameKey: "omg.attr2.name", distKey: "omg.attr2.dist", textKey: "omg.attr2.text" },
+    { img: images.areaMuseum, badgeKey: "omg.attr3.badge", nameKey: "omg.attr3.name", distKey: "omg.attr3.dist", textKey: "omg.attr3.text" },
+    { img: images.areaRestaurant, badgeKey: "omg.attr4.badge", nameKey: "omg.attr4.name", distKey: "omg.attr4.dist", textKey: "omg.attr4.text" },
+    { img: images.areaDunes, badgeKey: "omg.attr5.badge", nameKey: "omg.attr5.name", distKey: "omg.attr5.dist", textKey: "omg.attr5.text" },
+    { img: images.exteriorHouse, badgeKey: "omg.attr6.badge", nameKey: "omg.attr6.name", distKey: "omg.attr6.dist", textKey: "omg.attr6.text" },
+  ];
+
   return (
     <>
       {/* Hero */}
@@ -61,9 +37,9 @@ const Omgeving = () => {
         />
         <div className="absolute inset-0 bg-gradient-hero" />
         <div className="relative container-wide pb-16 md:pb-20">
-          <p className="eyebrow text-sand/80 mb-3">Omgeving · The area</p>
+          <p className="eyebrow text-sand/80 mb-3">{t("omg.heroEyebrow")}</p>
           <h1 className="display-italic text-display text-sand max-w-3xl">
-            Scheveningen — <br />where city meets sea.
+            {t("omg.heroTitle1")} <br />{t("omg.heroTitle2")}
           </h1>
         </div>
       </section>
@@ -72,9 +48,7 @@ const Omgeving = () => {
       <section className="section-py">
         <div className="container-narrow text-center">
           <p className="text-lg md:text-xl text-navy/75 leading-relaxed font-light">
-            Tiny Beachhouse sits in Scheveningen, The Hague's famous seaside district.
-            Step outside and you're immediately in one of the Netherlands' most vibrant coastal neighbourhoods —
-            <em className="font-display"> beach, restaurants, culture, and nature</em>, all within walking distance.
+            {t("omg.intro")}
           </p>
         </div>
       </section>
@@ -83,32 +57,32 @@ const Omgeving = () => {
       <section className="bg-sand-deep section-py">
         <div className="container-wide">
           <div className="mb-12">
-            <p className="eyebrow mb-3">Around the corner</p>
-            <h2 className="display-italic text-h1 text-navy">What's nearby</h2>
+            <p className="eyebrow mb-3">{t("omg.gridEyebrow")}</p>
+            <h2 className="display-italic text-h1 text-navy">{t("omg.gridTitle")}</h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {attractions.map((a) => (
               <article
-                key={a.name}
+                key={a.nameKey}
                 className="bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-lift transition group"
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
                     src={a.img}
-                    alt={a.name}
+                    alt={t(a.nameKey)}
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-7">
                   <span className="inline-block bg-dune/30 text-navy text-xs px-3 py-1 rounded-full mb-3">
-                    {a.badge}
+                    {t(a.badgeKey)}
                   </span>
-                  <h3 className="font-display text-xl text-navy">{a.name}</h3>
+                  <h3 className="font-display text-xl text-navy">{t(a.nameKey)}</h3>
                   <p className="text-xs text-muted-foreground mt-1 mb-3 inline-flex items-center gap-1">
-                    <MapPin className="w-3 h-3" /> {a.distance}
+                    <MapPin className="w-3 h-3" /> {t(a.distKey)}
                   </p>
-                  <p className="text-sm text-navy/75 leading-relaxed">{a.text}</p>
+                  <p className="text-sm text-navy/75 leading-relaxed">{t(a.textKey)}</p>
                 </div>
               </article>
             ))}
@@ -120,18 +94,17 @@ const Omgeving = () => {
       <section className="section-py">
         <div className="container-wide grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <div>
-            <p className="eyebrow mb-3">Getting here</p>
-            <h2 className="display-italic text-h1 text-navy mb-8">Easy to find. Easy to leave (eventually).</h2>
+            <p className="eyebrow mb-3">{t("omg.travelEyebrow")}</p>
+            <h2 className="display-italic text-h1 text-navy mb-8">{t("omg.travelTitle")}</h2>
             <div className="space-y-7">
               <div className="flex gap-4">
                 <div className="w-11 h-11 rounded-full bg-dune/30 flex items-center justify-center shrink-0">
                   <Car className="w-5 h-5 text-navy" />
                 </div>
                 <div>
-                  <h3 className="font-display text-lg text-navy">By car</h3>
+                  <h3 className="font-display text-lg text-navy">{t("omg.car.title")}</h3>
                   <p className="text-navy/75 text-sm mt-1 leading-relaxed">
-                    Free on-site parking & EV charging at Tiny Beachhouse.
-                    Located at Jacob Pronkstraat, 2584 BS Scheveningen.
+                    {t("omg.car.text")}
                   </p>
                 </div>
               </div>
@@ -140,10 +113,9 @@ const Omgeving = () => {
                   <Train className="w-5 h-5 text-navy" />
                 </div>
                 <div>
-                  <h3 className="font-display text-lg text-navy">By public transport</h3>
+                  <h3 className="font-display text-lg text-navy">{t("omg.transit.title")}</h3>
                   <p className="text-navy/75 text-sm mt-1 leading-relaxed">
-                    Bus stop <em>Scheveningseslag/Beelden aan Zee</em> is a 10-minute walk.
-                    Tram lines connect directly to Den Haag Centraal in 20 minutes.
+                    {t("omg.transit.text")}
                   </p>
                 </div>
               </div>
@@ -152,9 +124,9 @@ const Omgeving = () => {
                   <Plane className="w-5 h-5 text-navy" />
                 </div>
                 <div>
-                  <h3 className="font-display text-lg text-navy">From the airport</h3>
+                  <h3 className="font-display text-lg text-navy">{t("omg.air.title")}</h3>
                   <p className="text-navy/75 text-sm mt-1 leading-relaxed">
-                    Rotterdam The Hague Airport — 25 km, approx. 32 min by car. Schiphol — 50 min by car or train.
+                    {t("omg.air.text")}
                   </p>
                 </div>
               </div>
@@ -163,7 +135,7 @@ const Omgeving = () => {
               to="/boeken"
               className="mt-10 inline-flex items-center gap-2 bg-navy text-sand px-7 py-3.5 rounded-full font-medium hover:bg-navy-soft transition"
             >
-              Book your stay <ArrowRight className="w-4 h-4" />
+              {t("omg.bookCta")} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 

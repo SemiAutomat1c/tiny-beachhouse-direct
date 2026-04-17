@@ -5,44 +5,35 @@ import { images, galleryImages } from "@/lib/images";
 import { AvailabilityBar } from "@/components/site/AvailabilityBar";
 import { BookDirectBanner } from "@/components/site/BookDirectBanner";
 import { Lightbox } from "@/components/site/Lightbox";
-
-const trustItems = [
-  { icon: "🏖️", text: "200m from Scheveningen Beach" },
-  { icon: "⭐", text: "Highly rated on Booking.com" },
-  { icon: "🔑", text: "Private entrance & parking" },
-  { icon: "🌿", text: "Designed with care — every detail" },
-];
-
-const featurePills = [
-  { icon: Bed, label: "1 Bedroom" },
-  { icon: Bath, label: "Private Bathroom" },
-  { icon: Coffee, label: "Full Kitchen" },
-  { icon: Car, label: "Parking + EV" },
-  { icon: PawPrint, label: "Pets Welcome" },
-  { icon: Wifi, label: "Free WiFi" },
-];
-
-const reviews = [
-  {
-    text: "This is an exceptional spot. It's larger than it looks in the pictures and incredibly comfortable. The kitchen is well supplied and the hosts are helpful and considerate.",
-    name: "Sophie",
-  },
-  {
-    text: "Brilliant location right beside the beach. Wonderful hosts and beautifully decorated apartment.",
-    name: "James",
-  },
-  {
-    text: "Perfect hosts. Best location — next to the beach and a central road with cafes. We will surely be back.",
-    name: "Marta",
-  },
-  {
-    text: "Very cozy Dutch house designed in the style of a beach house. Interior thought to the small details. The sea is one hundred metres away.",
-    name: "Lukas",
-  },
-];
+import { useI18n } from "@/i18n/I18nContext";
+import type { TranslationKey } from "@/i18n/translations";
 
 const Index = () => {
+  const { t } = useI18n();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const trustItems: { icon: string; key: TranslationKey }[] = [
+    { icon: "🏖️", key: "home.trust1" },
+    { icon: "⭐", key: "home.trust2" },
+    { icon: "🔑", key: "home.trust3" },
+    { icon: "🌿", key: "home.trust4" },
+  ];
+
+  const featurePills: { icon: typeof Bed; key: TranslationKey }[] = [
+    { icon: Bed, key: "pill.bedroom" },
+    { icon: Bath, key: "pill.bathroom" },
+    { icon: Coffee, key: "pill.kitchen" },
+    { icon: Car, key: "pill.parking" },
+    { icon: PawPrint, key: "pill.pets" },
+    { icon: Wifi, key: "pill.wifi" },
+  ];
+
+  const reviews: { textKey: TranslationKey; name: string }[] = [
+    { textKey: "home.review1", name: "Sophie" },
+    { textKey: "home.review2", name: "James" },
+    { textKey: "home.review3", name: "Marta" },
+    { textKey: "home.review4", name: "Lukas" },
+  ];
 
   return (
     <>
@@ -59,14 +50,14 @@ const Index = () => {
         <div className="absolute inset-0 bg-navy/20" />
 
         <div className="relative container-wide pb-20 md:pb-28 pt-32 w-full">
-          <p className="eyebrow text-sand/80 mb-5 animate-fade-in">Scheveningen · Den Haag</p>
+          <p className="eyebrow text-sand/80 mb-5 animate-fade-in">{t("home.heroEyebrow")}</p>
           <h1 className="display-italic text-display md:text-[5.5rem] text-sand max-w-4xl animate-fade-up">
-            Your private escape.
+            {t("home.heroTitle1")}
             <br />
-            <span className="text-dune">Steps from the sea.</span>
+            <span className="text-dune">{t("home.heroTitle2")}</span>
           </h1>
           <p className="mt-6 text-lg md:text-xl text-sand/85 max-w-xl font-light animate-fade-up" style={{ animationDelay: "0.1s" }}>
-            A beautifully designed beach house in Scheveningen — just 200 metres from the North Sea.
+            {t("home.heroSub")}
           </p>
 
           <div className="mt-9 flex flex-wrap gap-4 animate-fade-up" style={{ animationDelay: "0.2s" }}>
@@ -74,13 +65,13 @@ const Index = () => {
               to="/boeken"
               className="bg-dune text-navy px-7 py-3.5 rounded-full font-medium hover:bg-dune-soft transition shadow-soft"
             >
-              Check Availability
+              {t("home.ctaCheck")}
             </Link>
             <Link
               to="/accommodatie"
               className="border border-sand/70 text-sand px-7 py-3.5 rounded-full font-medium hover:bg-sand/10 transition inline-flex items-center gap-2"
             >
-              Discover the Space <ArrowRight className="w-4 h-4" />
+              {t("home.ctaDiscover")} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
@@ -94,9 +85,9 @@ const Index = () => {
       <section className="bg-card border-y border-border">
         <div className="container-wide py-7 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {trustItems.map((item) => (
-            <div key={item.text} className="flex flex-col md:flex-row items-center justify-center gap-2 text-sm text-navy/80">
+            <div key={item.key} className="flex flex-col md:flex-row items-center justify-center gap-2 text-sm text-navy/80">
               <span className="text-xl" aria-hidden>{item.icon}</span>
-              <span>{item.text}</span>
+              <span>{t(item.key)}</span>
             </div>
           ))}
         </div>
@@ -123,28 +114,22 @@ const Index = () => {
           </div>
 
           <div>
-            <p className="eyebrow mb-4">A place unlike any other</p>
+            <p className="eyebrow mb-4">{t("home.introEyebrow")}</p>
             <h2 className="display-italic text-h1 text-navy">
-              A tiny house. <br />An unforgettable stay.
+              {t("home.introTitle1")} <br />{t("home.introTitle2")}
             </h2>
             <div className="mt-6 space-y-5 text-base md:text-lg text-navy/75 leading-relaxed">
-              <p>
-                Tiny Beachhouse is a thoughtfully designed retreat in the heart of Scheveningen.
-                Inspired by coastal living, every corner tells a story — from the driftwood details to the sea-facing terrace.
-              </p>
-              <p>
-                Whether you're here for a romantic weekend, a solo escape, or simply to breathe in sea air —
-                this is your home away from home.
-              </p>
+              <p>{t("home.introP1")}</p>
+              <p>{t("home.introP2")}</p>
             </div>
 
             <div className="mt-8 flex flex-wrap gap-2.5">
-              {featurePills.map(({ icon: Icon, label }) => (
+              {featurePills.map(({ icon: Icon, key }) => (
                 <span
-                  key={label}
+                  key={key}
                   className="inline-flex items-center gap-1.5 bg-dune/30 text-navy px-3.5 py-1.5 rounded-full text-sm"
                 >
-                  <Icon className="w-3.5 h-3.5" /> {label}
+                  <Icon className="w-3.5 h-3.5" /> {t(key)}
                 </span>
               ))}
             </div>
@@ -153,7 +138,7 @@ const Index = () => {
               to="/accommodatie"
               className="mt-8 inline-flex items-center gap-1.5 text-navy font-medium border-b-2 border-dune pb-1 hover:gap-3 transition-all"
             >
-              Explore the full space <ArrowRight className="w-4 h-4" />
+              {t("home.exploreSpace")} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -164,11 +149,11 @@ const Index = () => {
         <div className="container-wide">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-10 gap-3">
             <div>
-              <p className="eyebrow mb-3">Photo gallery</p>
-              <h2 className="display-italic text-h1 text-navy">A look inside</h2>
+              <p className="eyebrow mb-3">{t("home.galEyebrow")}</p>
+              <h2 className="display-italic text-h1 text-navy">{t("home.galTitle")}</h2>
             </div>
             <Link to="/accommodatie" className="text-navy/70 hover:text-navy text-sm inline-flex items-center gap-1.5">
-              See all photos <ArrowRight className="w-4 h-4" />
+              {t("home.galSeeAll")} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
@@ -201,17 +186,16 @@ const Index = () => {
               <MapPin className="w-3.5 h-3.5" /> Scheveningen, Den Haag
             </p>
             <h2 className="display-italic text-h1 text-navy">
-              In the heart of Scheveningen
+              {t("home.locTitle")}
             </h2>
             <p className="mt-6 text-base md:text-lg text-navy/75 leading-relaxed">
-              Scheveningen is The Hague's vibrant beach district — 200 metres from your door.
-              Walk to the beach, cycle the dunes, dine at seafront restaurants, or visit the Museum Beelden aan Zee.
+              {t("home.locText")}
             </p>
             <Link
               to="/omgeving"
               className="mt-8 inline-flex items-center gap-1.5 text-navy font-medium border-b-2 border-dune pb-1 hover:gap-3 transition-all"
             >
-              Explore the area <ArrowRight className="w-4 h-4" />
+              {t("home.exploreArea")} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
           <div className="rounded-2xl overflow-hidden shadow-soft aspect-[4/3]">
@@ -232,10 +216,10 @@ const Index = () => {
       <section className="bg-sand-deep section-py">
         <div className="container-wide">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <p className="eyebrow mb-3">What guests say</p>
-            <h2 className="display-italic text-h1 text-navy">Loved by travellers</h2>
+            <p className="eyebrow mb-3">{t("home.revEyebrow")}</p>
+            <h2 className="display-italic text-h1 text-navy">{t("home.revTitle")}</h2>
             <p className="mt-4 text-navy/70">
-              Rated highly on Booking.com by guests from around the world.
+              {t("home.revSub")}
             </p>
           </div>
 
@@ -250,7 +234,7 @@ const Index = () => {
                     <Star key={i} className="w-4 h-4 fill-current" />
                   ))}
                 </div>
-                <p className="text-navy/85 leading-relaxed text-[0.95rem] flex-1">"{r.text}"</p>
+                <p className="text-navy/85 leading-relaxed text-[0.95rem] flex-1">"{t(r.textKey)}"</p>
                 <p className="mt-5 text-sm font-medium text-navy">— {r.name}</p>
               </article>
             ))}
@@ -263,7 +247,7 @@ const Index = () => {
               rel="noreferrer noopener"
               className="text-navy/70 hover:text-navy text-sm inline-flex items-center gap-1.5"
             >
-              Read more reviews on Booking.com <ArrowRight className="w-4 h-4" />
+              {t("home.revMore")} <ArrowRight className="w-4 h-4" />
             </a>
           </div>
         </div>

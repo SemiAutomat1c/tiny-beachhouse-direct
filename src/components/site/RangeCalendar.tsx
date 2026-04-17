@@ -1,7 +1,26 @@
 import { useState } from "react";
 import { addMonths, addDays, format, isBefore, isSameDay, isSameMonth, startOfMonth, startOfWeek, endOfWeek, endOfMonth, isWithinInterval } from "date-fns";
+import { nl as nlLocale, enUS } from "date-fns/locale";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n/I18nContext";
+
+const CalendarSummary = ({ checkIn, checkOut }: { checkIn: Date; checkOut: Date | null }) => {
+  const { t, lang } = useI18n();
+  const locale = lang === "nl" ? nlLocale : enUS;
+  return (
+    <div className="mt-5 pt-4 border-t border-border flex flex-wrap gap-2 text-sm text-muted-foreground">
+      <span>
+        <span className="font-medium text-navy">{t("cal.checkin")}</span> {format(checkIn, "EEE, MMM d", { locale })}
+      </span>
+      {checkOut && (
+        <span>
+          <span className="font-medium text-navy">·  {t("cal.checkout")}</span> {format(checkOut, "EEE, MMM d", { locale })}
+        </span>
+      )}
+    </div>
+  );
+};
 
 interface RangeCalendarProps {
   checkIn: Date | null;
@@ -16,6 +35,11 @@ export const RangeCalendar = ({
   onChange,
   monthsToShow = 1,
 }: RangeCalendarProps) => {
+  const { lang } = useI18n();
+  const locale = lang === "nl" ? nlLocale : enUS;
+  const dayLabels = lang === "nl"
+    ? ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"]
+    : ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
   const [cursor, setCursor] = useState<Date>(startOfMonth(checkIn ?? new Date()));
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -44,11 +68,11 @@ export const RangeCalendar = ({
 
     return (
       <div key={monthDate.toISOString()} className="flex-1 min-w-0">
-        <div className="text-center font-display text-lg text-navy mb-3">
-          {format(monthDate, "MMMM yyyy")}
+        <div className="text-center font-display text-lg text-navy mb-3 capitalize">
+          {format(monthDate, "MMMM yyyy", { locale })}
         </div>
         <div className="grid grid-cols-7 text-[11px] uppercase tracking-wider text-muted-foreground mb-1.5">
-          {["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map((d) => (
+          {dayLabels.map((d) => (
             <div key={d} className="text-center py-1">{d}</div>
           ))}
         </div>
@@ -110,16 +134,7 @@ export const RangeCalendar = ({
         {months.map(renderMonth)}
       </div>
       {checkIn && (
-        <div className="mt-5 pt-4 border-t border-border flex flex-wrap gap-2 text-sm text-muted-foreground">
-          <span>
-            <span className="font-medium text-navy">Check-in:</span> {format(checkIn, "EEE, MMM d")}
-          </span>
-          {checkOut && (
-            <span>
-              <span className="font-medium text-navy">·  Check-out:</span> {format(checkOut, "EEE, MMM d")}
-            </span>
-          )}
-        </div>
+        <CalendarSummary checkIn={checkIn} checkOut={checkOut} />
       )}
     </div>
   );

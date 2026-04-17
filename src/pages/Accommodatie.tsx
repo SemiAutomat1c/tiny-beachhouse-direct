@@ -6,33 +6,41 @@ import {
 } from "lucide-react";
 import { images, galleryImages } from "@/lib/images";
 import { Lightbox } from "@/components/site/Lightbox";
-
-const facilities = [
-  { icon: Wifi, label: "Free WiFi" },
-  { icon: Car, label: "Free on-site parking" },
-  { icon: Zap, label: "EV charging station" },
-  { icon: Key, label: "Private entrance" },
-  { icon: PawPrint, label: "Pets welcome (free)" },
-  { icon: Wine, label: "Wine on request" },
-  { icon: Bath, label: "Walk-in shower + bidet" },
-  { icon: Tv, label: "Flat-screen TV (streaming)" },
-  { icon: Coffee, label: "Coffee & tea facilities" },
-  { icon: ChefHat, label: "Full kitchen" },
-  { icon: Trees, label: "Private terrace" },
-  { icon: VolumeX, label: "Soundproof windows" },
-];
-
-const houseRules = [
-  { icon: Check, text: "Check-in: from 15:00", positive: true },
-  { icon: Check, text: "Check-out: by 11:00", positive: true },
-  { icon: Check, text: "Pets allowed (no charge)", positive: true },
-  { icon: X, text: "Non-smoking property", positive: false },
-  { icon: X, text: "No bachelor/bachelorette parties", positive: false },
-  { icon: X, text: "No cribs available", positive: false },
-];
+import { useI18n } from "@/i18n/I18nContext";
+import type { TranslationKey } from "@/i18n/translations";
 
 const Accommodatie = () => {
+  const { t } = useI18n();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const facilities: { icon: typeof Wifi; key: TranslationKey }[] = [
+    { icon: Wifi, key: "acc.fac.wifi" },
+    { icon: Car, key: "acc.fac.parking" },
+    { icon: Zap, key: "acc.fac.ev" },
+    { icon: Key, key: "acc.fac.entrance" },
+    { icon: PawPrint, key: "acc.fac.pets" },
+    { icon: Wine, key: "acc.fac.wine" },
+    { icon: Bath, key: "acc.fac.shower" },
+    { icon: Tv, key: "acc.fac.tv" },
+    { icon: Coffee, key: "acc.fac.coffee" },
+    { icon: ChefHat, key: "acc.fac.fullKitchen" },
+    { icon: Trees, key: "acc.fac.terrace" },
+    { icon: VolumeX, key: "acc.fac.soundproof" },
+  ];
+
+  const features: TranslationKey[] = [
+    "acc.feature1", "acc.feature2", "acc.feature3", "acc.feature4",
+    "acc.feature5", "acc.feature6", "acc.feature7",
+  ];
+
+  const houseRules: { icon: typeof Check; key: TranslationKey; positive: boolean }[] = [
+    { icon: Check, key: "acc.rule1", positive: true },
+    { icon: Check, key: "acc.rule2", positive: true },
+    { icon: Check, key: "acc.rule3", positive: true },
+    { icon: X, key: "acc.rule4", positive: false },
+    { icon: X, key: "acc.rule5", positive: false },
+    { icon: X, key: "acc.rule6", positive: false },
+  ];
 
   return (
     <>
@@ -47,9 +55,9 @@ const Accommodatie = () => {
         />
         <div className="absolute inset-0 bg-gradient-hero" />
         <div className="relative container-wide pb-16 md:pb-20">
-          <p className="eyebrow text-sand/80 mb-3">De Accommodatie</p>
+          <p className="eyebrow text-sand/80 mb-3">{t("acc.heroEyebrow")}</p>
           <h1 className="display-italic text-display text-sand max-w-3xl">
-            Your home by the sea.
+            {t("acc.heroTitle")}
           </h1>
         </div>
       </section>
@@ -64,23 +72,15 @@ const Accommodatie = () => {
             loading="lazy"
           />
           <div>
-            <p className="eyebrow mb-4">The space</p>
+            <p className="eyebrow mb-4">{t("acc.spaceEyebrow")}</p>
             <h2 className="display-italic text-h1 text-navy">
-              Designed for two. <br />Loved by all.
+              {t("acc.spaceTitle1")} <br />{t("acc.spaceTitle2")}
             </h2>
             <ul className="mt-8 space-y-3.5 text-navy/80">
-              {[
-                "1 bedroom with double bed, fresh linen & towels",
-                "Living room with sofa bed (sleeps additional guest)",
-                "Fully equipped kitchen — fridge, kettle, coffee machine, microwave",
-                "Private bathroom with walk-in shower, bidet, separate toilet",
-                "Soundproof windows, flat-screen TV with streaming services",
-                "Private terrace with quiet street views",
-                "Wine & champagne welcome available on request",
-              ].map((line) => (
-                <li key={line} className="flex gap-3">
+              {features.map((key) => (
+                <li key={key} className="flex gap-3">
                   <span className="mt-2 w-1.5 h-1.5 bg-dune rounded-full shrink-0" />
-                  <span>{line}</span>
+                  <span>{t(key)}</span>
                 </li>
               ))}
             </ul>
@@ -92,19 +92,19 @@ const Accommodatie = () => {
       <section className="bg-sand-deep section-py">
         <div className="container-wide">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <p className="eyebrow mb-3">Everything you need</p>
-            <h2 className="display-italic text-h1 text-navy">Thoughtful details, throughout</h2>
+            <p className="eyebrow mb-3">{t("acc.facEyebrow")}</p>
+            <h2 className="display-italic text-h1 text-navy">{t("acc.facTitle")}</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {facilities.map(({ icon: Icon, label }) => (
+            {facilities.map(({ icon: Icon, key }) => (
               <div
-                key={label}
+                key={key}
                 className="bg-card rounded-xl p-5 flex flex-col items-center text-center gap-3 shadow-soft hover:shadow-lift transition"
               >
                 <div className="w-11 h-11 rounded-full bg-dune/30 flex items-center justify-center">
                   <Icon className="w-5 h-5 text-navy" />
                 </div>
-                <span className="text-sm text-navy/85 leading-tight">{label}</span>
+                <span className="text-sm text-navy/85 leading-tight">{t(key)}</span>
               </div>
             ))}
           </div>
@@ -115,12 +115,12 @@ const Accommodatie = () => {
       <section className="section-py">
         <div className="container-narrow">
           <div className="text-center max-w-xl mx-auto mb-10">
-            <p className="eyebrow mb-3">Good to know</p>
-            <h2 className="display-italic text-h1 text-navy">House rules</h2>
+            <p className="eyebrow mb-3">{t("acc.rulesEyebrow")}</p>
+            <h2 className="display-italic text-h1 text-navy">{t("acc.rulesTitle")}</h2>
           </div>
           <div className="bg-card rounded-2xl shadow-soft p-8 md:p-10 grid md:grid-cols-2 gap-x-10 gap-y-5">
             {houseRules.map((rule) => (
-              <div key={rule.text} className="flex items-center gap-3 text-navy/85">
+              <div key={rule.key} className="flex items-center gap-3 text-navy/85">
                 <span
                   className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
                     rule.positive ? "bg-seafoam/40 text-navy" : "bg-dune/30 text-navy"
@@ -128,12 +128,12 @@ const Accommodatie = () => {
                 >
                   <rule.icon className="w-3.5 h-3.5" />
                 </span>
-                <span className="text-sm">{rule.text}</span>
+                <span className="text-sm">{t(rule.key)}</span>
               </div>
             ))}
           </div>
           <p className="mt-5 text-center text-xs text-muted-foreground">
-            💳 Payment for direct bookings: bank transfer or credit card via emailed payment link.
+            {t("acc.payment")}
           </p>
         </div>
       </section>
@@ -142,8 +142,8 @@ const Accommodatie = () => {
       <section className="bg-sand-deep section-py">
         <div className="container-wide">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <p className="eyebrow mb-3">Gallery</p>
-            <h2 className="display-italic text-h1 text-navy">Every corner, considered</h2>
+            <p className="eyebrow mb-3">{t("acc.galEyebrow")}</p>
+            <h2 className="display-italic text-h1 text-navy">{t("acc.galTitle")}</h2>
           </div>
           <div className="columns-2 md:columns-3 lg:columns-4 gap-4 [column-fill:_balance]">
             {galleryImages.map((img, i) => (
@@ -168,13 +168,13 @@ const Accommodatie = () => {
       <section className="bg-navy text-sand">
         <div className="container-wide py-16 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <h2 className="display-italic text-h1 text-sand">
-            Ready to stay?
+            {t("acc.ctaTitle")}
           </h2>
           <Link
             to="/boeken"
             className="bg-dune text-navy px-7 py-3.5 rounded-full font-medium hover:bg-dune-soft transition inline-flex items-center gap-2"
           >
-            Book Direct <ArrowRight className="w-4 h-4" />
+            {t("acc.ctaBtn")} <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </section>
