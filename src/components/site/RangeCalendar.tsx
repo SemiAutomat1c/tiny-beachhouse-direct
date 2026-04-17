@@ -35,6 +35,11 @@ export const RangeCalendar = ({
   onChange,
   monthsToShow = 1,
 }: RangeCalendarProps) => {
+  const { lang } = useI18n();
+  const locale = lang === "nl" ? nlLocale : enUS;
+  const dayLabels = lang === "nl"
+    ? ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"]
+    : ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
   const [cursor, setCursor] = useState<Date>(startOfMonth(checkIn ?? new Date()));
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -63,11 +68,11 @@ export const RangeCalendar = ({
 
     return (
       <div key={monthDate.toISOString()} className="flex-1 min-w-0">
-        <div className="text-center font-display text-lg text-navy mb-3">
-          {format(monthDate, "MMMM yyyy")}
+        <div className="text-center font-display text-lg text-navy mb-3 capitalize">
+          {format(monthDate, "MMMM yyyy", { locale })}
         </div>
         <div className="grid grid-cols-7 text-[11px] uppercase tracking-wider text-muted-foreground mb-1.5">
-          {["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map((d) => (
+          {dayLabels.map((d) => (
             <div key={d} className="text-center py-1">{d}</div>
           ))}
         </div>
