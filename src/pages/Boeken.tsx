@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { differenceInCalendarDays, format, parseISO, isValid } from "date-fns";
+import { nl as nlLocale, enUS } from "date-fns/locale";
 import {
   Check, ChevronDown, Wallet, MessageCircle, PawPrint, Mail, ArrowRight, ArrowLeft,
 } from "lucide-react";
@@ -9,6 +10,8 @@ import { cn } from "@/lib/utils";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useI18n } from "@/i18n/I18nContext";
+import type { TranslationKey } from "@/i18n/translations";
 
 const NIGHTLY_RATE = 150; // EUR placeholder
 const CLEANING_FEE = 45;
@@ -30,6 +33,8 @@ interface Details {
 }
 
 const Boeken = () => {
+  const { t, lang } = useI18n();
+  const dateLocale = lang === "nl" ? nlLocale : enUS;
   const [params] = useSearchParams();
   const [step, setStep] = useState<Step>(1);
 
