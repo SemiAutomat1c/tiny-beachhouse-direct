@@ -1,0 +1,136 @@
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const links = [
+  { to: "/", label: "Home" },
+  { to: "/accommodatie", label: "De Accommodatie" },
+  { to: "/omgeving", label: "Omgeving" },
+];
+
+export const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  // Hero exists on home page; force solid on other pages
+  const transparentEligible = pathname === "/";
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  const solid = !transparentEligible || scrolled;
+
+  return (
+    <header
+      className={cn(
+        "fixed top-0 inset-x-0 z-50 transition-all duration-500",
+        solid
+          ? "bg-sand/90 backdrop-blur-xl shadow-soft"
+          : "bg-transparent"
+      )}
+    >
+      <div className="container-wide flex items-center justify-between h-20">
+        <Link
+          to="/"
+          className={cn(
+            "font-display italic text-2xl md:text-[1.6rem] font-bold transition-colors",
+            solid ? "text-navy" : "text-white"
+          )}
+        >
+          Tiny Beachhouse
+        </Link>
+
+        <nav className="hidden md:flex items-center gap-9">
+          {links.map((l) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              className={({ isActive }) =>
+                cn(
+                  "text-sm font-medium tracking-wide transition-colors relative",
+                  solid
+                    ? isActive
+                      ? "text-navy"
+                      : "text-navy/70 hover:text-navy"
+                    : isActive
+                    ? "text-white"
+                    : "text-white/80 hover:text-white",
+                  isActive &&
+                    "after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-px after:bg-current"
+                )
+              }
+              end={l.to === "/"}
+            >
+              {l.label}
+            </NavLink>
+          ))}
+          <Link
+            to="/boeken"
+            className="inline-flex items-center gap-1.5 bg-navy text-sand px-5 py-2.5 rounded-full text-sm font-medium hover:bg-navy-soft transition-colors"
+          >
+            Book Direct <ArrowUpRight className="w-4 h-4" />
+          </Link>
+        </nav>
+
+        <button
+          aria-label="Open menu"
+          className={cn(
+            "md:hidden p-2 rounded-md transition-colors",
+            solid ? "text-navy" : "text-white"
+          )}
+          onClick={() => setOpen(true)}
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+      </div>
+
+      {/* Mobile overlay */}
+      <div
+        className={cn(
+          "fixed inset-0 bg-navy text-sand transition-opacity duration-300 md:hidden",
+          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        )}
+      >
+        <div className="flex items-center justify-between h-20 container-wide">
+          <span className="font-display italic text-2xl font-bold">Tiny Beachhouse</span>
+          <button aria-label="Close menu" className="p-2" onClick={() => setOpen(false)}>
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+        <nav className="flex flex-col items-center justify-center gap-8 mt-16 px-6">
+          {links.map((l) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              end={l.to === "/"}
+              className={({ isActive }) =>
+                cn(
+                  "font-display text-3xl italic",
+                  isActive ? "text-dune" : "text-sand/90"
+                )
+              }
+            >
+              {l.label}
+            </NavLink>
+          ))}
+          <Link
+            to="/boeken"
+            className="mt-6 inline-flex items-center gap-2 bg-dune text-navy px-7 py-3.5 rounded-full text-base font-medium"
+          >
+            Book Direct <ArrowUpRight className="w-4 h-4" />
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
+};
