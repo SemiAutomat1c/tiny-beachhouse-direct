@@ -6,7 +6,7 @@ import {
   Check, ChevronDown, Wallet, MessageCircle, PawPrint, Mail, ArrowRight, ArrowLeft,
 } from "lucide-react";
 import { RangeCalendar } from "@/components/site/RangeCalendar";
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
