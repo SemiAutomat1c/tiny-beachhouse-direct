@@ -8,6 +8,7 @@ import { images, galleryImages } from "@/lib/images";
 import { Lightbox } from "@/components/site/Lightbox";
 import { useI18n } from "@/i18n/I18nContext";
 import type { TranslationKey } from "@/i18n/translations";
+import { cn } from "@/lib/utils";
 
 const Accommodatie = () => {
   const { t } = useI18n();
@@ -47,16 +48,16 @@ const Accommodatie = () => {
       {/* Hero */}
       <section className="relative h-[70vh] min-h-[500px] flex items-end overflow-hidden">
         <img
-          src={images.interiorBedroom}
+          src={images.heroAcc}
           alt="Bedroom of Tiny Beachhouse"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover animate-image-zoom"
           width={1920}
           height={1280}
         />
         <div className="absolute inset-0 bg-gradient-hero" />
         <div className="relative container-wide pb-16 md:pb-20">
           <p className="eyebrow text-sand/80 mb-3">{t("acc.heroEyebrow")}</p>
-          <h1 className="display-italic text-display text-sand max-w-3xl">
+          <h1 className="display-italic text-sand max-w-3xl">
             {t("acc.heroTitle")}
           </h1>
         </div>
@@ -65,15 +66,24 @@ const Accommodatie = () => {
       {/* The Space */}
       <section className="section-py">
         <div className="container-wide grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <img
-            src={images.interiorLiving}
-            alt="Living room with linen sofa"
-            className="w-full aspect-[4/5] object-cover rounded-2xl shadow-soft"
-            loading="lazy"
-          />
+          <div className="relative group">
+            <img
+              src={images.kitchenIslandWide}
+              alt="Bright open kitchen and island"
+              className="w-full aspect-[4/5] object-cover rounded-2xl shadow-soft transition-all duration-700 group-hover:scale-[1.01]"
+              loading="lazy"
+            />
+            <div className="hidden md:block absolute -bottom-6 -left-6 w-48 aspect-square rounded-xl overflow-hidden shadow-lift border-4 border-sand transition-transform duration-500 hover:scale-110 hover:rotate-2">
+              <img 
+                src={images.dogExperience} 
+                alt="A cozy stay for everyone" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
           <div>
             <p className="eyebrow mb-4">{t("acc.spaceEyebrow")}</p>
-            <h2 className="display-italic text-h1 text-navy">
+            <h2 className="display-italic text-navy">
               {t("acc.spaceTitle1")} <br />{t("acc.spaceTitle2")}
             </h2>
             <ul className="mt-8 space-y-3.5 text-navy/80">
@@ -91,20 +101,20 @@ const Accommodatie = () => {
       {/* Facilities Grid */}
       <section className="bg-sand-deep section-py">
         <div className="container-wide">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <p className="eyebrow mb-3">{t("acc.facEyebrow")}</p>
-            <h2 className="display-italic text-h1 text-navy">{t("acc.facTitle")}</h2>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <p className="eyebrow mb-4">{t("acc.facEyebrow")}</p>
+            <h2 className="display-italic text-navy">{t("acc.facTitle")}</h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {facilities.map(({ icon: Icon, key }) => (
               <div
                 key={key}
-                className="bg-card rounded-xl p-5 flex flex-col items-center text-center gap-3 shadow-soft hover:shadow-lift transition"
+                className="bg-white/60 backdrop-blur-sm rounded-[2rem] p-8 flex flex-col items-center text-center gap-5 shadow-soft hover:shadow-lift transition-all duration-500 border border-white/40 group"
               >
-                <div className="w-11 h-11 rounded-full bg-dune/30 flex items-center justify-center">
-                  <Icon className="w-5 h-5 text-navy" />
+                <div className="w-14 h-14 rounded-2xl bg-sand-deep flex items-center justify-center transition-all duration-500 group-hover:bg-dune/20 group-hover:rotate-3 group-hover:scale-110">
+                  <Icon className="w-6 h-6 text-navy" />
                 </div>
-                <span className="text-sm text-navy/85 leading-tight">{t(key)}</span>
+                <span className="font-medium text-navy/80 tracking-wide text-sm md:text-base">{t(key)}</span>
               </div>
             ))}
           </div>
@@ -112,27 +122,31 @@ const Accommodatie = () => {
       </section>
 
       {/* House Rules */}
-      <section className="section-py">
-        <div className="container-narrow">
-          <div className="text-center max-w-xl mx-auto mb-10">
-            <p className="eyebrow mb-3">{t("acc.rulesEyebrow")}</p>
-            <h2 className="display-italic text-h1 text-navy">{t("acc.rulesTitle")}</h2>
+      <section className="section-py relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-sand-deep/30 -skew-x-12 translate-x-1/2 pointer-events-none" />
+        <div className="container-narrow relative z-10">
+          <div className="text-center max-w-xl mx-auto mb-12">
+            <p className="eyebrow mb-4">{t("acc.rulesEyebrow")}</p>
+            <h2 className="display-italic text-navy">{t("acc.rulesTitle")}</h2>
           </div>
-          <div className="bg-card rounded-2xl shadow-soft p-8 md:p-10 grid md:grid-cols-2 gap-x-10 gap-y-5">
+          <div className="bg-white rounded-[2.5rem] shadow-soft p-10 md:p-16 grid md:grid-cols-2 gap-x-16 gap-y-8 border border-border/10">
             {houseRules.map((rule) => (
-              <div key={rule.key} className="flex items-center gap-3 text-navy/85">
+              <div key={rule.key} className="flex items-start gap-5 text-navy/85 group">
                 <span
-                  className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
-                    rule.positive ? "bg-seafoam/40 text-navy" : "bg-dune/30 text-navy"
-                  }`}
+                  className={cn(
+                    "mt-0.5 w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-500",
+                    rule.positive 
+                      ? "bg-seafoam/20 text-navy group-hover:bg-seafoam/40" 
+                      : "bg-dune/10 text-navy group-hover:bg-dune/20"
+                  )}
                 >
-                  <rule.icon className="w-3.5 h-3.5" />
+                  <rule.icon className="w-4 h-4 transition-transform group-hover:scale-110" />
                 </span>
-                <span className="text-sm">{t(rule.key)}</span>
+                <span className="font-light leading-relaxed italic text-[15px]">{t(rule.key)}</span>
               </div>
             ))}
           </div>
-          <p className="mt-5 text-center text-xs text-muted-foreground">
+          <p className="mt-5 text-center eyebrow">
             {t("acc.payment")}
           </p>
         </div>
@@ -143,7 +157,7 @@ const Accommodatie = () => {
         <div className="container-wide">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <p className="eyebrow mb-3">{t("acc.galEyebrow")}</p>
-            <h2 className="display-italic text-h1 text-navy">{t("acc.galTitle")}</h2>
+            <h2 className="display-italic text-navy">{t("acc.galTitle")}</h2>
           </div>
           <div className="columns-2 md:columns-3 lg:columns-4 gap-4 [column-fill:_balance]">
             {galleryImages.map((img, i) => (
@@ -167,7 +181,7 @@ const Accommodatie = () => {
       {/* CTA strip */}
       <section className="bg-navy text-sand">
         <div className="container-wide py-16 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-          <h2 className="display-italic text-h1 text-sand">
+          <h2 className="display-italic text-sand">
             {t("acc.ctaTitle")}
           </h2>
           <Link

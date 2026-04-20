@@ -59,7 +59,7 @@ export const Navbar = () => {
               to={l.to}
               className={({ isActive }) =>
                 cn(
-                  "text-sm font-medium tracking-wide transition-colors relative",
+                  "font-medium tracking-wide transition-colors relative",
                   solid
                     ? isActive
                       ? "text-navy"
@@ -79,7 +79,7 @@ export const Navbar = () => {
           <LanguageToggle solid={solid} />
           <Link
             to="/boeken"
-            className="inline-flex items-center gap-1.5 bg-navy text-sand px-5 py-2.5 rounded-full text-sm font-medium hover:bg-navy-soft transition-colors"
+            className="inline-flex items-center gap-1.5 bg-navy text-sand px-5 py-2.5 rounded-full font-medium hover:bg-navy-soft transition-colors"
           >
             {t("nav.bookDirect")} <ArrowUpRight className="w-4 h-4" />
           </Link>
@@ -131,7 +131,7 @@ export const Navbar = () => {
           ))}
           <Link
             to="/boeken"
-            className="mt-6 inline-flex items-center gap-2 bg-dune text-navy px-7 py-3.5 rounded-full text-base font-medium"
+            className="mt-6 inline-flex items-center gap-2 bg-dune text-navy px-7 py-3.5 rounded-full font-medium"
           >
             {t("nav.bookDirect")} <ArrowUpRight className="w-4 h-4" />
           </Link>

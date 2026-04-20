@@ -82,10 +82,74 @@
   body {
     @apply bg-background text-foreground font-body antialiased;
     font-feature-settings: "ss01", "cv11";
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 768px) {
+    body { font-size: 15px; }
+  }
+
+  @media (min-width: 1024px) {
+    body { font-size: 16px; }
   }
 
   h1, h2, h3, h4, h5 {
     @apply font-display tracking-tight;
+  }
+
+  h1 {
+    font-size: 32px;
+    line-height: 1.1;
+  }
+  @media (min-width: 768px) {
+    h1 { font-size: 42px; }
+  }
+  @media (min-width: 1024px) {
+    h1 { font-size: 56px; }
+  }
+  @media (min-width: 1280px) {
+    h1 { font-size: 68px; }
+  }
+
+  h2 {
+    font-size: 28px;
+    line-height: 1.15;
+  }
+  @media (min-width: 768px) {
+    h2 { font-size: 36px; }
+  }
+  @media (min-width: 1024px) {
+    h2 { font-size: 48px; }
+  }
+  @media (min-width: 1280px) {
+    h2 { font-size: 60px; }
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  @media (min-width: 768px) {
+    h3 { font-size: 24px; }
+  }
+  @media (min-width: 1024px) {
+    h3 { font-size: 30px; }
+  }
+  @media (min-width: 1280px) {
+    h3 { font-size: 36px; }
+  }
+
+  /* Button text consistency */
+  button, .btn-text {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  @media (min-width: 768px) {
+    button, .btn-text { font-size: 15px; }
+  }
+  @media (min-width: 1024px) {
+    button, .btn-text { font-size: 16px; }
   }
 }
 
