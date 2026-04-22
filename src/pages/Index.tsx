@@ -20,6 +20,7 @@ import {
   WifiHigh,
   Wine,
 } from "@phosphor-icons/react";
+import heroVideo from "@/assets/Scheveningen_14-02-2026.mp4";
 import { images, galleryImages } from "@/lib/images";
 import { AvailabilityBar } from "@/components/site/AvailabilityBar";
 import { BookDirectBanner } from "@/components/site/BookDirectBanner";
@@ -76,13 +77,17 @@ const Index = () => {
     <>
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <img
-          src={images.beachSunset}
-          alt="Scheveningen beach sunset"
-          className="absolute inset-0 w-full h-full object-cover animate-image-zoom"
-          width={1920}
-          height={1280}
-        />
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={images.beachSunset}
+          aria-hidden="true"
+        >
+          <source src={heroVideo} type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-navy/30" />
         <div className="absolute inset-0 bg-gradient-hero" />
 
