@@ -1,43 +1,82 @@
 // Centralized image imports for the site
-import heroInterior from "@/assets/hero-interior.jpg";
-import heroBeach from "@/assets/hero-beach.jpg";
-import interiorLiving from "@/assets/interior-living.jpg";
-import interiorKitchen from "@/assets/interior-kitchen.jpg";
-import interiorBedroom from "@/assets/interior-bedroom.jpg";
-import interiorBathroom from "@/assets/interior-bathroom.jpg";
-import exteriorTerrace from "@/assets/exterior-terrace.jpg";
-import exteriorHouse from "@/assets/exterior-house.jpg";
-import areaPier from "@/assets/area-pier.jpg";
-import areaMuseum from "@/assets/area-museum.jpg";
-import areaRestaurant from "@/assets/area-restaurant.jpg";
-import areaDunes from "@/assets/area-dunes.jpg";
-import omgevingHero from "@/assets/omgeving-hero.jpg";
-import detailDecor from "@/assets/detail-decor.jpg";
+import heroHome from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/523818066.jpg";
+import livingArea from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/375749746.jpg";
+import heroAcc from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/327687718.jpg";
+import beachSunset from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/340432632.jpg";
+import bathroomBrick from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/327687691.jpg";
+import kitchenDetail from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/327687719.jpg";
+import livingSliding from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/490061733.jpg";
+import livingReading from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/375749446.jpg";
+import bedroomSwan from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/327687717.jpg";
+import kitchenSink from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/327687729.jpg";
+import coatRack from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/327687720.jpg";
+
+// New Premium & Lifestyle Assets
+import livingLifestyle from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/375749559.jpg";
+import dogExperience from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/327879056.jpg";
+import bathroomPremium from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/490061731.jpg";
+import bedroomSwanPremium from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/490061723.jpg";
+import propertyCollage from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/490061727.jpg";
+import kitchenIslandWide from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/375749373.jpg";
+import bathroomStoneSink from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/327687730.jpg";
+import kitchenBright from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/490061730.jpg";
+import bedroomMain from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/523818066.jpg";
+import livingCozy from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/368530098.jpg";
+import exteriorTerraceReal from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/490061726.jpg";
 
 export const images = {
-  heroInterior,
-  heroBeach,
-  interiorLiving,
-  interiorKitchen,
-  interiorBedroom,
-  interiorBathroom,
-  exteriorTerrace,
-  exteriorHouse,
-  areaPier,
-  areaMuseum,
-  areaRestaurant,
-  areaDunes,
-  omgevingHero,
-  detailDecor,
+  heroHome,
+  livingArea,
+  heroAcc,
+  beachSunset,
+  bathroomBrick,
+  kitchenDetail,
+  livingSliding,
+  livingReading,
+  bedroomSwan,
+  kitchenSink,
+  coatRack,
+  // New Assets
+  livingLifestyle,
+  dogExperience,
+  bathroomPremium,
+  bedroomSwanPremium,
+  propertyCollage,
+  kitchenIslandWide,
+  bathroomStoneSink,
+  kitchenBright,
+  bedroomMain,
+  livingCozy,
+  exteriorTerraceReal,
+  // Fallbacks for missing assets if any
+  heroInterior: heroHome,
+  heroBeach: beachSunset,
+  interiorLiving: kitchenBright,
+  interiorKitchen: kitchenBright,
+  interiorBedroom: bedroomMain,
+  interiorBathroom: bathroomPremium,
+  exteriorTerrace: exteriorTerraceReal, 
+  exteriorHouse: propertyCollage, 
+  areaPier: beachSunset,
+  areaMuseum: beachSunset,
+  areaRestaurant: beachSunset,
+  areaDunes: beachSunset,
+  omgevingHero: beachSunset,
+  detailDecor: bedroomSwanPremium,
 };
 
 export const galleryImages: { src: string; alt: string }[] = [
-  { src: heroInterior, alt: "Beachhouse bedroom with sea view at golden hour" },
-  { src: interiorLiving, alt: "Cozy living room with linen sofa and coastal art" },
-  { src: interiorKitchen, alt: "Bright fully equipped kitchen with espresso machine" },
-  { src: interiorBedroom, alt: "Bedroom with crisp linens and rattan pendant light" },
-  { src: interiorBathroom, alt: "Walk-in shower with brass fixtures and white tiles" },
-  { src: exteriorTerrace, alt: "Private terrace with rattan chairs and morning coffee" },
-  { src: exteriorHouse, alt: "Charming Dutch beach house exterior with blue trim" },
-  { src: detailDecor, alt: "Coastal interior details — driftwood, linen, sand" },
+  { src: heroHome, alt: "Spacious bedroom with atmospheric lighting" },
+  { src: kitchenBright, alt: "Bright, airy kitchen with natural wood island" },
+  { src: livingArea, alt: "Coastal living and kitchen area" },
+  { src: livingLifestyle, alt: "Cozy afternoon reading in the nook" },
+  { src: dogExperience, alt: "Even your furry friends feel at home at Tiny Beachhouse" },
+  { src: propertyCollage, alt: "A glimpse of the Tiny Beachhouse experience" },
+  { src: livingCozy, alt: "Warm interior with rustic sliding barn door" },
+  { src: bedroomSwanPremium, alt: "Atmospheric bedroom with unique swan lamp" },
+  { src: bathroomPremium, alt: "Unique bathroom with walk-in shower" },
+  { src: bathroomStoneSink, alt: "Handcrafted stone sink and interior greens" },
+  { src: beachSunset, alt: "Golden hour at a Scheveningen beach restaurant" },
+  { src: exteriorTerraceReal, alt: "Private terrace view" },
 ];
+

@@ -1,6 +1,7 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { createPortal } from "react-dom";
+import { ArrowUpRight, Hamburger, X } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nContext";
 import { LanguageToggle } from "./LanguageToggle";
@@ -30,7 +31,56 @@ export const Navbar = () => {
     setOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
+
   const solid = !transparentEligible || scrolled;
+
+  const mobileMenu =
+    open &&
+    createPortal(
+      <div
+        id="mobile-nav"
+        role="dialog"
+        aria-modal="true"
+        aria-label={t("nav.menu")}
+        className="fixed inset-0 z-[100] flex min-h-[100dvh] flex-col bg-navy text-sand md:hidden"
+      >
+        <div className="flex h-20 shrink-0 items-center justify-between border-b border-sand/10 px-6">
+          <span className="font-display text-2xl font-bold italic">Tiny Beachhouse</span>
+          <button type="button" aria-label={t("nav.closeMenu")} className="rounded-md p-2" onClick={() => setOpen(false)}>
+            <X className="h-6 w-6" weight="bold" />
+          </button>
+        </div>
+        <nav className="flex flex-1 flex-col items-center justify-center gap-8 px-6 pb-16">
+          {links.map((l) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              end={l.to === "/"}
+              className={({ isActive }) =>
+                cn("font-display text-3xl italic", isActive ? "text-dune" : "text-sand/90")
+              }
+            >
+              {l.label}
+            </NavLink>
+          ))}
+          <Link
+            to="/boeken"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-dune px-7 py-3.5 font-medium text-navy"
+          >
+            {t("nav.bookDirect")} <ArrowUpRight className="h-4 w-4" weight="bold" />
+          </Link>
+        </nav>
+      </div>,
+      document.body,
+    );
 
   return (
     <header
@@ -59,7 +109,7 @@ export const Navbar = () => {
               to={l.to}
               className={({ isActive }) =>
                 cn(
-                  "text-sm font-medium tracking-wide transition-colors relative",
+                  "font-medium tracking-wide transition-colors relative",
                   solid
                     ? isActive
                       ? "text-navy"
@@ -79,64 +129,28 @@ export const Navbar = () => {
           <LanguageToggle solid={solid} />
           <Link
             to="/boeken"
-            className="inline-flex items-center gap-1.5 bg-navy text-sand px-5 py-2.5 rounded-full text-sm font-medium hover:bg-navy-soft transition-colors"
+            className="inline-flex items-center gap-1.5 bg-navy text-sand px-5 py-2.5 rounded-full font-medium hover:bg-navy-soft transition-colors"
           >
-            {t("nav.bookDirect")} <ArrowUpRight className="w-4 h-4" />
+            {t("nav.bookDirect")} <ArrowUpRight className="w-4 h-4" weight="bold" />
           </Link>
         </nav>
 
         <div className="md:hidden flex items-center gap-3">
           <LanguageToggle solid={solid} />
           <button
-            aria-label="Open menu"
-            className={cn(
-              "p-2 rounded-md transition-colors",
-              solid ? "text-navy" : "text-white"
-            )}
+            type="button"
+            aria-label={t("nav.openMenu")}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            className={cn("rounded-md p-2 transition-colors", solid ? "text-navy" : "text-white")}
             onClick={() => setOpen(true)}
           >
-            <Menu className="w-6 h-6" />
+            <Hamburger className="h-6 w-6" weight="bold" />
           </button>
         </div>
       </div>
 
-      {/* Mobile overlay */}
-      <div
-        className={cn(
-          "fixed inset-0 bg-navy text-sand transition-opacity duration-300 md:hidden",
-          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        )}
-      >
-        <div className="flex items-center justify-between h-20 container-wide">
-          <span className="font-display italic text-2xl font-bold">Tiny Beachhouse</span>
-          <button aria-label="Close menu" className="p-2" onClick={() => setOpen(false)}>
-            <X className="w-6 h-6" />
-          </button>
-        </div>
-        <nav className="flex flex-col items-center justify-center gap-8 mt-16 px-6">
-          {links.map((l) => (
-            <NavLink
-              key={l.to}
-              to={l.to}
-              end={l.to === "/"}
-              className={({ isActive }) =>
-                cn(
-                  "font-display text-3xl italic",
-                  isActive ? "text-dune" : "text-sand/90"
-                )
-              }
-            >
-              {l.label}
-            </NavLink>
-          ))}
-          <Link
-            to="/boeken"
-            className="mt-6 inline-flex items-center gap-2 bg-dune text-navy px-7 py-3.5 rounded-full text-base font-medium"
-          >
-            {t("nav.bookDirect")} <ArrowUpRight className="w-4 h-4" />
-          </Link>
-        </nav>
-      </div>
+      {mobileMenu}
     </header>
   );
 };

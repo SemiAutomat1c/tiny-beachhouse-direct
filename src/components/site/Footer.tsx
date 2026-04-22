@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapPin, Mail } from "lucide-react";
+import { EnvelopeSimple, MapPin } from "@phosphor-icons/react";
 import { useI18n } from "@/i18n/I18nContext";
 
 export const Footer = () => {
@@ -23,7 +23,7 @@ export const Footer = () => {
           <p className="font-display italic text-2xl font-bold text-navy">
             Tiny Beachhouse
           </p>
-          <p className="mt-3 text-sm text-muted-foreground max-w-xs leading-relaxed">
+          <p className="mt-3 text-muted-foreground max-w-xs leading-relaxed">
             {t("footer.tagline1")}
             <br />
             {t("footer.tagline2")}
@@ -32,7 +32,7 @@ export const Footer = () => {
 
         <div className="md:text-center">
           <p className="eyebrow mb-4">{t("footer.explore")}</p>
-          <ul className="space-y-2 text-sm">
+          <ul className="space-y-2">
             <li><Link to="/" className="text-navy/80 hover:text-navy transition-colors">{t("nav.home")}</Link></li>
             <li><Link to="/accommodatie" className="text-navy/80 hover:text-navy transition-colors">{t("nav.accommodation")}</Link></li>
             <li><Link to="/omgeving" className="text-navy/80 hover:text-navy transition-colors">{t("nav.area")}</Link></li>
@@ -42,13 +42,13 @@ export const Footer = () => {
 
         <div className="md:text-right">
           <p className="eyebrow mb-4">{t("footer.contact")}</p>
-          <ul className="space-y-2 text-sm text-navy/80">
+          <ul className="space-y-2 text-navy/80">
             <li className="flex md:justify-end items-center gap-2">
-              <MapPin className="w-4 h-4 shrink-0" />
+              <MapPin className="w-4 h-4 shrink-0" weight="thin" />
               Jacob Pronkstraat, 2584 BS Scheveningen
             </li>
             <li className="flex md:justify-end items-center gap-2">
-              <Mail className="w-4 h-4 shrink-0" />
+              <EnvelopeSimple className="w-4 h-4 shrink-0" weight="thin" />
               <a href="mailto:hello@tinybeachhouse.nl" className="hover:text-navy">
                 hello@tinybeachhouse.nl
               </a>
@@ -58,7 +58,7 @@ export const Footer = () => {
       </div>
 
       <div className="border-t border-dune/30">
-        <div className="container-wide py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
+        <div className="container-wide py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-muted-foreground">
           <p>© {new Date().getFullYear()} {t("footer.copyright")}</p>
           <p>{t("footer.legal")}</p>
         </div>

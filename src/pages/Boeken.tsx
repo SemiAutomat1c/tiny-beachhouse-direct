@@ -3,10 +3,18 @@ import { useSearchParams } from "react-router-dom";
 import { differenceInCalendarDays, format, parseISO, isValid } from "date-fns";
 import { nl as nlLocale, enUS } from "date-fns/locale";
 import {
-  Check, ChevronDown, Wallet, MessageCircle, PawPrint, Mail, ArrowRight, ArrowLeft,
-} from "lucide-react";
+  ArrowLeft,
+  ArrowRight,
+  ChatCircle,
+  Check,
+  EnvelopeSimple,
+  PawPrint,
+  Wallet,
+} from "@phosphor-icons/react";
 import { RangeCalendar } from "@/components/site/RangeCalendar";
-import { cn } from "@/lib/utils";
+import { PageHero } from "@/components/site/PageHero";
+import { images } from "@/lib/images";
+import { cn } from "../lib/utils";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
@@ -118,19 +126,22 @@ const Boeken = () => {
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-navy text-sand pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="container-narrow text-center">
-          <p className="eyebrow text-dune mb-3">{t("bk.heroEyebrow")}</p>
-          <h1 className="display-italic text-display text-sand">
-            {t("bk.heroTitle1")} <br />
-            <span className="text-dune">{t("bk.heroTitle2")}</span>
-          </h1>
-          <p className="mt-6 text-sand/75 max-w-xl mx-auto">
-            {t("bk.heroSub")}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        variant="compact"
+        imageSrc={images.beachSunset}
+        imageAlt="Scheveningen beach at sunset"
+        eyebrow={t("bk.heroEyebrow")}
+        title={
+          <>
+            {t("bk.heroTitle1")}
+            <br />
+            <span className="text-sand max-md:[text-shadow:0_1px_3px_rgba(17,30,45,0.55)] md:text-dune mt-3 inline-block text-3xl leading-[0.95] md:mt-4 md:text-5xl lg:text-6xl">
+              {t("bk.heroTitle2")}
+            </span>
+          </>
+        }
+        subtitle={t("bk.heroSub")}
+      />
 
       {/* Booking Form */}
       <section className="py-16 md:py-20">
@@ -142,7 +153,7 @@ const Boeken = () => {
           <div className="mt-10 bg-card rounded-2xl shadow-lift p-6 md:p-10">
             {step === 1 && (
               <div>
-                <h2 className="font-display text-2xl text-navy mb-2">{t("bk.s1.title")}</h2>
+                <h2 className="font-display text-navy mb-2">{t("bk.s1.title")}</h2>
                 <p className="text-sm text-muted-foreground mb-6">
                   {t("bk.s1.sub")}
                 </p>
@@ -176,7 +187,7 @@ const Boeken = () => {
                   </Field>
                 </div>
 
-                <p className="mt-5 text-xs text-muted-foreground">
+                <p className="mt-5 eyebrow">
                   {t("bk.minStay")}
                 </p>
 
@@ -201,7 +212,7 @@ const Boeken = () => {
                         : "bg-muted text-muted-foreground cursor-not-allowed"
                     )}
                   >
-                    {t("bk.continueDetails")} <ArrowRight className="w-4 h-4" />
+                    {t("bk.continueDetails")} <ArrowRight className="w-4 h-4" weight="bold" />
                   </button>
                 </div>
               </div>
@@ -209,7 +220,7 @@ const Boeken = () => {
 
             {step === 2 && (
               <div>
-                <h2 className="font-display text-2xl text-navy mb-6">{t("bk.s2.title")}</h2>
+                <h2 className="font-display text-navy mb-6">{t("bk.s2.title")}</h2>
                 <div className="grid sm:grid-cols-2 gap-5">
                   <Field label={t("bk.firstName")} required>
                     <Input value={details.firstName} onChange={(v) => setDetails((d) => ({ ...d, firstName: v }))} />
@@ -260,7 +271,7 @@ const Boeken = () => {
                       className="w-4 h-4 accent-navy"
                     />
                     <span className="text-sm text-navy/85 inline-flex items-center gap-2">
-                      <PawPrint className="w-4 h-4" /> {t("bk.bringPet")}
+                      <PawPrint className="w-4 h-4" weight="bold" /> {t("bk.bringPet")}
                     </span>
                   </label>
                   <label className="flex items-start gap-3 cursor-pointer">
@@ -281,7 +292,7 @@ const Boeken = () => {
                     onClick={() => setStep(1)}
                     className="inline-flex items-center gap-2 text-navy/70 hover:text-navy text-sm"
                   >
-                    <ArrowLeft className="w-4 h-4" /> {t("bk.back")}
+                    <ArrowLeft className="w-4 h-4" weight="bold" /> {t("bk.back")}
                   </button>
                   <button
                     disabled={!canStep3}
@@ -293,7 +304,7 @@ const Boeken = () => {
                         : "bg-muted text-muted-foreground cursor-not-allowed"
                     )}
                   >
-                    {t("bk.review")} <ArrowRight className="w-4 h-4" />
+                    {t("bk.review")} <ArrowRight className="w-4 h-4" weight="bold" />
                   </button>
                 </div>
               </div>
@@ -301,7 +312,7 @@ const Boeken = () => {
 
             {step === 3 && checkIn && checkOut && (
               <div>
-                <h2 className="font-display text-2xl text-navy mb-6">{t("bk.s3.title")}</h2>
+                <h2 className="font-display text-navy mb-6">{t("bk.s3.title")}</h2>
                 <div className="bg-sand-deep rounded-xl p-6 space-y-4 text-sm">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <SummaryItem label={t("bk.sum.checkin")} value={format(checkIn, "EEE, MMM d, yyyy", { locale: dateLocale })} />
@@ -322,7 +333,7 @@ const Boeken = () => {
                 </div>
 
                 <div className="mt-6 bg-dune/20 rounded-xl p-5 text-sm text-navy/85 leading-relaxed">
-                  <Wallet className="w-4 h-4 inline mr-2" />
+                  <Wallet className="w-4 h-4 inline mr-2" weight="bold" />
                   {t("bk.payNote")}
                 </div>
 
@@ -335,7 +346,7 @@ const Boeken = () => {
                     onClick={() => setStep(2)}
                     className="inline-flex items-center gap-2 text-navy/70 hover:text-navy text-sm"
                   >
-                    <ArrowLeft className="w-4 h-4" /> {t("bk.back")}
+                    <ArrowLeft className="w-4 h-4" weight="bold" /> {t("bk.back")}
                   </button>
                   <button
                     disabled={submitting}
@@ -351,13 +362,13 @@ const Boeken = () => {
             {step === 4 && (
               <div className="text-center py-8">
                 <div className="w-16 h-16 mx-auto rounded-full bg-seafoam/40 flex items-center justify-center mb-5">
-                  <Check className="w-8 h-8 text-navy" />
+                  <Check className="w-8 h-8 text-navy" weight="bold" />
                 </div>
-                <h2 className="display-italic text-h1 text-navy">{t("bk.s4.title")}</h2>
+                <h2 className="display-italic text-navy">{t("bk.s4.title")}</h2>
                 <p className="mt-4 text-navy/75 max-w-md mx-auto">
                   {t("bk.s4.thanks", { name: details.firstName })}
                 </p>
-                <p className="mt-6 text-sm text-muted-foreground">
+                <p className="mt-6 text-navy/70">
                   {t("bk.s4.questions")}{" "}
                   <a href="mailto:hello@tinybeachhouse.nl" className="text-navy underline">
                     hello@tinybeachhouse.nl
@@ -370,40 +381,45 @@ const Boeken = () => {
           {/* Why book direct */}
           {step !== 4 && (
             <>
-              <div className="grid md:grid-cols-3 gap-4 mt-16">
-                <Perk icon={<Wallet className="w-5 h-5 text-navy" />} title={t("bk.perk1.title")} text={t("bk.perk1.text")} />
-                <Perk icon={<MessageCircle className="w-5 h-5 text-navy" />} title={t("bk.perk2.title")} text={t("bk.perk2.text")} />
-                <Perk icon={<PawPrint className="w-5 h-5 text-navy" />} title={t("bk.perk3.title")} text={t("bk.perk3.text")} />
+              <div className="grid md:grid-cols-3 gap-6 mt-20">
+                <Perk icon={<Wallet className="w-5 h-5 text-navy" weight="thin" />} title={t("bk.perk1.title")} text={t("bk.perk1.text")} />
+                <Perk icon={<ChatCircle className="w-5 h-5 text-navy" weight="thin" />} title={t("bk.perk2.title")} text={t("bk.perk2.text")} />
+                <Perk icon={<PawPrint className="w-5 h-5 text-navy" weight="thin" />} title={t("bk.perk3.title")} text={t("bk.perk3.text")} />
               </div>
 
-              <div className="mt-14">
-                <Accordion type="single" collapsible className="bg-card rounded-2xl shadow-soft px-6">
+              <div className="mt-16">
+                <Accordion type="single" collapsible className="bg-white rounded-[2rem] shadow-soft px-8 border border-border/10">
                   <AccordionItem value="cancel" className="border-none">
-                    <AccordionTrigger className="text-navy font-medium hover:no-underline">
-                      {t("bk.cancel.title")}
+                    <AccordionTrigger className="text-navy font-medium hover:no-underline py-6">
+                      <span className="flex items-center gap-3">
+                        <Check className="w-4 h-4 text-seafoam" weight="bold" />
+                        {t("bk.cancel.title")}
+                      </span>
                     </AccordionTrigger>
-                    <AccordionContent className="text-navy/75 text-sm space-y-2 leading-relaxed">
+                    <AccordionContent className="text-navy/75 space-y-3 pb-8 leading-relaxed italic font-light">
                       <p>{t("bk.cancel.l1")}</p>
                       <p>{t("bk.cancel.l2")}</p>
                       <p>{t("bk.cancel.l3")}</p>
-                      <p className="text-muted-foreground italic">{t("bk.cancel.note")}</p>
+                      <p className="text-navy/40 text-[13px]">{t("bk.cancel.note")}</p>
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
               </div>
 
-              <div className="mt-12 text-center bg-sand-deep rounded-2xl p-8">
-                <Mail className="w-5 h-5 text-navy mx-auto mb-3" />
-                <p className="text-navy/85">
+              <div className="mt-16 text-center bg-sand-deep/50 backdrop-blur-sm rounded-[2.5rem] p-12 border border-white/40">
+                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+                  <EnvelopeSimple className="w-5 h-5 text-navy" weight="thin" />
+                </div>
+                <p className="text-navy/85 max-w-sm mx-auto leading-relaxed">
                   {t("bk.contactQ")}
                 </p>
                 <a
                   href="mailto:hello@tinybeachhouse.nl"
-                  className="mt-2 inline-block font-display italic text-xl text-navy underline underline-offset-4 decoration-dune"
+                  className="mt-4 inline-block font-display italic text-2xl text-navy hover:text-dune transition-colors"
                 >
                   hello@tinybeachhouse.nl
                 </a>
-                <p className="mt-2 text-xs text-muted-foreground">{t("bk.respond")}</p>
+                <p className="mt-4 eyebrow text-navy/40">{t("bk.respond")}</p>
               </div>
             </>
           )}
@@ -433,9 +449,9 @@ const Stepper = ({ current, t }: { current: Step; t: (k: TranslationKey) => stri
                 !active && !done && "bg-sand-deep text-muted-foreground"
               )}
             >
-              {done ? <Check className="w-4 h-4" /> : idx}
+              {done ? <Check className="w-4 h-4" weight="bold" /> : idx}
             </div>
-            <span className={cn("text-sm hidden sm:inline", active ? "text-navy font-medium" : "text-muted-foreground")}>
+            <span className={cn("hidden sm:inline", active ? "text-navy font-medium" : "text-muted-foreground")}>
               {t(label)}
             </span>
             {i < steps.length - 1 && <div className="w-6 md:w-12 h-px bg-dune/50" />}
@@ -448,7 +464,7 @@ const Stepper = ({ current, t }: { current: Step; t: (k: TranslationKey) => stri
 
 const Field = ({ label, children, required, className }: { label: string; children: React.ReactNode; required?: boolean; className?: string }) => (
   <label className={cn("block", className)}>
-    <span className="block text-xs uppercase tracking-wider text-navy/70 mb-1.5 font-medium">
+    <span className="eyebrow mb-1.5">
       {label} {required && <span className="text-destructive">*</span>}
     </span>
     {children}
@@ -470,13 +486,12 @@ const Select = ({ value, onChange, options }: { value: string; onChange: (v: str
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-sand-deep border-0 rounded-lg px-4 py-3 text-navy focus:ring-2 focus:ring-navy/20 focus:outline-none appearance-none pr-9"
+      className="w-full bg-sand-deep border-0 rounded-lg pl-4 pr-10 py-3 text-navy focus:ring-2 focus:ring-navy/20 focus:outline-none appearance-none"
     >
       {options.map((o) => (
         <option key={o} value={o}>{o}</option>
       ))}
     </select>
-    <ChevronDown className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-navy/60" />
   </div>
 );
 
@@ -509,16 +524,16 @@ const Row = ({ label, value }: { label: React.ReactNode; value: React.ReactNode 
 
 const SummaryItem = ({ label, value }: { label: string; value: string }) => (
   <div>
-    <p className="text-xs uppercase tracking-wider text-muted-foreground">{label}</p>
+    <p className="eyebrow">{label}</p>
     <p className="mt-0.5 text-navy font-medium">{value}</p>
   </div>
 );
 
 const Perk = ({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) => (
-  <div className="bg-card rounded-2xl p-7 shadow-soft">
-    <div className="w-11 h-11 rounded-full bg-dune/30 flex items-center justify-center mb-4">{icon}</div>
-    <h3 className="font-display text-xl text-navy">{title}</h3>
-    <p className="mt-2 text-sm text-navy/75 leading-relaxed">{text}</p>
+  <div className="bg-white/60 backdrop-blur-sm rounded-[2rem] p-8 md:p-10 shadow-soft border border-white/40 hover:shadow-lift transition-all duration-500 group">
+    <div className="w-12 h-12 rounded-2xl bg-sand-deep flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-dune/20 group-hover:scale-110 group-hover:rotate-3">{icon}</div>
+    <h3 className="font-display text-xl text-navy mb-3 tracking-tight">{title}</h3>
+    <p className="text-navy/70 leading-relaxed font-light italic text-sm md:text-base">{text}</p>
   </div>
 );
 

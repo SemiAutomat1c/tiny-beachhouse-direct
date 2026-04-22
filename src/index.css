@@ -82,10 +82,74 @@
   body {
     @apply bg-background text-foreground font-body antialiased;
     font-feature-settings: "ss01", "cv11";
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 768px) {
+    body { font-size: 15px; }
+  }
+
+  @media (min-width: 1024px) {
+    body { font-size: 16px; }
   }
 
   h1, h2, h3, h4, h5 {
     @apply font-display tracking-tight;
+  }
+
+  h1 {
+    font-size: 32px;
+    line-height: 1.1;
+  }
+  @media (min-width: 768px) {
+    h1 { font-size: 42px; }
+  }
+  @media (min-width: 1024px) {
+    h1 { font-size: 56px; }
+  }
+  @media (min-width: 1280px) {
+    h1 { font-size: 68px; }
+  }
+
+  h2 {
+    font-size: 28px;
+    line-height: 1.15;
+  }
+  @media (min-width: 768px) {
+    h2 { font-size: 36px; }
+  }
+  @media (min-width: 1024px) {
+    h2 { font-size: 48px; }
+  }
+  @media (min-width: 1280px) {
+    h2 { font-size: 60px; }
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  @media (min-width: 768px) {
+    h3 { font-size: 24px; }
+  }
+  @media (min-width: 1024px) {
+    h3 { font-size: 30px; }
+  }
+  @media (min-width: 1280px) {
+    h3 { font-size: 36px; }
+  }
+
+  /* Button text consistency */
+  button, .btn-text {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  @media (min-width: 768px) {
+    button, .btn-text { font-size: 15px; }
+  }
+  @media (min-width: 1024px) {
+    button, .btn-text { font-size: 16px; }
   }
 }
 
@@ -123,3 +187,58 @@
 /* Hide scrollbars on horizontal carousels */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Premium Global Touches */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--sand-deep));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--dune) / 0.4);
+  border-radius: 5px;
+  border: 3px solid hsl(var(--sand-deep));
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--dune) / 0.6);
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.4; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+/* Fix for native date picker icons */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-position: right 1rem center;
+  background-repeat: no-repeat;
+  background-size: 1em;
+}

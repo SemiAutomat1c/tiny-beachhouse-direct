@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { CaretLeft, CaretRight, X } from "@phosphor-icons/react";
 
 interface LightboxProps {
   images: { src: string; alt: string }[];
@@ -39,21 +39,21 @@ export const Lightbox = ({ images, openIndex, onClose }: LightboxProps) => {
         onClick={onClose}
         className="absolute top-6 right-6 text-sand p-2 hover:opacity-70 transition"
       >
-        <X className="w-7 h-7" />
+        <X className="w-7 h-7" weight="bold" />
       </button>
       <button
         aria-label="Previous"
         onClick={() => setIndex((i) => (i - 1 + images.length) % images.length)}
         className="absolute left-4 md:left-8 text-sand p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
       >
-        <ChevronLeft className="w-6 h-6" />
+        <CaretLeft className="w-6 h-6" weight="bold" />
       </button>
       <button
         aria-label="Next"
         onClick={() => setIndex((i) => (i + 1) % images.length)}
         className="absolute right-4 md:right-8 text-sand p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
       >
-        <ChevronRight className="w-6 h-6" />
+        <CaretRight className="w-6 h-6" weight="bold" />
       </button>
       <img
         src={current.src}
