@@ -29,8 +29,9 @@ import { cn } from "../lib/utils";
 import { useI18n } from "@/i18n/I18nContext";
 import type { TranslationKey } from "@/i18n/translations";
 
-/** Served from `public/` — override with `VITE_HERO_VIDEO_URL` when hosting elsewhere. */
-const DEFAULT_HERO_VIDEO_SRC = "/Scheveningen_14-02-2026.mp4";
+/** Default hero MP4 on Cloudinary — override with `VITE_HERO_VIDEO_URL` (e.g. local `public/…`). */
+const DEFAULT_HERO_VIDEO_SRC =
+  "https://res.cloudinary.com/dthannwji/video/upload/v1776847841/Scheveningen_14-02-2026_qqnkba.mp4";
 
 const Index = () => {
   const { t } = useI18n();
