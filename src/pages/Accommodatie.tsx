@@ -122,7 +122,7 @@ const Accommodatie = () => {
       <PageHero
         variant="editorial"
         imageSrc={images.heroAcc}
-        imageAlt="Bedroom of Tiny Beachhouse"
+        imageAlt="Golden hour at a Scheveningen beach restaurant, tables on the sand"
         eyebrow={t("acc.heroEyebrow")}
         title={t("acc.heroTitle")}
       />
@@ -263,7 +263,7 @@ const Accommodatie = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/25 to-transparent" />
               <div className="relative p-8 text-sand md:p-10 lg:p-12">
-                <h3 className="font-display text-2xl italic font-bold md:text-3xl">{t(spot.titleKey)}</h3>
+                <h3 className="font-display text-2xl font-light italic tracking-normal md:text-3xl">{t(spot.titleKey)}</h3>
                 <p className="mt-3 max-w-sm text-sm font-light leading-relaxed text-sand/85 md:text-base">
                   {t(spot.textKey)}
                 </p>

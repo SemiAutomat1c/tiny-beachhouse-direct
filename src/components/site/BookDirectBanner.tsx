@@ -7,12 +7,12 @@ export const BookDirectBanner = () => {
   return (
     <section className="bg-navy text-sand">
       <div className="container-narrow py-20 md:py-28 text-center">
-        <h2 className="display-italic text-sand">
+        <h2 className="font-display font-light tracking-normal text-sand text-4xl leading-[1.08] md:text-5xl lg:text-6xl">
           {t("banner.title1")}
           <br />
           <span className="text-dune">{t("banner.title2")}</span>
         </h2>
-        <p className="mt-6 text-sand/75 max-w-xl mx-auto">
+        <p className="mt-6 max-w-xl mx-auto font-body text-base font-normal leading-[26px] text-sand/80">
           {t("banner.sub")}
         </p>
         <a

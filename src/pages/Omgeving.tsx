@@ -200,7 +200,7 @@ const Omgeving = () => {
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-navy/88 via-navy/28 to-transparent" />
               <div className="relative z-10 p-8 text-sand md:p-10 lg:p-12">
-                <h3 className="font-display text-2xl italic font-bold md:text-3xl">{t(a.nameKey)}</h3>
+                <h3 className="font-display text-2xl font-light italic tracking-normal md:text-3xl">{t(a.nameKey)}</h3>
                 <p className="mt-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.28em] text-dune md:text-[11px]">
                   <MapPin className="h-3.5 w-3.5 shrink-0 text-dune/80" weight="thin" />
                   {t(a.distKey)}
@@ -233,7 +233,7 @@ const Omgeving = () => {
                   <Car className="h-5 w-5 text-navy" weight="thin" />
                 </div>
                 <div>
-                  <h3 className="font-display text-lg text-navy md:text-xl">{t("omg.car.title")}</h3>
+                  <h3 className="font-display text-lg font-light tracking-normal text-navy md:text-xl">{t("omg.car.title")}</h3>
                   <p className="mt-2 text-sm font-light leading-relaxed text-navy/70 md:text-[15px]">{t("omg.car.text")}</p>
                 </div>
               </div>
@@ -242,7 +242,7 @@ const Omgeving = () => {
                   <Train className="h-5 w-5 text-navy" weight="thin" />
                 </div>
                 <div>
-                  <h3 className="font-display text-lg text-navy md:text-xl">{t("omg.transit.title")}</h3>
+                  <h3 className="font-display text-lg font-light tracking-normal text-navy md:text-xl">{t("omg.transit.title")}</h3>
                   <p className="mt-2 text-sm font-light leading-relaxed text-navy/70 md:text-[15px]">{t("omg.transit.text")}</p>
                 </div>
               </div>
@@ -251,7 +251,7 @@ const Omgeving = () => {
                   <AirplaneInFlight className="h-5 w-5 text-navy" weight="thin" />
                 </div>
                 <div>
-                  <h3 className="font-display text-lg text-navy md:text-xl">{t("omg.air.title")}</h3>
+                  <h3 className="font-display text-lg font-light tracking-normal text-navy md:text-xl">{t("omg.air.title")}</h3>
                   <p className="mt-2 text-sm font-light leading-relaxed text-navy/70 md:text-[15px]">{t("omg.air.text")}</p>
                 </div>
               </div>

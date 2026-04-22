@@ -23,7 +23,6 @@ import {
 } from "@phosphor-icons/react";
 import { getBookingUrl } from "@/lib/booking";
 import { images, galleryImages } from "@/lib/images";
-import { AvailabilityBar } from "@/components/site/AvailabilityBar";
 import { BookDirectBanner } from "@/components/site/BookDirectBanner";
 import { Lightbox } from "@/components/site/Lightbox";
 import { cn } from "../lib/utils";
@@ -82,7 +81,7 @@ const Index = () => {
   return (
     <>
       {/* HERO — full-bleed video or poster; HotelBeach-style split + CTAs */}
-      <section className="relative flex min-h-screen flex-col justify-end overflow-hidden pb-20 pt-28 md:pb-28 md:pt-36 lg:pb-32">
+      <section className="relative flex min-h-[100dvh] flex-col justify-end overflow-hidden pb-8 pt-[4.75rem] sm:pb-10 sm:pt-28 md:pb-12 md:pt-32">
         <video
           className="absolute inset-0 h-full w-full object-cover"
           autoPlay
@@ -94,29 +93,31 @@ const Index = () => {
           aria-hidden="true"
           src={heroVideoSrc}
         />
-        <div className="absolute inset-0 bg-navy/15" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy/65 via-navy/20 to-navy/25" />
+        <div className="absolute inset-0 bg-navy/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/45 via-navy/10 to-navy/15" />
 
-        <div className="relative w-full px-6 md:px-10 lg:px-12 xl:px-16">
-          <div className="mx-auto w-full max-w-[1400px]">
-            {/* Headline + circle — wide gap, airy type */}
-            <div className="flex flex-col gap-16 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16 xl:gap-x-24 2xl:gap-x-32">
-              <div className="min-w-0 max-w-4xl space-y-8 text-left md:space-y-10 lg:max-w-[46rem] lg:space-y-12 xl:max-w-[52rem]">
+        <div className="relative w-full px-5 sm:px-6 md:px-8 lg:px-10">
+          <div className="w-full">
+            {/* Headline left, Book Direct circle right — same row on all breakpoints */}
+            <div className="flex w-full flex-row items-center justify-between gap-3 sm:gap-5 md:gap-8 lg:items-end">
+              <div className="min-w-0 max-w-[min(42rem,calc(100vw-11rem))] flex-1 space-y-3 text-left md:space-y-4 lg:max-w-lg xl:max-w-xl">
                 <p className="eyebrow animate-fade-in text-sand/85 tracking-[0.35em]">{t("home.heroEyebrow")}</p>
-                <h1 className="animate-fade-up font-body tracking-normal text-sand text-[clamp(1.875rem,3.5vw+0.5rem,3.8125rem)] leading-[1.45] md:leading-[1.48]">
-                  <span className="block font-medium">{t("home.heroTitle1")}</span>
-                  <span className="mt-6 block font-normal text-dune text-[clamp(1.5rem,2.5vw+0.35rem,3rem)] leading-[1.42] md:mt-8 lg:mt-10">
+                <h1 className="animate-fade-up font-display font-light tracking-normal text-white">
+                  <span className="block text-[clamp(1.875rem,3.5vw+0.5rem,3.8125rem)] leading-[1.08]">
+                    {t("home.heroTitle1")}
+                  </span>
+                  <span className="mt-2 block font-display font-light text-white/95 text-[clamp(1.5rem,2.5vw+0.35rem,3rem)] leading-[1.15] md:mt-2.5">
                     {t("home.heroTitle2")}
                   </span>
                 </h1>
               </div>
 
-              <div className="flex shrink-0 justify-center lg:justify-end lg:pb-1">
+              <div className="flex shrink-0 justify-end self-center lg:self-end">
                 <a
                   href={getBookingUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-44 w-44 shrink-0 items-center justify-center rounded-full bg-dune px-7 text-center font-body text-lg font-normal leading-snug tracking-normal text-navy shadow-lift transition hover:scale-[1.03] md:h-52 md:w-52 md:text-xl md:leading-normal"
+                  className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-dune px-4 text-center font-body text-xs font-normal leading-snug tracking-normal text-navy shadow-lift transition hover:scale-[1.03] sm:h-32 sm:w-32 sm:px-5 sm:text-sm md:h-36 md:w-36 md:px-5 md:text-base md:leading-normal lg:text-[0.95rem]"
                 >
                   {t("nav.bookDirect")}
                 </a>
@@ -124,16 +125,16 @@ const Index = () => {
             </div>
 
             {/* Full-width rule — reads “wide” like the reference */}
-            <div className="mt-14 w-full border-t border-white/40 md:mt-20 lg:mt-24" />
+            <div className="mt-5 w-full border-t border-white/40 md:mt-6 lg:mt-7" />
 
-            {/* Subcopy + pill — separated row, generous vertical rhythm */}
-            <div className="mt-10 flex flex-col gap-10 md:mt-12 md:gap-12 lg:mt-14 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
-              <p className="max-w-xl font-body text-[17px] font-normal leading-[1.65] text-sand/90 md:max-w-2xl md:text-lg md:leading-[1.7]">
+            {/* Subcopy + pill — bottom corners */}
+            <div className="mt-4 flex flex-col gap-6 md:mt-5 md:gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-6">
+              <p className="max-w-md font-body text-[16px] font-normal leading-[26px] text-sand/90 md:max-w-lg">
                 {t("home.heroSub")}
               </p>
               <Link
                 to="/accommodatie"
-                className="group inline-flex shrink-0 items-center gap-4 self-start rounded-full border border-white/45 bg-white/10 px-6 py-3 pl-8 font-body text-xs font-semibold uppercase tracking-[0.22em] text-sand backdrop-blur-sm transition hover:border-white/70 hover:bg-white/15 lg:self-end"
+                className="group inline-flex shrink-0 items-center gap-4 self-start rounded-full border border-white/45 bg-white/10 px-5 py-2.5 pl-6 font-body text-xs font-semibold uppercase tracking-[0.22em] text-sand backdrop-blur-sm transition hover:border-white/70 hover:bg-white/15 lg:self-end"
               >
                 {t("home.heroViewAccommodation")}
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sand text-navy transition group-hover:scale-105">
@@ -144,14 +145,8 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 opacity-60 animate-float">
-          <div className="h-12 w-px bg-sand/40" />
-        </div>
-      </section>
-
-      <section className="bg-sand py-10 md:py-14">
-        <div className="container-wide mx-auto max-w-5xl">
-          <AvailabilityBar />
+        <div className="pointer-events-none absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 opacity-50 animate-float md:bottom-8">
+          <div className="h-9 w-px bg-sand/40 md:h-11" />
         </div>
       </section>
 
@@ -164,7 +159,7 @@ const Index = () => {
           </h2>
           <div className="w-16 h-[1px] bg-dune mx-auto mb-16" />
           <div className="max-w-3xl mx-auto space-y-8 text-navy/60 text-lg leading-relaxed-luxury font-light">
-            <p className="first-letter:text-5xl first-letter:font-display first-letter:float-left first-letter:mr-3 first-letter:mt-2 first-letter:text-navy">
+            <p className="first-letter:float-left first-letter:mr-3 first-letter:mt-2 first-letter:font-display first-letter:text-5xl first-letter:font-light first-letter:tracking-normal first-letter:text-navy">
               {t("home.introP1")}
             </p>
             <p>{t("home.introP2")}</p>
@@ -389,7 +384,7 @@ const Index = () => {
                 <p className="eyebrow text-navy/50 tracking-[0.22em] mb-4">BOOKING.COM</p>
                 <div className="flex items-center justify-between gap-5">
                   <div>
-                    <p className="font-display text-5xl leading-none text-navy">9.1</p>
+                    <p className="font-display font-light text-5xl leading-none text-navy">9.1</p>
                     <p className="text-[11px] uppercase tracking-[0.18em] text-navy/50 mt-2">Superb rating</p>
                   </div>
                   <div className="flex gap-1 text-dune">
@@ -439,7 +434,7 @@ const Index = () => {
                 {ratingCategories.slice(0, 4).map((cat) => (
                   <div key={cat.label} className="space-y-2">
                     <p className="text-[10px] uppercase tracking-[0.25em] font-bold text-navy/30">{cat.label}</p>
-                    <p className="text-4xl font-display text-navy">{cat.score}</p>
+                    <p className="text-4xl font-display font-light text-navy">{cat.score}</p>
                   </div>
                 ))}
               </div>
@@ -447,7 +442,7 @@ const Index = () => {
               {/* Booking.com Refined Strip */}
               <div className="bg-navy p-10 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-8 shadow-lift">
                 <div className="flex items-center gap-6">
-                  <div className="text-sand border border-sand/20 w-16 h-16 rounded-2xl flex items-center justify-center font-display text-3xl">
+                  <div className="text-sand border border-sand/20 w-16 h-16 rounded-2xl flex items-center justify-center font-display font-light text-3xl">
                     9.1
                   </div>
                   <div>

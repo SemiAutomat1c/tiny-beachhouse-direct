@@ -415,7 +415,7 @@ const Boeken = () => {
                 </p>
                 <a
                   href="mailto:hello@tinybeachhouse.nl"
-                  className="mt-4 inline-block font-display italic text-2xl text-navy hover:text-dune transition-colors"
+                  className="mt-4 inline-block font-display text-2xl font-light italic tracking-normal text-navy transition-colors hover:text-dune"
                 >
                   hello@tinybeachhouse.nl
                 </a>
@@ -532,7 +532,7 @@ const SummaryItem = ({ label, value }: { label: string; value: string }) => (
 const Perk = ({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) => (
   <div className="bg-white/60 backdrop-blur-sm rounded-[2rem] p-8 md:p-10 shadow-soft border border-white/40 hover:shadow-lift transition-all duration-500 group">
     <div className="w-12 h-12 rounded-2xl bg-sand-deep flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-dune/20 group-hover:scale-110 group-hover:rotate-3">{icon}</div>
-    <h3 className="font-display text-xl text-navy mb-3 tracking-tight">{title}</h3>
+    <h3 className="font-display text-xl font-light tracking-normal text-navy mb-3">{title}</h3>
     <p className="text-navy/70 leading-relaxed font-light italic text-sm md:text-base">{text}</p>
   </div>
 );

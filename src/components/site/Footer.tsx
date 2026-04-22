@@ -21,7 +21,7 @@ export const Footer = () => {
 
       <div className="container-wide py-16 grid gap-12 md:grid-cols-3">
         <div>
-          <p className="font-display italic text-2xl font-bold text-navy">
+          <p className="font-display text-2xl font-light tracking-normal text-navy">
             Tiny Beachhouse
           </p>
           <p className="mt-3 text-muted-foreground max-w-xs leading-relaxed">

@@ -41,6 +41,7 @@ export const Navbar = () => {
   }, [open]);
 
   const solid = !transparentEligible || scrolled;
+  const edgeToEdge = transparentEligible && !solid;
 
   const mobileMenu =
     open &&
@@ -52,8 +53,8 @@ export const Navbar = () => {
         aria-label={t("nav.menu")}
         className="fixed inset-0 z-[100] flex min-h-[100dvh] flex-col bg-navy text-sand md:hidden"
       >
-        <div className="flex h-20 shrink-0 items-center justify-between border-b border-sand/10 px-6">
-          <span className="font-display text-2xl font-bold tracking-tight">Tiny Beachhouse</span>
+        <div className="flex h-[4.25rem] shrink-0 items-center justify-between border-b border-sand/10 px-5 sm:px-6">
+          <span className="font-display text-2xl font-light tracking-normal">Tiny Beachhouse</span>
           <button type="button" aria-label={t("nav.closeMenu")} className="rounded-md p-2" onClick={() => setOpen(false)}>
             <X className="h-6 w-6" weight="bold" />
           </button>
@@ -65,7 +66,7 @@ export const Navbar = () => {
               to={l.to}
               end={l.to === "/"}
               className={({ isActive }) =>
-                cn("font-display text-3xl font-semibold not-italic", isActive ? "text-dune" : "text-sand/90")
+                cn("font-display text-3xl font-light not-italic tracking-normal", isActive ? "text-dune" : "text-sand/90")
               }
             >
               {l.label}
@@ -93,18 +94,24 @@ export const Navbar = () => {
           : "bg-transparent"
       )}
     >
-      <div className="container-wide flex items-center justify-between h-20">
+      <div
+        className={cn(
+          "flex w-full max-w-[100vw] items-center justify-between",
+          edgeToEdge ? "h-[4.25rem] px-5 sm:px-6 md:px-8 lg:px-10" : "container-wide h-20",
+        )}
+      >
         <Link
           to="/"
           className={cn(
-            "font-display text-2xl font-bold tracking-tight transition-colors md:text-[1.6rem]",
+            "font-display font-light tracking-normal transition-colors",
+            edgeToEdge ? "text-xl md:text-2xl" : "text-2xl md:text-[1.6rem]",
             solid ? "text-navy" : "text-white",
           )}
         >
           Tiny Beachhouse
         </Link>
 
-        <nav className="hidden md:flex items-center gap-9">
+        <nav className={cn("hidden items-center md:flex", edgeToEdge ? "gap-5 lg:gap-7" : "gap-9")}>
           {links.map((l) => (
             <NavLink
               key={l.to}
@@ -144,7 +151,7 @@ export const Navbar = () => {
           </a>
         </nav>
 
-        <div className="md:hidden flex items-center gap-3">
+        <div className="flex items-center gap-2 md:hidden">
           <LanguageToggle solid={solid} />
           <button
             type="button"

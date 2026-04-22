@@ -14,8 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Playfair Display"', 'serif'],
-        body: ['Inter', 'system-ui', 'sans-serif'],
+        /* Same stack as hero — Zodiak for all marketing/display headings */
+        display: ['Zodiak', 'Georgia', 'serif'],
+        zodiak: ['Zodiak', 'Georgia', 'serif'],
+        body: ['"Hedvig Letters Sans"', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

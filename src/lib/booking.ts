@@ -24,7 +24,3 @@ export function getBookingUrl(opts?: { checkIn?: string; checkOut?: string; gues
   }
   return u.toString();
 }
-
-export function openBookingUrl(opts?: { checkIn?: string; checkOut?: string; guests?: number }): void {
-  window.open(getBookingUrl(opts), "_blank", "noopener,noreferrer");
-}

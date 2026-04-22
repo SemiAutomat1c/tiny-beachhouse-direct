@@ -18,14 +18,6 @@ export const translations = {
     "nf.metaTitle": "Pagina niet gevonden — Tiny Beachhouse",
     "nf.metaDesc": "De opgevraagde pagina bestaat niet. Ga terug naar de homepage van Tiny Beachhouse Scheveningen.",
 
-    // AvailabilityBar
-    "avail.checkIn": "Check-in",
-    "avail.checkOut": "Check-out",
-    "avail.guests": "Gasten",
-    "avail.guest_one": "gast",
-    "avail.guest_other": "gasten",
-    "avail.check": "Beschikbaarheid Bekijken",
-
     // BookDirectBanner
     "banner.title1": "Sla de tussenpersoon over.",
     "banner.title2": "Boek direct en bespaar.",
@@ -297,14 +289,6 @@ export const translations = {
     "nf.home": "Back to home",
     "nf.metaTitle": "Page not found — Tiny Beachhouse",
     "nf.metaDesc": "The page you requested doesn’t exist. Return to Tiny Beachhouse Scheveningen.",
-
-    // AvailabilityBar
-    "avail.checkIn": "Check-in",
-    "avail.checkOut": "Check-out",
-    "avail.guests": "Guests",
-    "avail.guest_one": "guest",
-    "avail.guest_other": "guests",
-    "avail.check": "Check Availability",
 
     // BookDirectBanner
     "banner.title1": "Skip the middleman.",
