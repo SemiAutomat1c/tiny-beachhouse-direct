@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { EnvelopeSimple, MapPin } from "@phosphor-icons/react";
+import { getBookingUrl } from "@/lib/booking";
 import { useI18n } from "@/i18n/I18nContext";
 
 export const Footer = () => {
@@ -20,7 +21,7 @@ export const Footer = () => {
 
       <div className="container-wide py-16 grid gap-12 md:grid-cols-3">
         <div>
-          <p className="font-display italic text-2xl font-bold text-navy">
+          <p className="font-display text-2xl font-light tracking-normal text-navy">
             Tiny Beachhouse
           </p>
           <p className="mt-3 text-muted-foreground max-w-xs leading-relaxed">
@@ -35,8 +36,16 @@ export const Footer = () => {
           <ul className="space-y-2">
             <li><Link to="/" className="text-navy/80 hover:text-navy transition-colors">{t("nav.home")}</Link></li>
             <li><Link to="/accommodatie" className="text-navy/80 hover:text-navy transition-colors">{t("nav.accommodation")}</Link></li>
-            <li><Link to="/omgeving" className="text-navy/80 hover:text-navy transition-colors">{t("nav.area")}</Link></li>
-            <li><Link to="/boeken" className="text-navy/80 hover:text-navy transition-colors">{t("nav.bookDirect")}</Link></li>
+            <li>
+              <a
+                href={getBookingUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-navy/80 hover:text-navy transition-colors"
+              >
+                {t("footer.bookOnBooking")}
+              </a>
+            </li>
           </ul>
         </div>
 

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import {
   ArrowRight,
+  ArrowUpRight,
   Bathtub,
   Bed,
   BeachBall,
@@ -20,17 +21,23 @@ import {
   WifiHigh,
   Wine,
 } from "@phosphor-icons/react";
+import { getBookingUrl } from "@/lib/booking";
 import { images, galleryImages } from "@/lib/images";
-import { AvailabilityBar } from "@/components/site/AvailabilityBar";
 import { BookDirectBanner } from "@/components/site/BookDirectBanner";
 import { Lightbox } from "@/components/site/Lightbox";
 import { cn } from "../lib/utils";
 import { useI18n } from "@/i18n/I18nContext";
 import type { TranslationKey } from "@/i18n/translations";
 
+/** Default hero MP4 on Cloudinary — override with `VITE_HERO_VIDEO_URL` (e.g. local `public/…`). */
+const DEFAULT_HERO_VIDEO_SRC =
+  "https://res.cloudinary.com/dthannwji/video/upload/v1776847841/Scheveningen_14-02-2026_qqnkba.mp4";
+
 const Index = () => {
   const { t } = useI18n();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const heroVideoSrc =
+    import.meta.env.VITE_HERO_VIDEO_URL?.trim() || DEFAULT_HERO_VIDEO_SRC;
 
   const trustItems: { icon: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>; key: TranslationKey }[] = [
     { icon: Waves, key: "home.trust1" },
@@ -74,38 +81,73 @@ const Index = () => {
 
   return (
     <>
-      {/* HERO */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <img
-          src={images.beachSunset}
-          alt="Scheveningen beach sunset"
-          className="absolute inset-0 w-full h-full object-cover animate-image-zoom"
-          width={1920}
-          height={1280}
+      {/* HERO — full-bleed video or poster; HotelBeach-style split + CTAs */}
+      <section className="relative flex min-h-[100dvh] flex-col justify-end overflow-hidden pb-8 pt-[4.75rem] sm:pb-10 sm:pt-28 md:pb-12 md:pt-32">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={images.beachSunset}
+          preload="metadata"
+          aria-hidden="true"
+          src={heroVideoSrc}
         />
-        <div className="absolute inset-0 bg-navy/30" />
-        <div className="absolute inset-0 bg-gradient-hero" />
+        <div className="absolute inset-0 bg-navy/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/45 via-navy/10 to-navy/15" />
 
-        <div className="relative container-wide text-center pt-20">
-          <p className="eyebrow text-sand/90 mb-6 tracking-[0.3em] animate-fade-in">{t("home.heroEyebrow")}</p>
-          <h1 className="display-italic text-sand text-5xl md:text-8xl lg:text-9xl leading-[0.9] animate-fade-up">
-            {t("home.heroTitle1")}
-            <br />
-            <span className="text-sand max-md:[text-shadow:0_1px_3px_rgba(17,30,45,0.55)] md:text-dune inline-block mt-4 text-4xl md:text-6xl lg:text-7xl leading-[0.95]">
-              {t("home.heroTitle2")}
-            </span>
-          </h1>
-          
-          <div className="mt-20 max-w-4xl mx-auto animate-fade-up" style={{ animationDelay: "0.35s" }}>
-            <div className="glass-pill py-3 px-3 shadow-lift inline-block w-full">
-              <AvailabilityBar />
+        <div className="relative w-full px-5 sm:px-6 md:px-8 lg:px-10">
+          <div className="w-full">
+            {/* Headline left, Book Direct circle right — same row on all breakpoints */}
+            <div className="flex w-full flex-row items-center justify-between gap-3 sm:gap-5 md:gap-8 lg:items-end">
+              <div className="min-w-0 max-w-[min(42rem,calc(100vw-11rem))] flex-1 space-y-3 text-left md:space-y-4 lg:max-w-lg xl:max-w-xl">
+                <p className="eyebrow animate-fade-in text-sand/85 tracking-[0.35em]">{t("home.heroEyebrow")}</p>
+                <h1 className="animate-fade-up font-display font-light tracking-normal text-white">
+                  <span className="block text-[clamp(1.875rem,3.5vw+0.5rem,3.8125rem)] leading-[1.08]">
+                    {t("home.heroTitle1")}
+                  </span>
+                  <span className="mt-2 block font-display font-light text-white/95 text-[clamp(1.5rem,2.5vw+0.35rem,3rem)] leading-[1.15] md:mt-2.5">
+                    {t("home.heroTitle2")}
+                  </span>
+                </h1>
+              </div>
+
+              <div className="flex shrink-0 justify-end self-center lg:self-end">
+                <a
+                  href={getBookingUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-dune px-4 text-center font-body text-xs font-normal leading-snug tracking-normal text-navy shadow-lift transition hover:scale-[1.03] sm:h-32 sm:w-32 sm:px-5 sm:text-sm md:h-36 md:w-36 md:px-5 md:text-base md:leading-normal lg:text-[0.95rem]"
+                >
+                  {t("nav.bookDirect")}
+                </a>
+              </div>
+            </div>
+
+            {/* Full-width rule — reads “wide” like the reference */}
+            <div className="mt-5 w-full border-t border-white/40 md:mt-6 lg:mt-7" />
+
+            {/* Subcopy + pill — bottom corners */}
+            <div className="mt-4 flex flex-col gap-6 md:mt-5 md:gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-6">
+              <p className="max-w-md font-body text-[16px] font-normal leading-[26px] text-sand/90 md:max-w-lg">
+                {t("home.heroSub")}
+              </p>
+              <Link
+                to="/accommodatie"
+                className="group inline-flex shrink-0 items-center gap-4 self-start rounded-full border border-white/45 bg-white/10 px-5 py-2.5 pl-6 font-body text-xs font-semibold uppercase tracking-[0.22em] text-sand backdrop-blur-sm transition hover:border-white/70 hover:bg-white/15 lg:self-end"
+              >
+                {t("home.heroViewAccommodation")}
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sand text-navy transition group-hover:scale-105">
+                  <ArrowUpRight className="h-4 w-4" weight="bold" />
+                </span>
+              </Link>
             </div>
           </div>
         </div>
 
-        {/* SCROLL INDICATOR */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-float pointer-events-none opacity-60">
-          <div className="w-[1px] h-12 bg-sand/40" />
+        <div className="pointer-events-none absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 opacity-50 animate-float md:bottom-8">
+          <div className="h-9 w-px bg-sand/40 md:h-11" />
         </div>
       </section>
 
@@ -118,7 +160,7 @@ const Index = () => {
           </h2>
           <div className="w-16 h-[1px] bg-dune mx-auto mb-16" />
           <div className="max-w-3xl mx-auto space-y-8 text-navy/60 text-lg leading-relaxed-luxury font-light">
-            <p className="first-letter:text-5xl first-letter:font-display first-letter:float-left first-letter:mr-3 first-letter:mt-2 first-letter:text-navy">
+            <p className="first-letter:float-left first-letter:mr-3 first-letter:mt-2 first-letter:font-display first-letter:text-5xl first-letter:font-light first-letter:tracking-normal first-letter:text-navy">
               {t("home.introP1")}
             </p>
             <p>{t("home.introP2")}</p>
@@ -295,10 +337,10 @@ const Index = () => {
               {t("home.locText")}
             </p>
             <Link
-              to="/omgeving"
-              className="mt-8 inline-flex items-center gap-1.5 text-navy font-medium border-b-2 border-dune pb-1 hover:gap-3 transition-all"
+              to="/accommodatie"
+              className="mt-8 inline-flex items-center gap-1.5 border-b-2 border-dune pb-1 font-medium text-navy transition-all hover:gap-3"
             >
-              {t("home.exploreArea")} <ArrowRight weight="bold" className="w-4 h-4" />
+              {t("home.exploreSpace")} <ArrowRight weight="bold" className="h-4 w-4" />
             </Link>
           </div>
           <div className="relative rounded-2xl overflow-hidden shadow-soft aspect-[4/3] group">
@@ -343,7 +385,7 @@ const Index = () => {
                 <p className="eyebrow text-navy/50 tracking-[0.22em] mb-4">BOOKING.COM</p>
                 <div className="flex items-center justify-between gap-5">
                   <div>
-                    <p className="font-display text-5xl leading-none text-navy">9.1</p>
+                    <p className="font-display font-light text-5xl leading-none text-navy">9.1</p>
                     <p className="text-[11px] uppercase tracking-[0.18em] text-navy/50 mt-2">Superb rating</p>
                   </div>
                   <div className="flex gap-1 text-dune">
@@ -393,7 +435,7 @@ const Index = () => {
                 {ratingCategories.slice(0, 4).map((cat) => (
                   <div key={cat.label} className="space-y-2">
                     <p className="text-[10px] uppercase tracking-[0.25em] font-bold text-navy/30">{cat.label}</p>
-                    <p className="text-4xl font-display text-navy">{cat.score}</p>
+                    <p className="text-4xl font-display font-light text-navy">{cat.score}</p>
                   </div>
                 ))}
               </div>
@@ -401,7 +443,7 @@ const Index = () => {
               {/* Booking.com Refined Strip */}
               <div className="bg-navy p-10 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-8 shadow-lift">
                 <div className="flex items-center gap-6">
-                  <div className="text-sand border border-sand/20 w-16 h-16 rounded-2xl flex items-center justify-center font-display text-3xl">
+                  <div className="text-sand border border-sand/20 w-16 h-16 rounded-2xl flex items-center justify-center font-display font-light text-3xl">
                     9.1
                   </div>
                   <div>

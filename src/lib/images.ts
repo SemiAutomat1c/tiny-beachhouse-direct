@@ -1,7 +1,6 @@
 // Centralized image imports for the site
 import heroHome from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/523818066.jpg";
 import livingArea from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/375749746.jpg";
-import heroAcc from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/327687718.jpg";
 import beachSunset from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/340432632.jpg";
 import bathroomBrick from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/327687691.jpg";
 import kitchenDetail from "@/assets/Tiny Beachhouse, Scheveningen (updated prices 2026)/327687719.jpg";
@@ -27,7 +26,7 @@ import exteriorTerraceReal from "@/assets/Tiny Beachhouse, Scheveningen (updated
 export const images = {
   heroHome,
   livingArea,
-  heroAcc,
+  heroAcc: beachSunset,
   beachSunset,
   bathroomBrick,
   kitchenDetail,

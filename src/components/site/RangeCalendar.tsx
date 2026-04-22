@@ -68,7 +68,7 @@ export const RangeCalendar = ({
 
     return (
       <div key={monthDate.toISOString()} className="flex-1 min-w-0">
-        <div className="text-center font-display text-lg text-navy mb-3 capitalize">
+        <div className="text-center font-display text-lg font-light tracking-normal text-navy mb-3 capitalize">
           {format(monthDate, "MMMM yyyy", { locale })}
         </div>
         <div className="grid grid-cols-7 text-[11px] uppercase tracking-wider text-muted-foreground mb-1.5">

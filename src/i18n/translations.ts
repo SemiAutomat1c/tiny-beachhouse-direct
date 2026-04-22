@@ -18,14 +18,6 @@ export const translations = {
     "nf.metaTitle": "Pagina niet gevonden — Tiny Beachhouse",
     "nf.metaDesc": "De opgevraagde pagina bestaat niet. Ga terug naar de homepage van Tiny Beachhouse Scheveningen.",
 
-    // AvailabilityBar
-    "avail.checkIn": "Check-in",
-    "avail.checkOut": "Check-out",
-    "avail.guests": "Gasten",
-    "avail.guest_one": "gast",
-    "avail.guest_other": "gasten",
-    "avail.check": "Beschikbaarheid Bekijken",
-
     // BookDirectBanner
     "banner.title1": "Sla de tussenpersoon over.",
     "banner.title2": "Boek direct en bespaar.",
@@ -36,6 +28,7 @@ export const translations = {
     "footer.tagline1": "200m van de zee.",
     "footer.tagline2": "Scheveningen, Den Haag.",
     "footer.explore": "Ontdek",
+    "footer.bookOnBooking": "Boek op Booking.com",
     "footer.contact": "Contact",
     "footer.credits": "Partner van",
     "footer.copyright": "Tiny Beachhouse",
@@ -46,6 +39,7 @@ export const translations = {
     "home.heroTitle1": "Strand van Scheveningen.",
     "home.heroTitle2": "Jouw eigen oase.",
     "home.heroSub": "Een prachtig vormgegeven beachhouse in Scheveningen — slechts 200 meter van de Noordzee.",
+    "home.heroViewAccommodation": "Bekijk de accommodatie",
     "home.ctaCheck": "Bekijk Beschikbaarheid",
     "home.ctaDiscover": "Ontdek de Ruimte",
 
@@ -296,14 +290,6 @@ export const translations = {
     "nf.metaTitle": "Page not found — Tiny Beachhouse",
     "nf.metaDesc": "The page you requested doesn’t exist. Return to Tiny Beachhouse Scheveningen.",
 
-    // AvailabilityBar
-    "avail.checkIn": "Check-in",
-    "avail.checkOut": "Check-out",
-    "avail.guests": "Guests",
-    "avail.guest_one": "guest",
-    "avail.guest_other": "guests",
-    "avail.check": "Check Availability",
-
     // BookDirectBanner
     "banner.title1": "Skip the middleman.",
     "banner.title2": "Book direct and save.",
@@ -314,6 +300,7 @@ export const translations = {
     "footer.tagline1": "200m from the sea.",
     "footer.tagline2": "Scheveningen, Den Haag.",
     "footer.explore": "Explore",
+    "footer.bookOnBooking": "Book on Booking.com",
     "footer.contact": "Contact",
     "footer.credits": "Partner of",
     "footer.copyright": "Tiny Beachhouse",
@@ -324,6 +311,7 @@ export const translations = {
     "home.heroTitle1": "Scheveningen Beach.",
     "home.heroTitle2": "Your private escape.",
     "home.heroSub": "A beautifully designed beach house in Scheveningen — just 200 metres from the North Sea.",
+    "home.heroViewAccommodation": "View the space",
     "home.ctaCheck": "Check Availability",
     "home.ctaDiscover": "Discover the Space",
 

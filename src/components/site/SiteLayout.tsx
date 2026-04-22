@@ -25,26 +25,6 @@ const titles: Record<string, { nl: { title: string; description: string }; en: {
       description: "Discover the bedroom, kitchen, terrace and amenities of Tiny Beachhouse — a boutique tiny house by the sea.",
     },
   },
-  "/omgeving": {
-    nl: {
-      title: "Scheveningen & omgeving — Tiny Beachhouse",
-      description: "Strand, pier, musea, restaurants en duinen — alles op loopafstand van Tiny Beachhouse.",
-    },
-    en: {
-      title: "Scheveningen & surroundings — Tiny Beachhouse",
-      description: "Beach, pier, museums, restaurants and dunes — explore everything within walking distance of Tiny Beachhouse.",
-    },
-  },
-  "/boeken": {
-    nl: {
-      title: "Direct Boeken — Tiny Beachhouse Scheveningen",
-      description: "Reserveer je verblijf direct bij de gastheren. Beste prijs, geen platformkosten.",
-    },
-    en: {
-      title: "Book Direct — Tiny Beachhouse Scheveningen",
-      description: "Reserve your stay directly with the hosts. Best available rate, no platform fees.",
-    },
-  },
 };
 
 export const SiteLayout = () => {

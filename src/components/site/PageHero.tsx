@@ -71,11 +71,11 @@ export const PageHero = ({
         )}
         <h1
           className={cn(
-            "display-italic text-sand",
+            "font-display font-light tracking-normal text-sand",
             isImmersive &&
-              "animate-fade-up text-5xl leading-[0.9] md:text-8xl lg:text-9xl",
-            !isImmersive && variant === "editorial" && "max-w-3xl",
-            variant === "compact" && "mx-auto max-w-3xl",
+              "animate-fade-up text-5xl leading-[0.95] md:text-8xl lg:text-9xl",
+            !isImmersive && variant === "editorial" && "max-w-3xl text-4xl leading-[1.08] md:text-6xl lg:text-7xl",
+            variant === "compact" && "mx-auto max-w-3xl text-4xl leading-[1.08] md:text-5xl lg:text-6xl",
           )}
         >
           {title}
@@ -83,9 +83,9 @@ export const PageHero = ({
         {subtitle != null && (
           <p
             className={cn(
-              "mt-6 max-w-xl text-sand/80",
+              "mt-6 max-w-xl font-body text-base font-normal leading-[26px] text-sand/85",
               isImmersive && "mx-auto",
-              variant === "compact" && "mx-auto text-sand/85",
+              variant === "compact" && "mx-auto text-sand/90",
             )}
           >
             {subtitle}
