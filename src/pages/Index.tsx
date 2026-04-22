@@ -30,10 +30,14 @@ import { cn } from "../lib/utils";
 import { useI18n } from "@/i18n/I18nContext";
 import type { TranslationKey } from "@/i18n/translations";
 
+/** Served from `public/` — override with `VITE_HERO_VIDEO_URL` when hosting elsewhere. */
+const DEFAULT_HERO_VIDEO_SRC = "/Scheveningen_14-02-2026.mp4";
+
 const Index = () => {
   const { t } = useI18n();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL?.trim();
+  const heroVideoSrc =
+    import.meta.env.VITE_HERO_VIDEO_URL?.trim() || DEFAULT_HERO_VIDEO_SRC;
 
   const trustItems: { icon: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>; key: TranslationKey }[] = [
     { icon: Waves, key: "home.trust1" },
@@ -78,69 +82,65 @@ const Index = () => {
   return (
     <>
       {/* HERO — full-bleed video or poster; HotelBeach-style split + CTAs */}
-      <section className="relative flex min-h-screen flex-col justify-end overflow-hidden pb-14 pt-28 md:pb-20 md:pt-32">
-        {heroVideoUrl ? (
-          <video
-            className="absolute inset-0 h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster={images.beachSunset}
-            aria-hidden="true"
-          >
-            <source src={heroVideoUrl} type="video/mp4" />
-          </video>
-        ) : (
-          <img
-            src={images.beachSunset}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover"
-            width={1920}
-            height={1280}
-          />
-        )}
+      <section className="relative flex min-h-screen flex-col justify-end overflow-hidden pb-20 pt-28 md:pb-28 md:pt-36 lg:pb-32">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={images.beachSunset}
+          preload="metadata"
+          aria-hidden="true"
+          src={heroVideoSrc}
+        />
         <div className="absolute inset-0 bg-navy/15" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/65 via-navy/20 to-navy/25" />
 
-        <div className="relative container-wide w-full">
-          <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
-            <div className="max-w-2xl space-y-5 text-left md:space-y-6">
-              <p className="eyebrow animate-fade-in text-sand/85 tracking-[0.3em]">{t("home.heroEyebrow")}</p>
-              <h1 className="display-serif animate-fade-up text-4xl text-sand sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-                {t("home.heroTitle1")}
-                <span className="mt-3 block font-normal text-dune md:mt-4 md:text-5xl lg:text-6xl xl:text-7xl">
-                  {t("home.heroTitle2")}
-                </span>
-              </h1>
-              <div className="max-w-xl border-t border-white/35 pt-5 md:pt-6" />
-              <p className="max-w-lg font-body text-base leading-relaxed text-sand/90 md:text-lg">
+        <div className="relative w-full px-6 md:px-10 lg:px-12 xl:px-16">
+          <div className="mx-auto w-full max-w-[1400px]">
+            {/* Headline + circle — wide gap, airy type */}
+            <div className="flex flex-col gap-16 lg:flex-row lg:items-end lg:justify-between lg:gap-x-16 xl:gap-x-24 2xl:gap-x-32">
+              <div className="min-w-0 max-w-4xl space-y-8 text-left md:space-y-10 lg:max-w-[46rem] lg:space-y-12 xl:max-w-[52rem]">
+                <p className="eyebrow animate-fade-in text-sand/85 tracking-[0.35em]">{t("home.heroEyebrow")}</p>
+                <h1 className="animate-fade-up font-body tracking-normal text-sand text-[clamp(1.875rem,3.5vw+0.5rem,3.8125rem)] leading-[1.45] md:leading-[1.48]">
+                  <span className="block font-medium">{t("home.heroTitle1")}</span>
+                  <span className="mt-6 block font-normal text-dune text-[clamp(1.5rem,2.5vw+0.35rem,3rem)] leading-[1.42] md:mt-8 lg:mt-10">
+                    {t("home.heroTitle2")}
+                  </span>
+                </h1>
+              </div>
+
+              <div className="flex shrink-0 justify-center lg:justify-end lg:pb-1">
+                <a
+                  href={getBookingUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-44 w-44 shrink-0 items-center justify-center rounded-full bg-dune px-7 text-center font-body text-lg font-normal leading-snug tracking-normal text-navy shadow-lift transition hover:scale-[1.03] md:h-52 md:w-52 md:text-xl md:leading-normal"
+                >
+                  {t("nav.bookDirect")}
+                </a>
+              </div>
+            </div>
+
+            {/* Full-width rule — reads “wide” like the reference */}
+            <div className="mt-14 w-full border-t border-white/40 md:mt-20 lg:mt-24" />
+
+            {/* Subcopy + pill — separated row, generous vertical rhythm */}
+            <div className="mt-10 flex flex-col gap-10 md:mt-12 md:gap-12 lg:mt-14 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+              <p className="max-w-xl font-body text-[17px] font-normal leading-[1.65] text-sand/90 md:max-w-2xl md:text-lg md:leading-[1.7]">
                 {t("home.heroSub")}
               </p>
-            </div>
-
-            <div className="flex flex-col items-center gap-8 lg:items-end">
-              <a
-                href={getBookingUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-40 w-40 shrink-0 items-center justify-center rounded-full bg-dune px-6 text-center font-body text-sm font-bold uppercase leading-snug tracking-[0.15em] text-navy shadow-lift transition hover:scale-[1.03] md:h-44 md:w-44 md:text-[0.8rem]"
+              <Link
+                to="/accommodatie"
+                className="group inline-flex shrink-0 items-center gap-4 self-start rounded-full border border-white/45 bg-white/10 px-6 py-3 pl-8 font-body text-xs font-semibold uppercase tracking-[0.22em] text-sand backdrop-blur-sm transition hover:border-white/70 hover:bg-white/15 lg:self-end"
               >
-                {t("nav.bookDirect")}
-              </a>
+                {t("home.heroViewAccommodation")}
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sand text-navy transition group-hover:scale-105">
+                  <ArrowUpRight className="h-4 w-4" weight="bold" />
+                </span>
+              </Link>
             </div>
-          </div>
-
-          <div className="mt-10 flex justify-start lg:mt-8 lg:justify-end">
-            <Link
-              to="/accommodatie"
-              className="group inline-flex items-center gap-4 rounded-full border border-white/45 bg-white/10 px-5 py-2.5 pl-7 font-body text-xs font-bold uppercase tracking-[0.2em] text-sand backdrop-blur-sm transition hover:border-white/70 hover:bg-white/15"
-            >
-              {t("home.heroViewAccommodation")}
-              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-sand text-navy transition group-hover:scale-105">
-                <ArrowUpRight className="h-4 w-4" weight="bold" />
-              </span>
-            </Link>
           </div>
         </div>
 

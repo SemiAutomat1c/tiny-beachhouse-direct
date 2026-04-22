@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Hero background video (~84MB). Keep locally or set VITE_HERO_VIDEO_URL for deploy.
+public/Scheveningen_14-02-2026.mp4
