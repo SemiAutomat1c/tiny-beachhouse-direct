@@ -36,6 +36,7 @@ export const translations = {
     "footer.tagline1": "200m van de zee.",
     "footer.tagline2": "Scheveningen, Den Haag.",
     "footer.explore": "Ontdek",
+    "footer.bookOnBooking": "Boek op Booking.com",
     "footer.contact": "Contact",
     "footer.credits": "Partner van",
     "footer.copyright": "Tiny Beachhouse",
@@ -46,6 +47,7 @@ export const translations = {
     "home.heroTitle1": "Strand van Scheveningen.",
     "home.heroTitle2": "Jouw eigen oase.",
     "home.heroSub": "Een prachtig vormgegeven beachhouse in Scheveningen — slechts 200 meter van de Noordzee.",
+    "home.heroViewAccommodation": "Bekijk de accommodatie",
     "home.ctaCheck": "Bekijk Beschikbaarheid",
     "home.ctaDiscover": "Ontdek de Ruimte",
 
@@ -314,6 +316,7 @@ export const translations = {
     "footer.tagline1": "200m from the sea.",
     "footer.tagline2": "Scheveningen, Den Haag.",
     "footer.explore": "Explore",
+    "footer.bookOnBooking": "Book on Booking.com",
     "footer.contact": "Contact",
     "footer.credits": "Partner of",
     "footer.copyright": "Tiny Beachhouse",
@@ -324,6 +327,7 @@ export const translations = {
     "home.heroTitle1": "Scheveningen Beach.",
     "home.heroTitle2": "Your private escape.",
     "home.heroSub": "A beautifully designed beach house in Scheveningen — just 200 metres from the North Sea.",
+    "home.heroViewAccommodation": "View the space",
     "home.ctaCheck": "Check Availability",
     "home.ctaDiscover": "Discover the Space",
 

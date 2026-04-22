@@ -2,6 +2,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { ArrowUpRight, Hamburger, X } from "@phosphor-icons/react";
+import { getBookingUrl } from "@/lib/booking";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nContext";
 import { LanguageToggle } from "./LanguageToggle";
@@ -15,10 +16,9 @@ export const Navbar = () => {
   const links = [
     { to: "/", label: t("nav.home") },
     { to: "/accommodatie", label: t("nav.accommodation") },
-    { to: "/omgeving", label: t("nav.area") },
   ];
 
-  const transparentEligible = pathname === "/";
+  const transparentEligible = pathname === "/" || pathname === "/accommodatie";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -53,7 +53,7 @@ export const Navbar = () => {
         className="fixed inset-0 z-[100] flex min-h-[100dvh] flex-col bg-navy text-sand md:hidden"
       >
         <div className="flex h-20 shrink-0 items-center justify-between border-b border-sand/10 px-6">
-          <span className="font-display text-2xl font-bold italic">Tiny Beachhouse</span>
+          <span className="font-display text-2xl font-bold tracking-tight">Tiny Beachhouse</span>
           <button type="button" aria-label={t("nav.closeMenu")} className="rounded-md p-2" onClick={() => setOpen(false)}>
             <X className="h-6 w-6" weight="bold" />
           </button>
@@ -65,18 +65,20 @@ export const Navbar = () => {
               to={l.to}
               end={l.to === "/"}
               className={({ isActive }) =>
-                cn("font-display text-3xl italic", isActive ? "text-dune" : "text-sand/90")
+                cn("font-display text-3xl font-semibold not-italic", isActive ? "text-dune" : "text-sand/90")
               }
             >
               {l.label}
             </NavLink>
           ))}
-          <Link
-            to="/boeken"
+          <a
+            href={getBookingUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-6 inline-flex items-center gap-2 rounded-full bg-dune px-7 py-3.5 font-medium text-navy"
           >
             {t("nav.bookDirect")} <ArrowUpRight className="h-4 w-4" weight="bold" />
-          </Link>
+          </a>
         </nav>
       </div>,
       document.body,
@@ -95,8 +97,8 @@ export const Navbar = () => {
         <Link
           to="/"
           className={cn(
-            "font-display italic text-2xl md:text-[1.6rem] font-bold transition-colors",
-            solid ? "text-navy" : "text-white"
+            "font-display text-2xl font-bold tracking-tight transition-colors md:text-[1.6rem]",
+            solid ? "text-navy" : "text-white",
           )}
         >
           Tiny Beachhouse
@@ -109,7 +111,7 @@ export const Navbar = () => {
               to={l.to}
               className={({ isActive }) =>
                 cn(
-                  "font-medium tracking-wide transition-colors relative",
+                  "font-body text-sm font-medium tracking-[0.12em] transition-colors relative",
                   solid
                     ? isActive
                       ? "text-navy"
@@ -127,12 +129,19 @@ export const Navbar = () => {
             </NavLink>
           ))}
           <LanguageToggle solid={solid} />
-          <Link
-            to="/boeken"
-            className="inline-flex items-center gap-1.5 bg-navy text-sand px-5 py-2.5 rounded-full font-medium hover:bg-navy-soft transition-colors"
+          <a
+            href={getBookingUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              "inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 font-body text-sm font-semibold tracking-wide transition-colors",
+              solid
+                ? "bg-navy text-sand hover:bg-navy-soft"
+                : "border border-white/50 bg-white/10 text-sand backdrop-blur-sm hover:bg-white/20",
+            )}
           >
-            {t("nav.bookDirect")} <ArrowUpRight className="w-4 h-4" weight="bold" />
-          </Link>
+            {t("nav.bookDirect")} <ArrowUpRight className="h-4 w-4" weight="bold" />
+          </a>
         </nav>
 
         <div className="md:hidden flex items-center gap-3">

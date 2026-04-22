@@ -179,6 +179,12 @@
     line-height: 1.05;
   }
 
+  .display-serif {
+    @apply font-display font-bold not-italic tracking-tight;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
   .eyebrow {
     @apply text-xs uppercase tracking-[0.2em] text-muted-foreground font-medium;
   }

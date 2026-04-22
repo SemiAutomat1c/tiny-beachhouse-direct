@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import {
   ArrowRight,
+  ArrowUpRight,
   Bathtub,
   Bed,
   BeachBall,
@@ -20,7 +21,7 @@ import {
   WifiHigh,
   Wine,
 } from "@phosphor-icons/react";
-import heroVideo from "@/assets/Scheveningen_14-02-2026.mp4";
+import { getBookingUrl } from "@/lib/booking";
 import { images, galleryImages } from "@/lib/images";
 import { AvailabilityBar } from "@/components/site/AvailabilityBar";
 import { BookDirectBanner } from "@/components/site/BookDirectBanner";
@@ -32,6 +33,7 @@ import type { TranslationKey } from "@/i18n/translations";
 const Index = () => {
   const { t } = useI18n();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL?.trim();
 
   const trustItems: { icon: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>; key: TranslationKey }[] = [
     { icon: Waves, key: "home.trust1" },
@@ -75,42 +77,81 @@ const Index = () => {
 
   return (
     <>
-      {/* HERO */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={images.beachSunset}
-          aria-hidden="true"
-        >
-          <source src={heroVideo} type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-navy/30" />
-        <div className="absolute inset-0 bg-gradient-hero" />
+      {/* HERO — full-bleed video or poster; HotelBeach-style split + CTAs */}
+      <section className="relative flex min-h-screen flex-col justify-end overflow-hidden pb-14 pt-28 md:pb-20 md:pt-32">
+        {heroVideoUrl ? (
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={images.beachSunset}
+            aria-hidden="true"
+          >
+            <source src={heroVideoUrl} type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src={images.beachSunset}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover"
+            width={1920}
+            height={1280}
+          />
+        )}
+        <div className="absolute inset-0 bg-navy/15" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/65 via-navy/20 to-navy/25" />
 
-        <div className="relative container-wide text-center pt-20">
-          <p className="eyebrow text-sand/90 mb-6 tracking-[0.3em] animate-fade-in">{t("home.heroEyebrow")}</p>
-          <h1 className="display-italic text-sand text-5xl md:text-8xl lg:text-9xl leading-[0.9] animate-fade-up">
-            {t("home.heroTitle1")}
-            <br />
-            <span className="text-sand max-md:[text-shadow:0_1px_3px_rgba(17,30,45,0.55)] md:text-dune inline-block mt-4 text-4xl md:text-6xl lg:text-7xl leading-[0.95]">
-              {t("home.heroTitle2")}
-            </span>
-          </h1>
-          
-          <div className="mt-20 max-w-4xl mx-auto animate-fade-up" style={{ animationDelay: "0.35s" }}>
-            <div className="glass-pill py-3 px-3 shadow-lift inline-block w-full">
-              <AvailabilityBar />
+        <div className="relative container-wide w-full">
+          <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+            <div className="max-w-2xl space-y-5 text-left md:space-y-6">
+              <p className="eyebrow animate-fade-in text-sand/85 tracking-[0.3em]">{t("home.heroEyebrow")}</p>
+              <h1 className="display-serif animate-fade-up text-4xl text-sand sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+                {t("home.heroTitle1")}
+                <span className="mt-3 block font-normal text-dune md:mt-4 md:text-5xl lg:text-6xl xl:text-7xl">
+                  {t("home.heroTitle2")}
+                </span>
+              </h1>
+              <div className="max-w-xl border-t border-white/35 pt-5 md:pt-6" />
+              <p className="max-w-lg font-body text-base leading-relaxed text-sand/90 md:text-lg">
+                {t("home.heroSub")}
+              </p>
             </div>
+
+            <div className="flex flex-col items-center gap-8 lg:items-end">
+              <a
+                href={getBookingUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-40 w-40 shrink-0 items-center justify-center rounded-full bg-dune px-6 text-center font-body text-sm font-bold uppercase leading-snug tracking-[0.15em] text-navy shadow-lift transition hover:scale-[1.03] md:h-44 md:w-44 md:text-[0.8rem]"
+              >
+                {t("nav.bookDirect")}
+              </a>
+            </div>
+          </div>
+
+          <div className="mt-10 flex justify-start lg:mt-8 lg:justify-end">
+            <Link
+              to="/accommodatie"
+              className="group inline-flex items-center gap-4 rounded-full border border-white/45 bg-white/10 px-5 py-2.5 pl-7 font-body text-xs font-bold uppercase tracking-[0.2em] text-sand backdrop-blur-sm transition hover:border-white/70 hover:bg-white/15"
+            >
+              {t("home.heroViewAccommodation")}
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-sand text-navy transition group-hover:scale-105">
+                <ArrowUpRight className="h-4 w-4" weight="bold" />
+              </span>
+            </Link>
           </div>
         </div>
 
-        {/* SCROLL INDICATOR */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-float pointer-events-none opacity-60">
-          <div className="w-[1px] h-12 bg-sand/40" />
+        <div className="pointer-events-none absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 opacity-60 animate-float">
+          <div className="h-12 w-px bg-sand/40" />
+        </div>
+      </section>
+
+      <section className="bg-sand py-10 md:py-14">
+        <div className="container-wide mx-auto max-w-5xl">
+          <AvailabilityBar />
         </div>
       </section>
 
@@ -300,10 +341,10 @@ const Index = () => {
               {t("home.locText")}
             </p>
             <Link
-              to="/omgeving"
-              className="mt-8 inline-flex items-center gap-1.5 text-navy font-medium border-b-2 border-dune pb-1 hover:gap-3 transition-all"
+              to="/accommodatie"
+              className="mt-8 inline-flex items-center gap-1.5 border-b-2 border-dune pb-1 font-medium text-navy transition-all hover:gap-3"
             >
-              {t("home.exploreArea")} <ArrowRight weight="bold" className="w-4 h-4" />
+              {t("home.exploreSpace")} <ArrowRight weight="bold" className="h-4 w-4" />
             </Link>
           </div>
           <div className="relative rounded-2xl overflow-hidden shadow-soft aspect-[4/3] group">

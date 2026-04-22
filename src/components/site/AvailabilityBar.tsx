@@ -1,11 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ArrowRight, CalendarBlank, Users } from "@phosphor-icons/react";
 import { format } from "date-fns";
+import { openBookingUrl } from "@/lib/booking";
 import { useI18n } from "@/i18n/I18nContext";
 
 export const AvailabilityBar = () => {
-  const navigate = useNavigate();
   const { t } = useI18n();
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
@@ -13,11 +12,11 @@ export const AvailabilityBar = () => {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const params = new URLSearchParams();
-    if (checkIn) params.set("in", checkIn);
-    if (checkOut) params.set("out", checkOut);
-    params.set("guests", String(guests));
-    navigate(`/boeken?${params.toString()}`);
+    openBookingUrl({
+      checkIn: checkIn || undefined,
+      checkOut: checkOut || undefined,
+      guests,
+    });
   };
 
   const today = format(new Date(), "yyyy-MM-dd");

@@ -1,5 +1,4 @@
 import { useState, type ForwardRefExoticComponent, type RefAttributes } from "react";
-import { Link } from "react-router-dom";
 import type { IconProps } from "@phosphor-icons/react";
 import {
   ArrowRight,
@@ -18,6 +17,7 @@ import {
   WifiHigh,
   X,
 } from "@phosphor-icons/react";
+import { getBookingUrl } from "@/lib/booking";
 import { images, galleryImages } from "@/lib/images";
 import { Lightbox } from "@/components/site/Lightbox";
 import { PageHero } from "@/components/site/PageHero";
@@ -209,15 +209,17 @@ const Accommodatie = () => {
           <div className="flex flex-col justify-center px-6 py-14 md:px-10 md:py-20 lg:order-4 lg:px-16 lg:py-24 xl:px-24">
             <h2 className="display-italic text-4xl text-navy md:text-5xl lg:text-6xl">{t("acc.spaceTitle2")}</h2>
             <p className="mt-6 max-w-md text-base font-light leading-relaxed text-navy/70">{t("acc.visionBlurb")}</p>
-            <Link
-              to="/boeken"
+            <a
+              href={getBookingUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group mt-10 inline-flex w-fit items-center gap-3 text-sm font-bold uppercase tracking-[0.2em] text-navy"
             >
               {t("acc.ctaBtn")}
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-navy text-sand transition group-hover:scale-105">
                 <ArrowRight className="h-4 w-4" weight="bold" />
               </span>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -265,12 +267,14 @@ const Accommodatie = () => {
                 <p className="mt-3 max-w-sm text-sm font-light leading-relaxed text-sand/85 md:text-base">
                   {t(spot.textKey)}
                 </p>
-                <Link
-                  to="/boeken"
+                <a
+                  href={getBookingUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-dune transition hover:text-sand"
                 >
                   {t("acc.readMore")} <ArrowRight className="h-3.5 w-3.5" weight="bold" />
-                </Link>
+                </a>
               </div>
             </article>
           ))}
@@ -345,15 +349,17 @@ const Accommodatie = () => {
       <section className="flex min-h-[380px] w-full items-center bg-navy py-20 md:min-h-[440px] md:py-24">
         <div className="container-wide flex w-full flex-col items-start gap-10 md:flex-row md:items-center md:justify-between">
           <h2 className="display-italic max-w-lg text-3xl text-sand md:text-4xl lg:text-5xl">{t("acc.ctaTitle")}</h2>
-          <Link
-            to="/boeken"
+          <a
+            href={getBookingUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group inline-flex items-center gap-5 rounded-full border border-sand/30 bg-sand/10 px-3 py-2 pl-8 backdrop-blur-md transition hover:border-sand/50 hover:bg-sand/15"
           >
             <span className="text-xs font-bold uppercase tracking-[0.22em] text-sand md:text-sm">{t("acc.ctaBtn")}</span>
             <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-dune text-navy shadow-lift transition group-hover:scale-105">
               <ArrowRight className="h-5 w-5" weight="bold" />
             </span>
-          </Link>
+          </a>
         </div>
       </section>
 
