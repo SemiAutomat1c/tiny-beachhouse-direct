@@ -81,15 +81,15 @@ const Index = () => {
 
   return (
     <>
-      {/* HERO — full-bleed video or poster; HotelBeach-style split + CTAs */}
+      {/* HERO — full-bleed video over navy; HotelBeach-style split + CTAs */}
       <section className="relative flex min-h-[100dvh] flex-col justify-end overflow-hidden pb-8 pt-[4.75rem] sm:pb-10 sm:pt-28 md:pb-12 md:pt-32">
+        <div className="absolute inset-0 bg-navy" aria-hidden="true" />
         <video
           className="absolute inset-0 h-full w-full object-cover"
           autoPlay
           muted
           loop
           playsInline
-          poster={images.beachSunset}
           preload="metadata"
           aria-hidden="true"
           src={heroVideoSrc}
