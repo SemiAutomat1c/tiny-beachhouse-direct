@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { addMonths, addDays, format, isBefore, isSameDay, isSameMonth, startOfMonth, startOfWeek, endOfWeek, endOfMonth, isWithinInterval } from "date-fns";
 import { nl as nlLocale, enUS } from "date-fns/locale";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nContext";
 
@@ -119,7 +119,7 @@ export const RangeCalendar = ({
           onClick={() => setCursor(addMonths(cursor, -1))}
           className="p-2 rounded-md hover:bg-sand-deep transition"
         >
-          <ChevronLeft className="w-4 h-4 text-navy" />
+          <CaretLeft className="w-4 h-4 text-navy" weight="bold" />
         </button>
         <button
           type="button"
@@ -127,7 +127,7 @@ export const RangeCalendar = ({
           onClick={() => setCursor(addMonths(cursor, 1))}
           className="p-2 rounded-md hover:bg-sand-deep transition"
         >
-          <ChevronRight className="w-4 h-4 text-navy" />
+          <CaretRight className="w-4 h-4 text-navy" weight="bold" />
         </button>
       </div>
       <div className={cn("flex gap-8", monthsToShow > 1 && "flex-col md:flex-row")}>

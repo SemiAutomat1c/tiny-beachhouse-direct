@@ -7,6 +7,16 @@ export const translations = {
     "nav.accommodation": "De Accommodatie",
     "nav.area": "Omgeving",
     "nav.bookDirect": "Direct Boeken",
+    "nav.menu": "Hoofdmenu",
+    "nav.openMenu": "Menu openen",
+    "nav.closeMenu": "Menu sluiten",
+
+    // Not found
+    "nf.title": "Pagina niet gevonden",
+    "nf.body": "Deze URL bestaat niet of is verplaatst.",
+    "nf.home": "Terug naar home",
+    "nf.metaTitle": "Pagina niet gevonden — Tiny Beachhouse",
+    "nf.metaDesc": "De opgevraagde pagina bestaat niet. Ga terug naar de homepage van Tiny Beachhouse Scheveningen.",
 
     // AvailabilityBar
     "avail.checkIn": "Check-in",
@@ -33,8 +43,8 @@ export const translations = {
 
     // Home — Hero
     "home.heroEyebrow": "Scheveningen · Den Haag",
-    "home.heroTitle1": "Jouw eigen oase.",
-    "home.heroTitle2": "Op een steenworp van zee.",
+    "home.heroTitle1": "Strand van Scheveningen.",
+    "home.heroTitle2": "Jouw eigen oase.",
     "home.heroSub": "Een prachtig vormgegeven beachhouse in Scheveningen — slechts 200 meter van de Noordzee.",
     "home.ctaCheck": "Bekijk Beschikbaarheid",
     "home.ctaDiscover": "Ontdek de Ruimte",
@@ -92,6 +102,17 @@ export const translations = {
     // Accommodatie page
     "acc.heroEyebrow": "De Accommodatie",
     "acc.heroTitle": "Jouw thuis aan zee.",
+    "acc.introLead": "Een boutique tiny house op loopafstand van het strand — knus, compleet uitgerust en doordacht ontworpen voor wie van de kust houdt.",
+    "acc.introCta": "Ontdek de ruimte",
+    "acc.storyBlurb": "Van warme materialen tot een volledige keuken: alles is gekozen voor comfort en een rustige strand-sfeer.",
+    "acc.visionBlurb": "Perfect voor twee, met ruimte om te lezen, te koken en van het terras te genieten — huisdieren zijn van harte welkom.",
+    "acc.spot1Title": "Keuken & leven",
+    "acc.spot1Text": "Open keuken en een gezellige woonruimte in één.",
+    "acc.spot2Title": "Slaapkamer",
+    "acc.spot2Text": "Een rustige plek om uit te rusten na een dag aan zee.",
+    "acc.spot3Title": "Badkamer",
+    "acc.spot3Text": "Inloopdouche, bidet en zorgvuldige afwerking.",
+    "acc.readMore": "Meer weten",
     "acc.spaceEyebrow": "De ruimte",
     "acc.spaceTitle1": "Ontworpen voor twee.",
     "acc.spaceTitle2": "Geliefd bij iedereen.",
@@ -124,7 +145,7 @@ export const translations = {
     "acc.rule4": "Niet-roken accommodatie",
     "acc.rule5": "Geen vrijgezellenfeesten",
     "acc.rule6": "Geen babybedjes beschikbaar",
-    "acc.payment": "💳 Betaling voor directe boekingen: bankoverschrijving of creditcard via gemailde betaallink.",
+    "acc.payment": "Betaling voor directe boekingen: bankoverschrijving of creditcard via gemailde betaallink.",
     "acc.galEyebrow": "Galerij",
     "acc.galTitle": "Elke hoek met aandacht",
     "acc.ctaTitle": "Klaar om te verblijven?",
@@ -135,35 +156,37 @@ export const translations = {
     "omg.heroTitle1": "Scheveningen —",
     "omg.heroTitle2": "waar stad en zee elkaar ontmoeten.",
     "omg.intro": "Tiny Beachhouse ligt in Scheveningen, de beroemde kustwijk van Den Haag. Stap naar buiten en je staat midden in een van Nederlands meest bruisende kustbuurten — strand, restaurants, cultuur en natuur, allemaal op loopafstand.",
+    "omg.introCta": "Ontdek wat dichtbij is",
+    "omg.gridTagline": "Van strand tot duinen — alles binnen een korte wandeling van je verblijf.",
     "omg.gridEyebrow": "Om de hoek",
     "omg.gridTitle": "Wat er in de buurt is",
 
-    "omg.attr1.badge": "🏖️ De Kustlijn",
+    "omg.attr1.badge": "De kustlijn",
     "omg.attr1.name": "Zand & Zee",
     "omg.attr1.dist": "Op 200 meter · 2 min lopen",
     "omg.attr1.text": "Er gaat niets boven de geur van de zoute zeelucht bij het ontwaken. Het brede strand van Scheveningen is jouw eigen achtertuin.",
 
-    "omg.attr2.badge": "🎡 Iconisch Uitzicht",
+    "omg.attr2.badge": "Boulevard",
     "omg.attr2.name": "De Pier & SkyView",
     "omg.attr2.dist": "Een korte wandeling",
     "omg.attr2.text": "Wandel over de iconische boulevard naar de Pier. Geniet van het uitzicht vanuit het reuzenrad of proost bij een van de vele strandtenten.",
 
-    "omg.attr3.badge": "🎨 Verborgen Cultuur",
+    "omg.attr3.badge": "Cultuur",
     "omg.attr3.name": "Museum Beelden aan Zee",
     "omg.attr3.dist": "8 min lopen",
     "omg.attr3.text": "Een architectonisch hoogstandje tussen de duinen, waar moderne beeldhouwkunst en de ruwe schoonheid van de kust samenkomen.",
 
-    "omg.attr4.badge": "🍽️ Culinair aan Zee",
+    "omg.attr4.badge": "Eten & drinken",
     "omg.attr4.name": "Strandpaviljoens",
     "omg.attr4.dist": "Binnen handbereik",
     "omg.attr4.text": "Van ontbijten met je voeten in het zand bij BooNooNooNoos tot dineren bij zonsondergang — de beste smaken van de kust direct om de hoek.",
 
-    "omg.attr5.badge": "🚲 Puur Natuur",
+    "omg.attr5.badge": "Duinen",
     "omg.attr5.name": "Duinwandelingen",
     "omg.attr5.dist": "Direct voor de deur",
     "omg.attr5.text": "Verlies jezelf in het uitgestrekte duinlandschap. Of je nu kiest voor een frisse ochtendwandeling of een fietstocht richting Wassenaar.",
 
-    "omg.attr6.badge": "🌲 Groene Oase",
+    "omg.attr6.badge": "Groen",
     "omg.attr6.name": "Scheveningen Woods",
     "omg.attr6.dist": "25 min lopen",
     "omg.attr6.text": "Voor de momenten dat je de zeewind wilt inruilen voor de rust van het bos. Een prachtig park met eeuwenoude bomen.",
@@ -177,6 +200,7 @@ export const translations = {
     "omg.air.title": "Vanaf het vliegveld",
     "omg.air.text": "Rotterdam The Hague Airport — 25 km, ongeveer 32 min met de auto. Schiphol — 50 min met auto of trein.",
     "omg.bookCta": "Boek je verblijf",
+    "omg.ctaTitle": "Klaar om Scheveningen te ontdekken?",
 
     // Boeken page
     "bk.heroEyebrow": "Direct Boeken",
@@ -261,6 +285,16 @@ export const translations = {
     "nav.accommodation": "The Space",
     "nav.area": "The Area",
     "nav.bookDirect": "Book Direct",
+    "nav.menu": "Main menu",
+    "nav.openMenu": "Open menu",
+    "nav.closeMenu": "Close menu",
+
+    // Not found
+    "nf.title": "Page not found",
+    "nf.body": "This URL doesn’t exist or has moved.",
+    "nf.home": "Back to home",
+    "nf.metaTitle": "Page not found — Tiny Beachhouse",
+    "nf.metaDesc": "The page you requested doesn’t exist. Return to Tiny Beachhouse Scheveningen.",
 
     // AvailabilityBar
     "avail.checkIn": "Check-in",
@@ -287,8 +321,8 @@ export const translations = {
 
     // Home
     "home.heroEyebrow": "Scheveningen · Den Haag",
-    "home.heroTitle1": "Your private escape.",
-    "home.heroTitle2": "Steps from the sea.",
+    "home.heroTitle1": "Scheveningen Beach.",
+    "home.heroTitle2": "Your private escape.",
     "home.heroSub": "A beautifully designed beach house in Scheveningen — just 200 metres from the North Sea.",
     "home.ctaCheck": "Check Availability",
     "home.ctaDiscover": "Discover the Space",
@@ -340,6 +374,17 @@ export const translations = {
     // Accommodatie
     "acc.heroEyebrow": "The Space",
     "acc.heroTitle": "Your home by the sea.",
+    "acc.introLead": "A boutique tiny house steps from the beach — cozy, fully equipped, and thoughtfully designed for coastal living.",
+    "acc.introCta": "Explore the space",
+    "acc.storyBlurb": "From warm materials to a full kitchen: everything is chosen for comfort and a calm seaside mood.",
+    "acc.visionBlurb": "Perfect for two, with room to read, cook, and enjoy the terrace — pets are warmly welcome.",
+    "acc.spot1Title": "Kitchen & living",
+    "acc.spot1Text": "Open kitchen and a welcoming living area in one.",
+    "acc.spot2Title": "Bedroom",
+    "acc.spot2Text": "A quiet place to rest after a day by the sea.",
+    "acc.spot3Title": "Bathroom",
+    "acc.spot3Text": "Walk-in shower, bidet, and refined finishes.",
+    "acc.readMore": "Read more",
     "acc.spaceEyebrow": "The space",
     "acc.spaceTitle1": "Designed for two.",
     "acc.spaceTitle2": "Loved by all.",
@@ -372,7 +417,7 @@ export const translations = {
     "acc.rule4": "Non-smoking property",
     "acc.rule5": "No bachelor/bachelorette parties",
     "acc.rule6": "No cribs available",
-    "acc.payment": "💳 Payment for direct bookings: bank transfer or credit card via emailed payment link.",
+    "acc.payment": "Payment for direct bookings: bank transfer or credit card via emailed payment link.",
     "acc.galEyebrow": "Gallery",
     "acc.galTitle": "Every corner, considered",
     "acc.ctaTitle": "Ready to stay?",
@@ -383,35 +428,37 @@ export const translations = {
     "omg.heroTitle1": "Scheveningen —",
     "omg.heroTitle2": "where city meets sea.",
     "omg.intro": "Tiny Beachhouse sits in Scheveningen, The Hague's famous seaside district. Step outside and you're immediately in one of the Netherlands' most vibrant coastal neighbourhoods — beach, restaurants, culture, and nature, all within walking distance.",
+    "omg.introCta": "See what's nearby",
+    "omg.gridTagline": "From beach to dunes — all within a short walk of your stay.",
     "omg.gridEyebrow": "Around the corner",
     "omg.gridTitle": "What's nearby",
 
-    "omg.attr1.badge": "🏖️ The Coastline",
+    "omg.attr1.badge": "The coastline",
     "omg.attr1.name": "Sand & Sea",
     "omg.attr1.dist": "200 metres · 2 min walk",
     "omg.attr1.text": "Nothing beats the scent of the salty sea air when you wake up. Scheveningen's wide beach is your own private backyard.",
 
-    "omg.attr2.badge": "🎡 Iconic Views",
+    "omg.attr2.badge": "Boulevard",
     "omg.attr2.name": "The Pier & SkyView",
     "omg.attr2.dist": "A short stroll away",
     "omg.attr2.text": "Walk along the iconic boulevard to the Pier. Take in the views from the Ferris wheel or have a drink at one of the many beach clubs.",
 
-    "omg.attr3.badge": "🎨 Hidden Culture",
+    "omg.attr3.badge": "Culture",
     "omg.attr3.name": "Museum Beelden aan Zee",
     "omg.attr3.dist": "8 min walk",
     "omg.attr3.text": "An architectural masterpiece nestled in the dunes, where modern sculpture meets the raw beauty of the North Sea coast.",
 
-    "omg.attr4.badge": "🍽️ Coastal Dining",
+    "omg.attr4.badge": "Food & drink",
     "omg.attr4.name": "Beach Restaurants",
     "omg.attr4.dist": "At your fingertips",
     "omg.attr4.text": "From breakfast with your feet in the sand to sunset dinners — the best flavours of the coast are just around the corner.",
 
-    "omg.attr5.badge": "🚲 Pure Nature",
+    "omg.attr5.badge": "Dunes",
     "omg.attr5.name": "Dune Walks",
     "omg.attr5.dist": "Right outside",
     "omg.attr5.text": "Lose yourself in the sprawling dune landscape. Perfect for an early morning walk or a scenic bike ride towards Wassenaar.",
 
-    "omg.attr6.badge": "🌲 Green Escape",
+    "omg.attr6.badge": "Green",
     "omg.attr6.name": "Scheveningen Woods",
     "omg.attr6.dist": "25 min walk",
     "omg.attr6.text": "For moments when you want to trade the sea breeze for forest peace. A beautiful park with centuries-old trees.",
@@ -425,6 +472,7 @@ export const translations = {
     "omg.air.title": "From the airport",
     "omg.air.text": "Rotterdam The Hague Airport — 25 km, approx. 32 min by car. Schiphol — 50 min by car or train.",
     "omg.bookCta": "Book your stay",
+    "omg.ctaTitle": "Ready to explore Scheveningen?",
 
     // Boeken
     "bk.heroEyebrow": "Book Direct",

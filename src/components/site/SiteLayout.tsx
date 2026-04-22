@@ -52,16 +52,18 @@ export const SiteLayout = () => {
   const { lang } = useI18n();
 
   useEffect(() => {
-    const entry = titles[pathname] ?? titles["/"];
-    const meta = entry[lang];
-    document.title = meta.title;
-    let descTag = document.querySelector('meta[name="description"]');
-    if (!descTag) {
-      descTag = document.createElement("meta");
-      descTag.setAttribute("name", "description");
-      document.head.appendChild(descTag);
+    const entry = titles[pathname as keyof typeof titles];
+    if (entry) {
+      const meta = entry[lang];
+      document.title = meta.title;
+      let descTag = document.querySelector('meta[name="description"]');
+      if (!descTag) {
+        descTag = document.createElement("meta");
+        descTag.setAttribute("name", "description");
+        document.head.appendChild(descTag);
+      }
+      descTag.setAttribute("content", meta.description);
     }
-    descTag.setAttribute("content", meta.description);
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }, [pathname, lang]);
 

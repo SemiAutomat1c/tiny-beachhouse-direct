@@ -26,8 +26,8 @@ const App = () => (
             <Route path="/accommodatie" element={<Accommodatie />} />
             <Route path="/omgeving" element={<Omgeving />} />
             <Route path="/boeken" element={<Boeken />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
-          <Route path="*" element={<NotFound />} />
         </Routes>
         </BrowserRouter>
       </I18nProvider>

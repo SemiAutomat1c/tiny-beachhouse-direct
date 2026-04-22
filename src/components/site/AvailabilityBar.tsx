@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Calendar, Users, ArrowRight } from "lucide-react";
+import { ArrowRight, CalendarBlank, Users } from "@phosphor-icons/react";
 import { format } from "date-fns";
 import { useI18n } from "@/i18n/I18nContext";
 
@@ -25,14 +25,14 @@ export const AvailabilityBar = () => {
   return (
     <form
       onSubmit={submit}
-      className="glass-card rounded-2xl p-4 md:p-6 grid grid-cols-1 md:grid-cols-[1.2fr_1.2fr_0.8fr_auto] gap-4 md:gap-5 items-end shadow-lift"
+      className="glass-card rounded-2xl p-4 md:p-6 grid grid-cols-1 md:grid-cols-[1.2fr_1.2fr_1fr_auto] gap-4 md:gap-5 items-end shadow-lift"
     >
       <div className="space-y-1.5">
         <label className="block text-[10px] uppercase tracking-[0.2em] text-navy/50 font-bold px-1 ml-0.5">
           {t("avail.checkIn")}
         </label>
         <div className="relative group">
-          <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-dune group-focus-within:text-navy transition-colors pointer-events-none" />
+          <CalendarBlank className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-dune group-focus-within:text-navy transition-colors pointer-events-none" weight="thin" />
           <input
             type="date"
             min={today}
@@ -48,7 +48,7 @@ export const AvailabilityBar = () => {
           {t("avail.checkOut")}
         </label>
         <div className="relative group">
-          <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-dune group-focus-within:text-navy transition-colors pointer-events-none" />
+          <CalendarBlank className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-dune group-focus-within:text-navy transition-colors pointer-events-none" weight="thin" />
           <input
             type="date"
             min={checkIn || today}
@@ -59,19 +59,25 @@ export const AvailabilityBar = () => {
         </div>
       </div>
 
-      <div className="space-y-1.5">
-        <label className="block text-[10px] uppercase tracking-[0.2em] text-navy/50 font-bold px-1 ml-0.5">
+      <div className="space-y-1.5 min-w-0">
+        <label
+          htmlFor="availability-guests"
+          className="block text-[10px] uppercase tracking-[0.2em] text-navy/50 font-bold px-1 ml-0.5"
+        >
           {t("avail.guests")}
         </label>
         <div className="relative group">
-          <Users className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-dune group-focus-within:text-navy transition-colors pointer-events-none" />
+          <Users className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-dune group-focus-within:text-navy transition-colors pointer-events-none z-10" weight="thin" />
           <select
+            id="availability-guests"
             value={guests}
             onChange={(e) => setGuests(Number(e.target.value))}
-            className="w-full bg-sand-deep/40 border border-navy/5 hover:border-navy/10 px-10 py-3 rounded-xl text-navy font-medium focus:outline-none focus:ring-2 focus:ring-navy/5 transition-all appearance-none cursor-pointer"
+            className="w-full min-w-0 bg-sand-deep/40 border border-navy/5 hover:border-navy/10 pl-10 pr-10 py-3 rounded-xl text-navy font-medium focus:outline-none focus:ring-2 focus:ring-navy/5 transition-all appearance-none cursor-pointer"
           >
             {[1, 2, 3, 4].map((n) => (
-              <option key={n} value={n}>{n} {n === 1 ? t("avail.guest_one") : t("avail.guest_other")}</option>
+              <option key={n} value={n}>
+                {n}
+              </option>
             ))}
           </select>
         </div>
@@ -82,7 +88,7 @@ export const AvailabilityBar = () => {
         className="bg-navy text-sand h-[52px] px-8 rounded-xl font-bold inline-flex items-center justify-center gap-2 hover:bg-navy-soft transition-all hover:shadow-soft active:scale-95 group"
       >
         <span>{t("avail.check")}</span>
-        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" weight="bold" />
       </button>
     </form>
   );

@@ -90,6 +90,11 @@ export default {
         'gradient-sand': "var(--gradient-sand)",
       },
       keyframes: {
+        marquee: {
+          from: { transform: "translateX(0)" },
+          /* Half of duplicated track = one seamless loop */
+          to: { transform: "translateX(-50%)" },
+        },
         "accordion-down": { from: { height: "0" }, to: { height: "var(--radix-accordion-content-height)" } },
         "accordion-up": { from: { height: "var(--radix-accordion-content-height)" }, to: { height: "0" } },
         "fade-up": {
@@ -110,6 +115,7 @@ export default {
         },
       },
       animation: {
+        marquee: "marquee var(--duration) linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-up": "fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) both",
