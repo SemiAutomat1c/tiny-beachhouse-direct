@@ -51,7 +51,7 @@
     --input: 33 25% 88%;
     --ring: var(--navy);
 
-    --radius: 1rem;
+    --radius: 0;
 
     /* Brand tokens */
     --shadow-soft: 0 4px 24px hsl(211 35% 17% / 0.08);

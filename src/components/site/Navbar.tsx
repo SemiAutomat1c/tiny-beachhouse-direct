@@ -13,9 +13,9 @@ export const Navbar = () => {
   const { pathname } = useLocation();
   const { t } = useI18n();
 
-  const links = [
-    { to: "/", label: t("nav.home") },
-    { to: "/accommodatie", label: t("nav.accommodation") },
+  const links: { to: string; label: string }[] = [
+    // { to: "/", label: t("nav.home") },
+    // { to: "/accommodatie", label: t("nav.accommodation") },
   ];
 
   const transparentEligible = pathname === "/" || pathname === "/accommodatie";

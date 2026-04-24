@@ -1,68 +1,92 @@
 import { Link } from "react-router-dom";
-import { EnvelopeSimple, MapPin } from "@phosphor-icons/react";
 import { getBookingUrl } from "@/lib/booking";
 import { useI18n } from "@/i18n/I18nContext";
 
 export const Footer = () => {
   const { t } = useI18n();
+  const quickLinks = [
+    { label: t("footer.linkHome"), to: "/" },
+    { label: t("footer.linkAccommodation"), to: "/accommodatie" },
+    { label: t("footer.linkArea"), to: "/" },
+    { label: t("footer.linkBook"), href: getBookingUrl(), external: true },
+    { label: t("footer.linkContact"), href: `mailto:${t("footer.email")}` },
+    { label: t("footer.linkPrivacy"), to: "/" },
+  ];
+
   return (
     <footer className="bg-sand-deep">
-      <svg
-        viewBox="0 0 1440 60"
-        preserveAspectRatio="none"
-        className="w-full h-10 text-sand-deep"
-        aria-hidden
-      >
-        <path
-          d="M0,30 C240,60 480,0 720,20 C960,40 1200,10 1440,30 L1440,60 L0,60 Z"
-          fill="currentColor"
-        />
-      </svg>
+      <div className="container-wide py-14 md:py-16">
+        <div className="grid gap-8 md:grid-cols-2 md:gap-10 lg:gap-14">
+          <div className="flex min-h-[17rem] flex-col justify-between px-6 py-7 md:px-7">
+            <div>
+              <p className="eyebrow mb-6 text-navy/50">{t("footer.quickTitle")}</p>
+              <ul className="grid grid-cols-2 gap-x-8 gap-y-3 text-[15px] text-navy/85 sm:grid-cols-3">
+                {quickLinks.map((item) => (
+                  <li key={item.label}>
+                    {"to" in item ? (
+                      <Link to={item.to} className="transition-colors hover:text-navy">
+                        {item.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={item.href}
+                        target={item.external ? "_blank" : undefined}
+                        rel={item.external ? "noopener noreferrer" : undefined}
+                        className="transition-colors hover:text-navy"
+                      >
+                        {item.label}
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <p className="mt-10 font-display text-[26px] font-light tracking-normal text-navy">Tiny Beachhouse.</p>
+          </div>
 
-      <div className="container-wide py-16 grid gap-12 md:grid-cols-3">
-        <div>
-          <p className="font-display text-2xl font-light tracking-normal text-navy">
-            Tiny Beachhouse
-          </p>
-          <p className="mt-3 text-muted-foreground max-w-xs leading-relaxed">
-            {t("footer.tagline1")}
-            <br />
-            {t("footer.tagline2")}
-          </p>
-        </div>
+          <div className="flex min-h-[17rem] flex-col justify-between px-2 md:px-0">
+            <div className="grid grid-cols-1 gap-6 text-navy/85 sm:grid-cols-3">
+              <div>
+                <p className="eyebrow mb-2 text-navy/40">{t("footer.infoEmail")}</p>
+                <a href={`mailto:${t("footer.email")}`} className="text-sm leading-relaxed hover:text-navy">
+                  {t("footer.email")}
+                </a>
+              </div>
+              <div>
+                <p className="eyebrow mb-2 text-navy/40">{t("footer.infoPhone")}</p>
+                <a href="tel:+31612345678" className="text-sm leading-relaxed hover:text-navy">
+                  {t("footer.phone")}
+                </a>
+              </div>
+              <div>
+                <p className="eyebrow mb-2 text-navy/40">{t("footer.infoAddress")}</p>
+                <p className="text-sm leading-relaxed">
+                  {t("footer.addressLine1")}
+                  <br />
+                  {t("footer.addressLine2")}
+                </p>
+              </div>
+            </div>
 
-        <div className="md:text-center">
-          <p className="eyebrow mb-4">{t("footer.explore")}</p>
-          <ul className="space-y-2">
-            <li><Link to="/" className="text-navy/80 hover:text-navy transition-colors">{t("nav.home")}</Link></li>
-            <li><Link to="/accommodatie" className="text-navy/80 hover:text-navy transition-colors">{t("nav.accommodation")}</Link></li>
-            <li>
+            <div className="mt-10 flex items-center gap-5 text-sm text-navy/80 md:justify-end">
+              <a
+                href="https://www.instagram.com/tinybeachhouse/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-navy"
+              >
+                {t("footer.socialInstagram")}
+              </a>
               <a
                 href={getBookingUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-navy/80 hover:text-navy transition-colors"
+                className="transition-colors hover:text-navy"
               >
-                {t("footer.bookOnBooking")}
+                {t("footer.socialBooking")}
               </a>
-            </li>
-          </ul>
-        </div>
-
-        <div className="md:text-right">
-          <p className="eyebrow mb-4">{t("footer.contact")}</p>
-          <ul className="space-y-2 text-navy/80">
-            <li className="flex md:justify-end items-center gap-2">
-              <MapPin className="w-4 h-4 shrink-0" weight="thin" />
-              Jacob Pronkstraat, 2584 BS Scheveningen
-            </li>
-            <li className="flex md:justify-end items-center gap-2">
-              <EnvelopeSimple className="w-4 h-4 shrink-0" weight="thin" />
-              <a href="mailto:hello@tinybeachhouse.nl" className="hover:text-navy">
-                hello@tinybeachhouse.nl
-              </a>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
 

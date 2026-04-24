@@ -3,29 +3,27 @@ import { useState } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
-  Bathtub,
-  Bed,
-  BeachBall,
+  Buildings,
   Car,
-  Coffee,
-  CookingPot,
+  ForkKnife,
+  GlobeStand,
+  House,
   IconProps,
-  Leaf,
   MapPin,
+  PaintBrush,
   PawPrint,
   Quotes,
+  ShoppingBag,
   Star,
-  Trophy,
-  UsersThree,
-  Waves,
+  Tree,
+  Umbrella,
   WifiHigh,
-  Wine,
 } from "@phosphor-icons/react";
 import { getBookingUrl } from "@/lib/booking";
+import { activityImageUrls } from "@/lib/activityImages";
 import { images, galleryImages } from "@/lib/images";
 import { BookDirectBanner } from "@/components/site/BookDirectBanner";
 import { Lightbox } from "@/components/site/Lightbox";
-import { cn } from "../lib/utils";
 import { useI18n } from "@/i18n/I18nContext";
 import type { TranslationKey } from "@/i18n/translations";
 
@@ -39,44 +37,27 @@ const Index = () => {
   const heroVideoSrc =
     import.meta.env.VITE_HERO_VIDEO_URL?.trim() || DEFAULT_HERO_VIDEO_SRC;
 
-  const trustItems: { icon: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>; key: TranslationKey }[] = [
-    { icon: Waves, key: "home.trust1" },
-    { icon: Trophy, key: "home.trust2" },
-    { icon: UsersThree, key: "home.trust3" },
-    { icon: Leaf, key: "home.trust4" },
+  const accSpecs: { icon: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>; key: TranslationKey }[] = [
+    { icon: House, key: "home.accSpec1" },
+    { icon: WifiHigh, key: "home.accSpec2" },
+    { icon: Car, key: "home.accSpec3" },
+    { icon: PawPrint, key: "home.accSpec4" },
   ];
 
-  const featurePills: { icon: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>; key: TranslationKey }[] = [
-    { icon: Bed, key: "pill.bedroom" },
-    { icon: Bathtub, key: "pill.bathroom" },
-    { icon: Coffee, key: "pill.kitchen" },
-    { icon: Car, key: "pill.parking" },
-    { icon: PawPrint, key: "pill.pets" },
-    { icon: WifiHigh, key: "pill.wifi" },
+  const reviewShowcase: { textKey: TranslationKey; byKey: TranslationKey }[] = [
+    { textKey: "home.review1", byKey: "home.reviewBy1" },
+    { textKey: "home.review2", byKey: "home.reviewBy2" },
   ];
 
-  const reviews: { textKey: TranslationKey; name: string; location: string }[] = [
-    { textKey: "home.review1", name: "Erwin", location: "netherlands" },
-    { textKey: "home.review2", name: "Daniel", location: "Germany" },
-    { textKey: "home.review3", name: "Anderson", location: "Spain" },
-    { textKey: "home.review4", name: "Pascale", location: "Switzerland" },
-  ];
-
-  const ratingCategories = [
-    { label: "LOCATION", score: "9.7" },
-    { label: "STAFF", score: "9.3" },
-    { label: "FACILITIES", score: "9.1" },
-    { label: "COMFORT", score: "9.1" },
-    { label: "CLEANLINESS", score: "9.0" },
-    { label: "FREE WIFI", score: "10" },
-  ];
-
-  const services = [
-    { title: "Swimming Pool", image: images.heroHome, icon: Waves },
-    { title: "Meeting & Events", image: images.beachSunset, icon: UsersThree },
-    { title: "Dining Options", image: images.kitchenBright, icon: CookingPot },
-    { title: "Luxurious Rooms", image: images.bedroomMain, icon: Bed },
-    { title: "Beach Access", image: images.beachSunset, icon: BeachBall },
+  const activities: { titleKey: TranslationKey; image: string; icon: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>> }[] = [
+    { titleKey: "home.actBoulevard", image: activityImageUrls[0], icon: MapPin },
+    { titleKey: "home.actStrandtenten", image: activityImageUrls[1], icon: Umbrella },
+    { titleKey: "home.actDuinen", image: activityImageUrls[2], icon: Tree },
+    { titleKey: "home.actFoodhall", image: activityImageUrls[3], icon: ForkKnife },
+    { titleKey: "home.actMadurodam", image: activityImageUrls[4], icon: GlobeStand },
+    { titleKey: "home.actMall", image: activityImageUrls[5], icon: ShoppingBag },
+    { titleKey: "home.actBinnenstad", image: activityImageUrls[6], icon: Buildings },
+    { titleKey: "home.actMusea", image: activityImageUrls[7], icon: PaintBrush },
   ];
 
   return (
@@ -100,8 +81,8 @@ const Index = () => {
         <div className="relative w-full px-5 sm:px-6 md:px-8 lg:px-10">
           <div className="w-full">
             {/* Headline left, Book Direct circle right — same row on all breakpoints */}
-            <div className="flex w-full flex-row items-center justify-between gap-3 sm:gap-5 md:gap-8 lg:items-end">
-              <div className="min-w-0 max-w-[min(42rem,calc(100vw-11rem))] flex-1 space-y-3 text-left md:space-y-4 lg:max-w-lg xl:max-w-xl">
+            <div className="flex w-full flex-row items-center gap-3 sm:gap-5 md:gap-8 lg:items-end">
+              <div className="min-w-0 max-w-2xl flex-1 space-y-3 text-left md:space-y-4 lg:max-w-3xl">
                 <p className="eyebrow animate-fade-in text-sand/85 tracking-[0.35em]">{t("home.heroEyebrow")}</p>
                 <h1 className="animate-fade-up font-display font-light tracking-normal text-white">
                   <span className="block text-[clamp(1.875rem,3.5vw+0.5rem,3.8125rem)] leading-[1.08]">
@@ -111,17 +92,6 @@ const Index = () => {
                     {t("home.heroTitle2")}
                   </span>
                 </h1>
-              </div>
-
-              <div className="flex shrink-0 justify-end self-center lg:self-end">
-                <a
-                  href={getBookingUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-dune px-4 text-center font-body text-xs font-normal leading-snug tracking-normal text-navy shadow-lift transition hover:scale-[1.03] sm:h-32 sm:w-32 sm:px-5 sm:text-sm md:h-36 md:w-36 md:px-5 md:text-base md:leading-normal lg:text-[0.95rem]"
-                >
-                  {t("nav.bookDirect")}
-                </a>
               </div>
             </div>
 
@@ -135,7 +105,7 @@ const Index = () => {
               </p>
               <Link
                 to="/accommodatie"
-                className="group inline-flex shrink-0 items-center gap-4 self-start rounded-full border border-white/45 bg-white/10 px-5 py-2.5 pl-6 font-body text-xs font-semibold uppercase tracking-[0.22em] text-sand backdrop-blur-sm transition hover:border-white/70 hover:bg-white/15 lg:self-end"
+                className="group inline-flex shrink-0 items-center gap-4 self-start rounded-full border border-white/45 bg-white/10 px-5 py-1.5 pl-6 font-body text-xs font-semibold uppercase tracking-[0.22em] text-sand backdrop-blur-sm transition hover:border-white/70 hover:bg-white/15 lg:self-end"
               >
                 {t("home.heroViewAccommodation")}
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sand text-navy transition group-hover:scale-105">
@@ -152,188 +122,260 @@ const Index = () => {
       </section>
 
       {/* WELCOME SECTION */}
-      <section className="section-py bg-sand relative overflow-hidden">
-        <div className="container-narrow text-center py-20">
-          <p className="eyebrow mb-8 text-navy/40 tracking-[0.4em] uppercase">{t("home.introEyebrow")}</p>
-          <h2 className="display-italic text-navy text-4xl md:text-6xl lg:text-7xl mb-12">
-            {t("home.introTitle1")} <br />{t("home.introTitle2")}
-          </h2>
-          <div className="w-16 h-[1px] bg-dune mx-auto mb-16" />
-          <div className="max-w-3xl mx-auto space-y-8 text-navy/60 text-lg leading-relaxed-luxury font-light">
-            <p className="first-letter:float-left first-letter:mr-3 first-letter:mt-2 first-letter:font-display first-letter:text-5xl first-letter:font-light first-letter:tracking-normal first-letter:text-navy">
-              {t("home.introP1")}
-            </p>
-            <p>{t("home.introP2")}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* FULL BLEED CONTENT BLOCK 1 — mobile: stack image then copy; lg: split */}
-      <section className="relative overflow-hidden bg-sand lg:bg-transparent lg:min-h-screen">
-        <div className="relative z-0 w-full aspect-[5/4] sm:aspect-[3/2] lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-1/2 lg:aspect-auto">
-          <img
-            src={images.kitchenBright}
-            alt="Interior Kitchen"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        </div>
-        <div className="relative z-10 flex lg:min-h-screen lg:items-center">
-          <div className="container-wide flex w-full justify-end">
-            <div className="w-full space-y-8 bg-sand px-6 py-10 sm:px-8 md:p-24 lg:w-1/2 lg:bg-transparent lg:p-32">
-              <h2 className="display-italic text-navy text-4xl md:text-6xl">
-                Kitchen & Social Space
-              </h2>
-              <p className="text-navy/60 leading-relaxed-luxury text-lg font-light">
-                Crafted with natural materials and modern amenities, the open-plan living and kitchen area is the heart of the home.
-              </p>
-              <Link
-                to="/accommodatie"
-                className="group inline-flex items-center gap-4 text-navy uppercase tracking-widest text-sm font-bold border-b border-navy/20 pb-2 transition-all hover:gap-6"
-              >
-                {t("home.exploreSpace")}{" "}
-                <ArrowRight weight="bold" className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FULL BLEED CONTENT BLOCK 2 */}
-      <section className="relative overflow-hidden bg-sand lg:bg-transparent lg:min-h-screen">
-        <div className="relative z-0 w-full aspect-[5/4] sm:aspect-[3/2] lg:absolute lg:inset-y-0 lg:left-auto lg:right-0 lg:h-full lg:w-1/2 lg:aspect-auto">
-          <img
-            src={images.bedroomMain}
-            alt="Interior Bedroom"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        </div>
-        <div className="relative z-10 flex lg:min-h-screen lg:items-center">
-          <div className="container-wide flex w-full justify-start">
-            <div className="w-full space-y-8 bg-sand px-6 py-10 sm:px-8 md:p-24 lg:w-1/2 lg:bg-transparent lg:p-32">
-              <h2 className="display-italic text-navy text-4xl md:text-6xl">
-                Nachtrust aan Zee
-              </h2>
-              <p className="text-navy/60 leading-relaxed-luxury text-lg font-light">
-                Experience the sound of waves as you drift off in our boutique-style master bedroom.
-              </p>
-              <Link
-                to="/accommodatie"
-                className="group inline-flex items-center gap-4 text-navy uppercase tracking-widest text-sm font-bold border-b border-navy/20 pb-2 transition-all hover:gap-6"
-              >
-                Discover Bedroom{" "}
-                <ArrowRight weight="bold" className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* LARGE ATMOSPHERIC BREAK */}
-      <section className="relative h-[80vh] overflow-hidden">
-        <img
-          src={images.livingLifestyle}
-          className="absolute inset-0 w-full h-full object-cover scale-110"
-          alt="Lifestyle"
-          style={{ transform: "translateY(var(--scroll-offset, 0))" }}
-        />
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute inset-0 flex items-center justify-center text-center px-6">
-          <div className="max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 p-12 md:p-20 rounded-[2rem] text-sand shadow-lift">
-            <Quotes weight="thin" className="w-12 h-12 text-dune/60 mx-auto mb-8" />
-            <p className="display-italic text-2xl md:text-4xl leading-relaxed italic mb-8">
-              "The perfect spot to lose track of time with a good book and the sound of the sea."
-            </p>
-            <p className="eyebrow tracking-widest">— Erwin from the Netherlands</p>
-          </div>
-        </div>
-      </section>
-
-      {/* REVIEWS GRID SIMPLIFIED */}
-      <section className="section-py bg-sand">
+      <section className="pt-12 md:pt-20 pb-20 md:pb-28 lg:pb-32 bg-[#faf2e6] relative overflow-hidden">
         <div className="container-wide">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {reviews.map((review) => (
-              <div key={review.name} className="space-y-6">
-                <div className="flex gap-1">
+          <div className="container-narrow text-center mb-16 md:mb-24 pt-4 md:pt-8">
+            <p className="eyebrow mb-6 text-[#1E1E1E]/40 tracking-[0.4em] uppercase">
+              {t("home.introEyebrow")}
+            </p>
+            <h2 className="display-serif text-[#1E1E1E] text-[32px] md:text-[49px] mb-12 leading-[1.326]">
+              {t("home.introTitle")}
+            </h2>
+            <div className="w-16 h-[1px] bg-dune mx-auto mb-12" />
+            <p className="max-w-3xl mx-auto text-[#1E1E1E] text-base leading-[26px] font-normal">
+              {t("home.introBody")}
+            </p>
+          </div>
+        </div>
+
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="relative aspect-square overflow-hidden group">
+            <img
+              src={images.livingArea}
+              alt="Tiny Beachhouse Interior"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            />
+          </div>
+          <div className="relative aspect-square overflow-hidden group">
+            <img
+              src={images.beachSunset}
+              alt="Scheveningen Beach"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            />
+          </div>
+        </div>
+
+      </section>
+
+      {/* ACTIVITIES — Scheveningen & Den Haag (H2, body, marquee like Services) */}
+      <section
+        className="bg-white py-16 md:py-20 lg:py-24 overflow-hidden"
+        aria-labelledby="home-activities-heading"
+      >
+        <div className="container-wide">
+          <div className="mb-10 flex w-full flex-col gap-8 md:mb-12 lg:mb-16 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
+            <h2
+              id="home-activities-heading"
+              className="display-serif shrink-0 text-[#1E1E1E] text-[32px] md:text-[49px] leading-[1.326] max-w-sm md:max-w-md"
+            >
+              {t("home.actTitle")}
+            </h2>
+            <p className="shrink-0 max-w-md text-left text-[#1E1E1E] text-base font-normal leading-[26px] sm:max-w-lg lg:max-w-xl">
+              {t("home.actBody")}
+            </p>
+          </div>
+        </div>
+
+        <div className="group flex overflow-hidden p-2 [--gap:1.5rem] [--duration:50s]">
+          <div className="flex w-max shrink-0 gap-[var(--gap)] pr-[var(--gap)] animate-marquee group-hover:[animation-play-state:paused]">
+            {[...activities, ...activities].map((item, idx) => (
+              <div
+                key={`${item.titleKey}-${idx}`}
+                className="group/card relative w-[300px] shrink-0 overflow-hidden aspect-[4/5] transition-transform duration-700 hover:scale-[1.02] md:w-[450px]"
+              >
+                <img
+                  src={item.image}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
+                  aria-hidden
+                />
+                <div className="absolute inset-0 flex items-end justify-between gap-4 p-6 text-sand md:p-8">
+                  <item.icon
+                    weight="thin"
+                    className="h-9 w-9 shrink-0 md:h-10 md:w-10"
+                    aria-hidden
+                  />
+                  <h3 className="max-w-[min(12rem,55%)] text-right font-body text-sm font-semibold uppercase leading-snug tracking-[0.14em] md:text-base">
+                    {t(item.titleKey)}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ACCOMMODATION — Framer-style: large image inset on the right; smaller card straddles seam + cream */}
+      <section
+        className="w-full border-y border-dune/15 bg-[#faf2e6]"
+        aria-labelledby="home-accommodation-heading"
+      >
+        <div className="grid w-full min-h-[100dvh] grid-cols-1 items-stretch lg:min-h-screen lg:grid-cols-2 lg:gap-x-6 xl:gap-x-10 2xl:gap-x-14">
+          <div className="order-2 flex w-full min-h-0 flex-col justify-center px-5 py-12 sm:px-8 sm:py-16 md:px-10 md:py-20 lg:order-1 lg:min-h-screen lg:max-w-none lg:justify-center lg:py-20 lg:pl-8 lg:pr-2 xl:pl-12 2xl:pl-20 2xl:pr-8">
+            <div className="relative z-20 max-w-2xl">
+            <h2
+              id="home-accommodation-heading"
+              className="display-serif text-[#1E1E1E] text-[32px] leading-[1.326] md:text-[49px]"
+            >
+              {t("home.accTitle")}
+            </h2>
+            <p className="mt-6 text-base font-normal leading-[26px] text-[#1E1E1E]">
+              {t("home.accBody")}
+            </p>
+            <ul className="mt-10 space-y-3 border-t border-dune/35 pt-8">
+              {accSpecs.map((row) => (
+                <li key={row.key} className="flex items-center gap-3 text-sm font-medium text-[#1E1E1E]">
+                  <row.icon
+                    weight="regular"
+                    className="h-5 w-5 shrink-0 text-navy/45"
+                    aria-hidden
+                  />
+                  {t(row.key)}
+                </li>
+              ))}
+            </ul>
+            <Link
+              to="/accommodatie"
+              className="group mt-10 inline-flex w-fit items-center gap-3 border-b border-navy/25 pb-1.5 text-sm font-bold uppercase tracking-[0.2em] text-navy transition-all hover:gap-5"
+            >
+              {t("home.exploreSpace")}{" "}
+              <ArrowRight
+                weight="bold"
+                className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5"
+              />
+            </Link>
+            </div>
+          </div>
+          <div className="relative z-0 order-1 h-[22rem] min-h-0 w-full overflow-visible sm:h-[28rem] lg:order-2 lg:h-full lg:min-h-screen">
+            {/* Main photo — not full-bleed: weighted right, with margin from the frame (like the reference) */}
+            <div
+              className="absolute overflow-hidden border border-dune/10 shadow-sm
+                inset-2.5
+                sm:inset-3
+                lg:inset-0
+                lg:left-[10%] lg:top-1/2 lg:h-[min(64vh,38rem)] lg:max-w-[min(32rem,88%)] lg:-translate-y-1/2 lg:rounded-sm
+                lg:right-5 xl:left-[5%] xl:max-w-[40rem] xl:h-[min(62vh,42rem)] 2xl:right-8
+              "
+            >
+              <img
+                src={images.kitchenBright}
+                alt=""
+                className="h-full w-full object-cover"
+              />
+            </div>
+            {/* Foreground photo — on mobile, corner overlap; on lg+ half sits on cream past the column seam */}
+            <div
+              className="absolute z-20 aspect-[3/4] w-40 max-w-[min(92%,14rem)]
+                border border-white/20 bg-white/5 object-cover shadow-2xl
+                bottom-4 right-4 sm:bottom-5 sm:right-5 sm:max-w-[15rem] md:w-44
+                lg:bottom-auto lg:left-0 lg:right-auto lg:top-1/2
+                lg:w-56 lg:max-w-[16rem] lg:-translate-x-1/2 lg:-translate-y-1/2
+                xl:max-w-[18rem] xl:w-64
+              "
+            >
+              <img
+                src={images.livingArea}
+                alt=""
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* REVIEWS — full-bleed Scheveningen beach, two quotes + Booking.com score */}
+      <section
+        className="relative isolate min-h-[min(100dvh,52rem)] overflow-hidden lg:min-h-[90vh]"
+        aria-labelledby="home-reviews-heading"
+      >
+        <img
+          src={images.beachSunset}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-navy/55" aria-hidden />
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/50 to-navy/25"
+          aria-hidden
+        />
+
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-between gap-14 px-5 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:min-h-[90vh] lg:flex-row lg:items-end lg:gap-12 lg:px-10 lg:py-20 xl:px-12">
+          <div className="flex max-w-3xl flex-col justify-center lg:max-w-[min(100%,42rem)] lg:py-8 xl:max-w-2xl">
+            <h2 id="home-reviews-heading" className="sr-only">
+              {t("home.revEyebrow")} — {t("home.revTitle")}
+            </h2>
+            <div className="space-y-12 md:space-y-16 lg:space-y-20">
+              {reviewShowcase.map((block) => (
+                <blockquote key={block.textKey} className="border-0 p-0">
+                  <Quotes
+                    weight="fill"
+                    className="mb-4 h-9 w-9 text-white/35 sm:mb-5 sm:h-10 sm:w-10"
+                    aria-hidden
+                  />
+                  <p className="font-body text-lg font-light leading-relaxed text-white/95 md:text-xl">
+                    {t(block.textKey)}
+                  </p>
+                  <footer className="mt-5 text-sm font-medium tracking-wide text-white/65 md:mt-6">
+                    {t(block.byKey)}
+                  </footer>
+                </blockquote>
+              ))}
+            </div>
+          </div>
+
+          <aside className="w-full shrink-0 lg:max-w-sm lg:self-end">
+            <a
+              href="https://www.booking.com/hotel/nl/tiny-beachhouse.html"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="group flex flex-col gap-4 rounded-lg border border-white/20 bg-white/10 p-6 backdrop-blur-md transition hover:border-white/35 hover:bg-white/15 md:p-7"
+            >
+              <p className="eyebrow text-[10px] tracking-[0.28em] text-white/70">BOOKING.COM</p>
+              <div className="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                  <p className="font-display text-5xl font-light leading-none text-white md:text-6xl">
+                    9.1
+                  </p>
+                  <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-dune">
+                    {t("home.bookingRatingWord")}
+                  </p>
+                </div>
+                <div className="flex gap-0.5 text-dune">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} weight="fill" className="w-3.5 h-3.5 text-dune" />
+                    <Star key={i} weight="fill" className="h-5 w-5 md:h-6 md:w-6" />
                   ))}
                 </div>
-                <p className="text-navy/70 italic text-[17px] leading-relaxed">
-                  "{t(review.textKey)}"
-                </p>
-                <div>
-                  <p className="font-bold text-navy uppercase tracking-widest text-xs">{review.name}</p>
-                  <p className="text-navy/40 text-xs mt-1 uppercase tracking-widest">{review.location}</p>
-                </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TRUST ELEMENTS */}
-      <section className="bg-sand border-y border-navy/5 py-12">
-        <div className="container-wide mx-auto flex max-w-lg flex-col items-stretch gap-5 opacity-60 grayscale hover:grayscale-0 sm:max-w-xl md:max-w-none md:flex-row md:flex-wrap md:items-center md:justify-center md:gap-x-16 md:gap-y-6 lg:gap-x-24 transition-all duration-700">
-          {trustItems.map((item) => (
-            <div key={item.key} className="flex items-center gap-3 md:w-auto">
-              <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center text-navy" aria-hidden>
-                <item.icon weight="thin" className="h-6 w-6" />
-              </span>
-              <span className="eyebrow min-w-0 flex-1 text-left text-xs tracking-[0.2em] md:flex-initial">
-                {t(item.key)}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SERVICES MARQUEE */}
-      <section className="bg-sand py-24 overflow-hidden">
-        <div className="container-wide mb-16">
-          <p className="eyebrow mb-4 tracking-[0.4em] text-navy/40 uppercase">Amenities & Services</p>
-          <h2 className="display-italic text-6xl md:text-8xl text-navy">Services</h2>
-        </div>
-
-        <div 
-          className="group flex overflow-hidden p-2 [--gap:1.5rem] [--duration:40s]"
-        >
-          <div className="flex w-max shrink-0 gap-[var(--gap)] pr-[var(--gap)] animate-marquee group-hover:[animation-play-state:paused]">
-            {[...services, ...services].map((service, idx) => (
-              <div 
-                key={`${service.title}-${idx}`} 
-                className="relative w-[300px] md:w-[450px] shrink-0 aspect-[4/5] rounded-[2rem] overflow-hidden shadow-lift transition-transform duration-700 hover:scale-[1.02]"
-              >
-                <img 
-                  src={service.image} 
-                  alt={service.title} 
-                  className="absolute inset-0 w-full h-full object-cover"
+              <p className="text-sm leading-relaxed text-white/75">{t("home.revSub")}</p>
+              <p className="inline-flex items-center gap-2 text-sm font-semibold text-white group-hover:gap-3">
+                {t("home.revMore")}
+                <ArrowRight
+                  weight="bold"
+                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                <div className="absolute inset-0 p-10 flex flex-col justify-end items-start text-sand">
-                  <div className="mb-4">
-                    <service.icon weight="thin" className="w-10 h-10" />
-                  </div>
-                  <h3 className="text-xl md:text-2xl tracking-[0.1em] uppercase font-bold">{service.title}</h3>
-                </div>
-              </div>
-            ))}
-          </div>
+              </p>
+            </a>
+          </aside>
         </div>
       </section>
 
-
-      {/* LOCATION TEASER */}
-      <section className="section-py">
-        <div className="container-wide grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      {/* LOCATION — copy + map */}
+      <section className="section-py bg-[#faf2e6]">
+        <div className="container-wide grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <p className="eyebrow mb-4 inline-flex items-center gap-2">
-              <MapPin weight="thin" className="w-3.5 h-3.5" /> Scheveningen, Den Haag
+            <p className="eyebrow mb-4 inline-flex items-center gap-2 text-[#1E1E1E]/50">
+              <MapPin weight="thin" className="w-3.5 h-3.5" aria-hidden />
+              {t("home.locEyebrow")}
             </p>
-            <h2 className="display-italic text-navy">
+            <h2 className="display-serif text-[#1E1E1E] text-[32px] leading-[1.326] md:text-[49px]">
               {t("home.locTitle")}
             </h2>
-            <p className="mt-6 text-navy/75">
+            <p className="mt-6 text-base font-normal leading-[26px] text-[#1E1E1E]">
               {t("home.locText")}
             </p>
             <Link
@@ -343,7 +385,7 @@ const Index = () => {
               {t("home.exploreSpace")} <ArrowRight weight="bold" className="h-4 w-4" />
             </Link>
           </div>
-          <div className="relative rounded-2xl overflow-hidden shadow-soft aspect-[4/3] group">
+          <div className="group relative aspect-[4/3] overflow-hidden">
             <iframe
               src="https://www.google.com/maps?q=Jacob+Pronkstraat,+2584+BS+Scheveningen&output=embed"
               width="100%"
@@ -354,162 +396,11 @@ const Index = () => {
               title="Map of Tiny Beachhouse, Scheveningen"
               className="grayscale-[0.2] contrast-[1.1] transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.02]"
             />
-            <div className="absolute top-6 left-6 glass-card px-5 py-3 rounded-xl shadow-lift border border-white/20 pointer-events-none md:max-w-[200px]">
-              <p className="eyebrow text-navy/60 mb-1">Location</p>
-              <p className="text-navy leading-snug">Just 3 minutes walk to the beach</p>
+            <div className="pointer-events-none absolute left-5 top-5 max-w-[200px] border border-dune/20 bg-white/90 px-4 py-3 shadow-sm backdrop-blur-sm md:px-5 md:py-3">
+              <p className="eyebrow mb-1 text-[#1E1E1E]/60">{t("home.locMapTitle")}</p>
+              <p className="text-sm leading-snug text-[#1E1E1E]">{t("home.locMapBlurb")}</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* REVIEWS SECTION */}
-      <section className="bg-sand section-py overflow-hidden relative">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-dune-soft/40 to-transparent" />
-        <div className="container-wide relative">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end mb-20 md:mb-28">
-            <div className="lg:col-span-8">
-              <div className="inline-flex items-center gap-4 mb-8">
-                <p className="eyebrow text-navy/40 tracking-[0.4em] uppercase">{t("home.revEyebrow")}</p>
-                <span className="h-px w-16 bg-dune/70" />
-              </div>
-              <h2 className="display-italic text-navy text-4xl md:text-6xl lg:text-7xl mb-8 max-w-4xl">
-                {t("home.revTitle")}
-              </h2>
-              <p className="text-lg md:text-xl text-navy/60 font-light leading-relaxed-luxury max-w-3xl">
-                {t("home.revSub")}
-              </p>
-            </div>
-
-            <aside className="lg:col-span-4">
-              <div className="bg-white/70 backdrop-blur-md rounded-[2rem] p-7 md:p-8 border border-white/80 shadow-soft">
-                <p className="eyebrow text-navy/50 tracking-[0.22em] mb-4">BOOKING.COM</p>
-                <div className="flex items-center justify-between gap-5">
-                  <div>
-                    <p className="font-display font-light text-5xl leading-none text-navy">9.1</p>
-                    <p className="text-[11px] uppercase tracking-[0.18em] text-navy/50 mt-2">Superb rating</p>
-                  </div>
-                  <div className="flex gap-1 text-dune">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} weight="fill" className="w-4 h-4" />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </aside>
-          </div>
-
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-center">
-            {/* Featured Image Column */}
-            <div className="lg:col-span-7">
-              <div className="relative aspect-[4/5] md:aspect-[16/10] lg:aspect-[4/5] overflow-hidden rounded-[2.5rem] shadow-lift group">
-                <img 
-                  src={images.livingReading} 
-                  alt="Cozy moments at Tiny Beachhouse" 
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-navy/20" />
-                <div className="absolute top-10 left-10">
-                  <div className="glass-pill py-2 px-6 flex items-center gap-2">
-                    <Star weight="fill" className="w-3 h-3 text-sand" />
-                    <span className="eyebrow text-[9px] text-sand tracking-[0.2em] font-bold">TOP RATED</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Content Column */}
-            <div className="lg:col-span-5 space-y-16">
-              <div className="space-y-8">
-                <Quotes weight="thin" className="w-10 h-10 text-dune/40" />
-                <p className="display-italic text-2xl md:text-3xl lg:text-4xl text-navy leading-relaxed italic pr-8">
-                  "The accommodation is cozy, but fully equipped. Beautiful bathroom and a spacious bedroom. Steps away from the sand."
-                </p>
-                <div className="pt-4">
-                  <p className="font-bold text-navy uppercase tracking-[0.2em] text-xs">Pascale</p>
-                  <p className="text-navy/40 text-[10px] mt-1 uppercase tracking-[0.2em]">Verified Guest</p>
-                </div>
-              </div>
-
-              {/* Booking Stats Grid */}
-              <div className="grid grid-cols-2 gap-x-12 gap-y-10 border-t border-navy/5 pt-16">
-                {ratingCategories.slice(0, 4).map((cat) => (
-                  <div key={cat.label} className="space-y-2">
-                    <p className="text-[10px] uppercase tracking-[0.25em] font-bold text-navy/30">{cat.label}</p>
-                    <p className="text-4xl font-display font-light text-navy">{cat.score}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Booking.com Refined Strip */}
-              <div className="bg-navy p-10 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-8 shadow-lift">
-                <div className="flex items-center gap-6">
-                  <div className="text-sand border border-sand/20 w-16 h-16 rounded-2xl flex items-center justify-center font-display font-light text-3xl">
-                    9.1
-                  </div>
-                  <div>
-                    <p className="text-sand font-bold uppercase tracking-[0.2em] text-[11px]">Superb Experience</p>
-                    <p className="text-sand/40 text-[10px] mt-1 uppercase tracking-[0.1em]">On Booking.com</p>
-                  </div>
-                </div>
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} weight="fill" className="w-3.5 h-3.5 text-dune" />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-sand pb-32">
-        <div className="container-wide">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-24">
-            {reviews.slice(1).map((r, idx) => (
-              <article
-                key={r.name}
-                className={cn(
-                  "bg-white rounded-[2.5rem] p-12 shadow-sm flex flex-col items-start relative border border-black/[0.03] transition-all duration-500 hover:shadow-xl hover:-translate-y-1",
-                  idx === 1 ? "md:translate-y-16" : ""
-                )}
-              >
-                <Quotes weight="fill" className="absolute top-10 right-10 w-10 h-10 text-navy/[0.02]" />
-                
-                <div className="flex gap-1 text-[#d4b996] mb-10">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} weight="fill" className="w-3.5 h-3.5" />
-                  ))}
-                </div>
-                
-                <p className="text-navy/70 italic font-light leading-relaxed flex-1 mb-12 text-[16px]">
-                  "{t(r.textKey)}"
-                </p>
-                
-                <div className="flex items-center justify-between w-full border-t border-black/[0.05] pt-8 mt-auto">
-                  <div className="flex flex-col">
-                    <span className="text-navy font-bold text-lg mb-0.5 tracking-tight">{r.name}</span>
-                    <span className="eyebrow text-navy/20 lowercase text-[10px] tracking-[0.2em]">{r.location}</span>
-                  </div>
-                  <div className="flex items-center gap-2 grayscale opacity-20">
-                    <div className="w-1 h-1 rounded-full bg-navy" />
-                    <span className="eyebrow text-navy text-[8px] uppercase tracking-[0.3em] font-bold">Verified</span>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="text-center mt-32">
-              <a
-                href="https://www.booking.com/hotel/nl/tiny-beachhouse.html"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="inline-flex items-center gap-3 text-navy font-medium border-b-2 border-dune/30 hover:border-dune transition-all pb-1.5 group"
-              >
-                <span className="tracking-wide">{t("home.revMore")}</span>
-                <ArrowRight weight="bold" className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
-              </a>
-            </div>
         </div>
       </section>
 
