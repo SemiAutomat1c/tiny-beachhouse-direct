@@ -216,7 +216,7 @@ const Index = () => {
         aria-labelledby="home-accommodation-heading"
       >
         <div className="grid w-full min-h-[100dvh] grid-cols-1 items-stretch lg:min-h-screen lg:grid-cols-2 lg:gap-x-6 xl:gap-x-10 2xl:gap-x-14">
-          <div className="order-2 flex w-full min-h-0 flex-col justify-center px-5 py-12 sm:px-8 sm:py-16 md:px-10 md:py-20 lg:order-1 lg:min-h-screen lg:max-w-none lg:justify-center lg:py-20 lg:pl-8 lg:pr-2 xl:pl-12 2xl:pl-20 2xl:pr-8">
+          <div className="order-2 flex w-full min-h-0 flex-col justify-center px-5 py-12 sm:px-8 sm:py-16 md:px-10 md:py-20 lg:order-1 lg:min-h-screen lg:max-w-none lg:justify-center lg:py-20 lg:pl-12 lg:pr-32 xl:pl-20 xl:pr-40 2xl:pl-32 2xl:pr-56">
             <div className="relative z-20 max-w-2xl">
             <h2
               id="home-accommodation-heading"
@@ -259,7 +259,7 @@ const Index = () => {
                 sm:inset-3
                 lg:inset-0
                 lg:left-[10%] lg:top-1/2 lg:h-[min(64vh,38rem)] lg:max-w-[min(32rem,88%)] lg:-translate-y-1/2 lg:rounded-sm
-                lg:right-5 xl:left-[5%] xl:max-w-[40rem] xl:h-[min(62vh,42rem)] 2xl:right-8
+                lg:right-10 xl:left-[5%] xl:max-w-[40rem] xl:h-[min(62vh,42rem)] 2xl:right-20
               "
             >
               <img
@@ -274,8 +274,8 @@ const Index = () => {
                 border border-white/20 bg-white/5 object-cover shadow-2xl
                 bottom-4 right-4 sm:bottom-5 sm:right-5 sm:max-w-[15rem] md:w-44
                 lg:bottom-auto lg:left-0 lg:right-auto lg:top-1/2
-                lg:w-56 lg:max-w-[16rem] lg:-translate-x-1/2 lg:-translate-y-1/2
-                xl:max-w-[18rem] xl:w-64
+                lg:w-52 lg:max-w-[14rem] lg:-translate-x-1/2 lg:-translate-y-1/2
+                xl:max-w-[16rem] xl:w-60
               "
             >
               <img
